@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="21c-Fh-LQu">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--About-->
+        <scene sceneID="DWB-Wq-06v">
+            <objects>
+                <viewController id="2by-so-8aa" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="f5z-rP-xNp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="aJb-Fu-EvT">
+                                <rect key="frame" x="36" y="279.5" width="303.5" height="109"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ULD-dh-Hzi">
+                                        <rect key="frame" x="0.0" y="0.0" width="303.5" height="75"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="getsdone" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oat-jB-c07">
+                                                <rect key="frame" x="0.0" y="0.0" width="268" height="75"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="64"/>
+                                                <color key="textColor" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6wb-Vk-mS1">
+                                                <rect key="frame" x="278" y="0.0" width="25.5" height="75"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                    </stackView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright © 2018.  Stephen Hu.  All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nEc-9P-fxM">
+                                        <rect key="frame" x="0.0" y="95" width="303.5" height="14"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="aJb-Fu-EvT" firstAttribute="centerX" secondItem="f5z-rP-xNp" secondAttribute="centerX" id="OvB-ou-JNW"/>
+                            <constraint firstItem="aJb-Fu-EvT" firstAttribute="centerY" secondItem="f5z-rP-xNp" secondAttribute="centerY" id="SJV-46-zdj"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="BhR-eU-pnR"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="About" id="uwp-kr-DbF"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="A5N-sd-y4o" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-97" y="803"/>
+        </scene>
+        <!--Statistics-->
+        <scene sceneID="aUH-PO-kcs">
+            <objects>
+                <viewController id="TjN-za-H5l" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kFD-WM-uTC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="CTM-W8-g7K"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Statistics" id="Lf0-uh-aFN"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Qwt-0L-A2n" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="713" y="501"/>
+        </scene>
+        <!--Followers-->
+        <scene sceneID="EyS-r7-ZUc">
+            <objects>
+                <viewController id="GAL-lt-h0I" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4vh-Rk-s8F">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="oyz-hW-lGF"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Followers" id="xUq-24-Sc0"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gtA-cq-joZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1954" y="276"/>
+        </scene>
+        <!--Home-->
+        <scene sceneID="xAJ-nL-PL3">
+            <objects>
+                <viewController id="klG-nW-8zb" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ODq-tP-XwA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="AMU-ep-nOd"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Home" id="5Bl-XC-iKR"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qvM-eQ-VHq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1910" y="-410"/>
+        </scene>
+        <!--Main Tab Controller-->
+        <scene sceneID="M4a-9D-hD3">
+            <objects>
+                <tabBarController id="21c-Fh-LQu" customClass="MainTabController" customModule="getsdone_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="QaM-o0-baa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <outlet property="tabs" destination="QaM-o0-baa" id="xLH-at-Pra"/>
+                        <segue destination="klG-nW-8zb" kind="relationship" relationship="viewControllers" id="Lvv-IR-wV5"/>
+                        <segue destination="GAL-lt-h0I" kind="relationship" relationship="viewControllers" id="qFc-aV-sg8"/>
+                        <segue destination="TjN-za-H5l" kind="relationship" relationship="viewControllers" id="bW5-a9-nAO"/>
+                        <segue destination="2by-so-8aa" kind="relationship" relationship="viewControllers" id="i9q-qj-JCz"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aC8-v9-oIr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-44" y="-81"/>
+        </scene>
+    </scenes>
+</document>

@@ -1,0 +1,32 @@
+PODS:
+  - Alamofire (4.7.2)
+  - CryptoSwift (0.10.0)
+  - Font-Awesome-Swift (1.7.2)
+  - KeychainSwift (11.0.0)
+  - SwiftyJSON (4.1.0)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.7.2)
+  - CryptoSwift (~> 0.10.0)
+  - Font-Awesome-Swift (~> 1.7.2)
+  - KeychainSwift (~> 11.0.0)
+  - SwiftyJSON (~> 4.1.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Alamofire
+    - CryptoSwift
+    - Font-Awesome-Swift
+    - KeychainSwift
+    - SwiftyJSON
+
+SPEC CHECKSUMS:
+  Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
+  CryptoSwift: 6c778d69282bed3b4e975ff97a79d074f20bb011
+  Font-Awesome-Swift: 83ab9db365379ee6025167cec67bdc5d3226a811
+  KeychainSwift: bea6bd9f98af7b8d7ca4aa79fe105c00fab532db
+  SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
+
+PODFILE CHECKSUM: 35c1e9071ee3ee4f005907b12372e819aa1e733e
+
+COCOAPODS: 1.5.3
