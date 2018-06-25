@@ -13,7 +13,9 @@ class TaskViewCell: UITableViewCell {
     // MARK: Properties
     @IBOutlet weak var owner: UIButton!
     @IBOutlet weak var task: UILabel!
+    @IBOutlet weak var ago: UILabel!
     @IBOutlet weak var comments: UILabel!
+    
     
     
     

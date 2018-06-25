@@ -14,11 +14,14 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     let cellIdentifier = "cell"
     
-    var tasks = [["buy milk", "1d"], ["get car fixed at mini cs store", "2h"], ["get estimate for car damage and take photos at crime spot", "30s"]]
+    var tasks = [["buy milk", "1d", "5"], ["get car fixed at mini cs store", "2h", "0"], ["get estimate for car damage and take photos at crime spot", "30s", "23"]]
     
-    var assigned = [["take daughter to singing lessons", "4s"], ["buy 6 tomatoes with celery", "2h"]]
+    var assigned = [["take daughter to singing lessons", "4s", "11"], ["buy 6 tomatoes with celery", "2h", "3"]]
     
-    var closed = [["eat breakfast with big el", "30d"]]
+    var closed = [["eat breakfast with big el", "30d", "5"]]
+    
+    var deferred = [["my balls itch ooh oh yeah!!", "27m", "2"]]
+
     
     // MARK: Properties
     @IBOutlet weak var createTask: UIBarButtonItem!
@@ -54,6 +57,8 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return assigned.count
         } else if theView.selectedSegmentIndex == 2 {
             return closed.count
+        } else if theView.selectedSegmentIndex == 3 {
+            return deferred.count
         } else {
             return tasks.count
         }
@@ -65,10 +70,10 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tasksTable.dequeueReusableCell(
             withIdentifier: cellIdentifier, for: indexPath) as! TaskViewCell
         
-        cell.owner.setFAIcon(icon: FAType.FAMehO, iconSize: 48, forState: .normal)
+        cell.owner.setFAIcon(icon: FAType.FAFacebookSquare, iconSize: 48, forState: .normal)
+        cell.owner.setTitleColor(UIColor.black, for: .normal)
         //cell.comments.setFAIcon(icon: FAType.FACommentO, forState: .normal)
-        //cell.comments.setFAText(prefixText: "", icon: FAType.FACommentO, postfixText: " 12", size: 12,
-        //forState: .normal)
+        
         
         var data = [[String]]()
         
@@ -78,16 +83,78 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
             data = assigned
         } else if theView.selectedSegmentIndex == 2 {
             data = closed
+        } else if theView.selectedSegmentIndex == 3 {
+            data = deferred
         }
         
-        cell.comments.text = "\(data[indexPath.item][1]), 5 comments"
+        cell.comments.setFAText(prefixText: "", icon: FAType.FACommentO, postfixText: " \(data[indexPath.item][2])", size: 12, iconSize: 12)
+        
         cell.task.text = data[indexPath.item][0]
+        cell.ago.text = data[indexPath.item][1]
+        cell.ago.setFAColor(color: Getsdone.TealColor)
 
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+        
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
+        if theView.selectedSegmentIndex == 0 {
+            
+        
+            let deferAction = UITableViewRowAction(style: .normal, title: "Defer")
+            { (rowAction, indexPath) in
+                
+            }
+            
+            deferAction.backgroundColor = Getsdone.BlueColor
+            
+            let completeAction = UITableViewRowAction(style: .normal, title: "Complete")
+            { (rowAction, indexPath) in
+                
+            }
+            
+            completeAction.backgroundColor = Getsdone.GreenColor
+
+            let cloneAction = UITableViewRowAction(style: .normal, title: "Clone")
+            { (rowAction, indexPath) in
+                
+            }
+            
+            cloneAction.backgroundColor = UIColor.red
+            
+            return [completeAction, deferAction, cloneAction]
+            
+        
+        } else if theView.selectedSegmentIndex == 3 {
+
+            let undeferAction = UITableViewRowAction(style: .normal, title: "Undefer")
+            { (rowAction, indexPath) in
+                
+            }
+            
+            undeferAction.backgroundColor = Getsdone.BlueColor
+    
+            return [undeferAction]
+            
+            
+        } else {
+            return []
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            
+        }
+        
     }
     
     

@@ -76,7 +76,7 @@
             </objects>
             <point key="canvasLocation" x="713" y="501"/>
         </scene>
-        <!--Following-->
+        <!--Contacts-->
         <scene sceneID="EyS-r7-ZUc">
             <objects>
                 <viewController id="GAL-lt-h0I" sceneMemberID="viewController">
@@ -86,7 +86,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="oyz-hW-lGF"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Following" id="xUq-24-Sc0"/>
+                    <tabBarItem key="tabBarItem" title="Contacts" id="xUq-24-Sc0"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gtA-cq-joZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -104,8 +104,12 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
                                     <navigationItem title="Tasks" id="wUC-QZ-pzM">
-                                        <barButtonItem key="leftBarButtonItem" title="Item" id="d1C-EM-78A"/>
-                                        <barButtonItem key="rightBarButtonItem" title="Item" id="sR7-RS-9Fu"/>
+                                        <barButtonItem key="leftBarButtonItem" title="Item" id="d1C-EM-78A">
+                                            <color key="tintColor" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Item" id="sR7-RS-9Fu">
+                                            <color key="tintColor" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -120,7 +124,8 @@
                                         <segments>
                                             <segment title="Open"/>
                                             <segment title="Assigned"/>
-                                            <segment title="Closed"/>
+                                            <segment title="Completed"/>
+                                            <segment title="Deferred"/>
                                         </segments>
                                         <color key="tintColor" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <connections>
@@ -152,18 +157,29 @@
                                                                 <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="oxh-6l-J5I">
                                                                     <rect key="frame" x="68" y="0.0" width="287" height="39"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="hello world" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PnW-2R-M3y">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="hello world" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PnW-2R-M3y">
                                                                             <rect key="frame" x="0.0" y="0.0" width="287" height="20"/>
                                                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Comments" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rd5-lA-gnZ">
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="JX8-wK-KlD">
                                                                             <rect key="frame" x="0.0" y="25" width="287" height="14"/>
-                                                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                                                            <nil key="textColor"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
+                                                                            <subviews>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Comments" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QLd-IL-R5A">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="59" height="14"/>
+                                                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Ago" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rd5-lA-gnZ">
+                                                                                    <rect key="frame" x="265" y="0.0" width="22" height="14"/>
+                                                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
+                                                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                            </subviews>
+                                                                        </stackView>
                                                                     </subviews>
                                                                 </stackView>
                                                             </subviews>
@@ -175,7 +191,8 @@
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
-                                                    <outlet property="comments" destination="Rd5-lA-gnZ" id="5WV-dR-IZR"/>
+                                                    <outlet property="ago" destination="Rd5-lA-gnZ" id="EGK-Jk-ksu"/>
+                                                    <outlet property="comments" destination="QLd-IL-R5A" id="dWc-LT-gI5"/>
                                                     <outlet property="owner" destination="PBi-le-whR" id="psX-sq-jap"/>
                                                     <outlet property="task" destination="PnW-2R-M3y" id="raD-3O-HSk"/>
                                                 </connections>
@@ -208,7 +225,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="AMU-ep-nOd"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Home" id="5Bl-XC-iKR"/>
+                    <tabBarItem key="tabBarItem" title="Home" id="5Bl-XC-iKR">
+                        <color key="badgeColor" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    </tabBarItem>
                     <connections>
                         <outlet property="createTask" destination="sR7-RS-9Fu" id="6Mj-De-42a"/>
                         <outlet property="profile" destination="d1C-EM-78A" id="M9a-K3-BH1"/>
@@ -228,6 +247,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     </tabBar>
                     <connections>
                         <outlet property="tabs" destination="QaM-o0-baa" id="xLH-at-Pra"/>

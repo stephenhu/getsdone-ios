@@ -11,6 +11,7 @@
 		852D8CB120DF969C004F7D65 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852D8CB020DF969C004F7D65 /* MainTabController.swift */; };
 		8556803620DFD238003D9418 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8556803520DFD238003D9418 /* HomeController.swift */; };
 		8556803820DFEA1A003D9418 /* TaskViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8556803720DFEA1A003D9418 /* TaskViewCell.swift */; };
+		8556803A20E1315C003D9418 /* Getsdone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8556803920E1315C003D9418 /* Getsdone.swift */; };
 		85C105F820DD3F6100BA66CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C105F720DD3F6100BA66CF /* AppDelegate.swift */; };
 		85C105FA20DD3F6100BA66CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C105F920DD3F6100BA66CF /* ViewController.swift */; };
 		85C105FD20DD3F6100BA66CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85C105FB20DD3F6100BA66CF /* Main.storyboard */; };
@@ -49,6 +50,7 @@
 		852D8CB020DF969C004F7D65 /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
 		8556803520DFD238003D9418 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		8556803720DFEA1A003D9418 /* TaskViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewCell.swift; sourceTree = "<group>"; };
+		8556803920E1315C003D9418 /* Getsdone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Getsdone.swift; sourceTree = "<group>"; };
 		85C105F420DD3F6100BA66CF /* getsdone-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "getsdone-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		85C105F720DD3F6100BA66CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85C105F920DD3F6100BA66CF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				852D8CB020DF969C004F7D65 /* MainTabController.swift */,
 				8556803520DFD238003D9418 /* HomeController.swift */,
 				8556803720DFEA1A003D9418 /* TaskViewCell.swift */,
+				8556803920E1315C003D9418 /* Getsdone.swift */,
 			);
 			path = "getsdone-ios";
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8556803A20E1315C003D9418 /* Getsdone.swift in Sources */,
 				8556803620DFD238003D9418 /* HomeController.swift in Sources */,
 				85C105FA20DD3F6100BA66CF /* ViewController.swift in Sources */,
 				8556803820DFEA1A003D9418 /* TaskViewCell.swift in Sources */,
