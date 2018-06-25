@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		79B09A22DA79A4EC7C5532EA /* Pods_getsdone_iosUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5727EC1112A0B0EBDF8A9084 /* Pods_getsdone_iosUITests.framework */; };
 		852D8CB120DF969C004F7D65 /* MainTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852D8CB020DF969C004F7D65 /* MainTabController.swift */; };
+		8556803620DFD238003D9418 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8556803520DFD238003D9418 /* HomeController.swift */; };
+		8556803820DFEA1A003D9418 /* TaskViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8556803720DFEA1A003D9418 /* TaskViewCell.swift */; };
 		85C105F820DD3F6100BA66CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C105F720DD3F6100BA66CF /* AppDelegate.swift */; };
 		85C105FA20DD3F6100BA66CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C105F920DD3F6100BA66CF /* ViewController.swift */; };
 		85C105FD20DD3F6100BA66CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85C105FB20DD3F6100BA66CF /* Main.storyboard */; };
@@ -45,6 +47,8 @@
 		6EC299A3C0EDAE34B445C12F /* Pods-getsdone-iosUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-getsdone-iosUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-getsdone-iosUITests/Pods-getsdone-iosUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8426033539F9AF2F8DD8AF31 /* Pods-getsdone-ios.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-getsdone-ios.debug.xcconfig"; path = "Pods/Target Support Files/Pods-getsdone-ios/Pods-getsdone-ios.debug.xcconfig"; sourceTree = "<group>"; };
 		852D8CB020DF969C004F7D65 /* MainTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabController.swift; sourceTree = "<group>"; };
+		8556803520DFD238003D9418 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		8556803720DFEA1A003D9418 /* TaskViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskViewCell.swift; sourceTree = "<group>"; };
 		85C105F420DD3F6100BA66CF /* getsdone-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "getsdone-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		85C105F720DD3F6100BA66CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85C105F920DD3F6100BA66CF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +137,8 @@
 				85C1060020DD3F6200BA66CF /* LaunchScreen.storyboard */,
 				85C1060320DD3F6200BA66CF /* Info.plist */,
 				852D8CB020DF969C004F7D65 /* MainTabController.swift */,
+				8556803520DFD238003D9418 /* HomeController.swift */,
+				8556803720DFEA1A003D9418 /* TaskViewCell.swift */,
 			);
 			path = "getsdone-ios";
 			sourceTree = "<group>";
@@ -386,7 +392,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8556803620DFD238003D9418 /* HomeController.swift in Sources */,
 				85C105FA20DD3F6100BA66CF /* ViewController.swift in Sources */,
+				8556803820DFEA1A003D9418 /* TaskViewCell.swift in Sources */,
 				85C105F820DD3F6100BA66CF /* AppDelegate.swift in Sources */,
 				852D8CB120DF969C004F7D65 /* MainTabController.swift in Sources */,
 			);
