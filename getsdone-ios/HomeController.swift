@@ -14,13 +14,13 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     let cellIdentifier = "cell"
     
-    var tasks = [["buy milk", "1d", "5"], ["get car fixed at mini cs store", "2h", "0"], ["get estimate for car damage and take photos at crime spot", "30s", "23"]]
+    var tasks = [["lebronjames", "buy milk", "1d", "5", "2"], ["masters", "get car fixed at mini cs store", "2h", "0", "2"], ["mj23", "get estimate for car damage and take photos at crime spot", "30s", "23", "2"]]
     
-    var assigned = [["take daughter to singing lessons", "4s", "11"], ["buy 6 tomatoes with celery", "2h", "3"]]
+    var assigned = [["lebronjames", "take daughter to singing lessons", "4s", "11", "2"], ["morgan", "buy 6 tomatoes with celery", "2h", "3", "2"]]
     
-    var closed = [["eat breakfast with big el", "30d", "5"]]
+    var closed = [["tedj", "eat breakfast with big el", "30d", "5", "2"]]
     
-    var deferred = [["my balls itch ooh oh yeah!!", "27m", "2"]]
+    var deferred = [["ransomware", "my balls itch ooh oh yeah!!", "27m", "2", "2"]]
 
     
     // MARK: Properties
@@ -38,7 +38,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.tasksTable.dataSource = self
         self.tasksTable.delegate = self
         
-        self.tasksTable.rowHeight = 80
+        self.tasksTable.rowHeight = 120
         self.tasksTable.reloadData()
         
     }
@@ -87,10 +87,11 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
             data = deferred
         }
         
-        cell.comments.setFAText(prefixText: "", icon: FAType.FACommentO, postfixText: " \(data[indexPath.item][2])", size: 12, iconSize: 12)
+        cell.comments.setFAText(prefixText: "", icon: FAType.FACommentO, postfixText: " \(data[indexPath.item][3])", size: 12, iconSize: 12)
+        cell.user.text = "@\(data[indexPath.item][0])"
         
-        cell.task.text = data[indexPath.item][0]
-        cell.ago.text = data[indexPath.item][1]
+        cell.task.text = data[indexPath.item][1]
+        cell.ago.text = data[indexPath.item][2]
         cell.ago.setFAColor(color: Getsdone.TealColor)
 
         
@@ -98,8 +99,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
-        
+        self.performSegue(withIdentifier: "showTask", sender: self)
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -150,10 +150,6 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        
-        if editingStyle == .delete {
-            
-        }
         
     }
     

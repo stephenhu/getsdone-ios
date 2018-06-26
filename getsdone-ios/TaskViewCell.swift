@@ -15,6 +15,7 @@ class TaskViewCell: UITableViewCell {
     @IBOutlet weak var task: UILabel!
     @IBOutlet weak var ago: UILabel!
     @IBOutlet weak var comments: UILabel!
+    @IBOutlet weak var user: UILabel!
     
     
     
