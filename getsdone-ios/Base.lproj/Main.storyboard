@@ -337,10 +337,10 @@
             </objects>
             <point key="canvasLocation" x="2844" y="294.60269865067471"/>
         </scene>
-        <!--View Controller-->
+        <!--Profile Controller-->
         <scene sceneID="Cfx-vw-lpu">
             <objects>
-                <viewController id="wVC-Qj-Bsn" sceneMemberID="viewController">
+                <viewController id="wVC-Qj-Bsn" customClass="ProfileController" customModule="getsdone_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fhw-aX-EBE">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -376,10 +376,22 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JHe-sb-I0z">
+                                <rect key="frame" x="56" y="342" width="53" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                <state key="normal" title="log out"/>
+                                <connections>
+                                    <action selector="logout:" destination="wVC-Qj-Bsn" eventType="touchUpInside" id="rcy-Tv-bdL"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="pgk-tC-0KK"/>
                     </view>
+                    <connections>
+                        <segue destination="vfa-OU-5ar" kind="show" identifier="loginSegue" id="fkz-3Q-coZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N86-Op-wlK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -424,7 +436,7 @@
                                         </constraints>
                                         <segments>
                                             <segment title="Open"/>
-                                            <segment title="Assigned"/>
+                                            <segment title="Delegated"/>
                                             <segment title="Completed"/>
                                             <segment title="Deferred"/>
                                         </segments>
@@ -433,8 +445,20 @@
                                             <action selector="changeView:" destination="klG-nW-8zb" eventType="valueChanged" id="9vr-ju-K1G"/>
                                         </connections>
                                     </segmentedControl>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="U4R-Sy-sDa">
+                                        <rect key="frame" x="0.0" y="45" width="355" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="Gb1-OM-DXX"/>
+                                        </constraints>
+                                        <segments>
+                                            <segment title="Latest"/>
+                                            <segment title="Oldest"/>
+                                            <segment title="By Tag"/>
+                                        </segments>
+                                        <color key="tintColor" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </segmentedControl>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WnQ-qZ-LkN">
-                                        <rect key="frame" x="0.0" y="45" width="355" height="459"/>
+                                        <rect key="frame" x="0.0" y="90" width="355" height="414"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="reD-KV-3Ca" customClass="TaskViewCell" customModule="getsdone_ios" customModuleProvider="target">
@@ -564,7 +588,7 @@
                                             <color key="tintColor" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <connections>
                                                 <action selector="cancel:" destination="JEK-OH-avc" id="exi-So-rd1"/>
-                                                <segue destination="21c-Fh-LQu" kind="show" id="3wQ-U8-0B7"/>
+                                                <segue destination="21c-Fh-LQu" kind="show" identifier="homeSegue" id="3wQ-U8-0B7"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Create" id="DSo-7Z-eyo">
@@ -579,7 +603,7 @@
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="q9x-rD-Xp9">
                                 <rect key="frame" x="20" y="103" width="335" height="544"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -623,17 +647,17 @@
                                         <color key="textColor" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="adX-GB-Ydq">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="natural" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="adX-GB-Ydq">
                                         <rect key="frame" x="0.0" y="26.5" width="275" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="email"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qFG-UQ-WnB">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="qFG-UQ-WnB">
                                         <rect key="frame" x="0.0" y="66.5" width="275" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wwu-df-4EZ">
                                         <rect key="frame" x="0.0" y="106.5" width="275" height="32"/>
@@ -661,10 +685,10 @@
             </objects>
             <point key="canvasLocation" x="-825" y="-823"/>
         </scene>
-        <!--View Controller-->
+        <!--Login Controller-->
         <scene sceneID="DV4-cV-1x4">
             <objects>
-                <viewController id="vfa-OU-5ar" sceneMemberID="viewController">
+                <viewController id="vfa-OU-5ar" customClass="LoginController" customModule="getsdone_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IAQ-uh-rsM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -678,17 +702,17 @@
                                         <color key="textColor" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="scw-s6-u4c">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="natural" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="scw-s6-u4c">
                                         <rect key="frame" x="0.0" y="26.5" width="275" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="email"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vvh-Tu-P4l">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Vvh-Tu-P4l">
                                         <rect key="frame" x="0.0" y="66.5" width="275" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x6q-MH-GQO">
                                         <rect key="frame" x="0.0" y="106.5" width="275" height="32"/>
@@ -697,7 +721,7 @@
                                             <color key="titleColor" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         </state>
                                         <connections>
-                                            <segue destination="21c-Fh-LQu" kind="show" id="Eno-EY-mUc"/>
+                                            <action selector="loginClicked:" destination="vfa-OU-5ar" eventType="touchUpInside" id="Llb-rh-p5l"/>
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="3jI-Iu-xRv">
@@ -732,6 +756,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="c0d-t5-7St"/>
                     </view>
+                    <connections>
+                        <outlet property="email" destination="scw-s6-u4c" id="F99-72-RYx"/>
+                        <outlet property="loginBtn" destination="x6q-MH-GQO" id="Nkd-kh-ybD"/>
+                        <outlet property="password" destination="Vvh-Tu-P4l" id="CcS-7e-ceH"/>
+                        <segue destination="21c-Fh-LQu" kind="show" identifier="homeSegue" id="en5-Ww-xZM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zZo-RW-NQG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -761,6 +791,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="NL3-KJ-N06"/>
+        <segue reference="w79-zJ-rcx"/>
+        <segue reference="3wQ-U8-0B7"/>
     </inferredMetricsTieBreakers>
 </document>

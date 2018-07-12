@@ -11,6 +11,20 @@ import UIKit
 
 class Getsdone {
     
+    
+    static let HTTP                     = "http://"
+    static let HTTPS                    = "https://"
+    static let SERVER                   = "127.0.0.1:8888"
+    static let API_ENDPOINT             = "127.0.0.1:8888/api"
+    static let AUTH_ENDPOINT            = "127.0.0.1:8888/auth"
+    static let API_USERS                = "/users"
+    static let API_TASKS                = "/tasks"
+    
+    static let COOKIE                   = "cookie"
+    static let TOKEN                    = "token"
+    static let APP_NAME                 = "getsdone"
+
+    
     static let TealColor = UIColor(
         red: 1/255, green: 129/255, blue: 186/255, alpha: 1)
 
@@ -19,5 +33,9 @@ class Getsdone {
     
     static let GreenColor = UIColor(
         red: 53/255, green: 129/255, blue: 48/255, alpha: 1)
+    
+    func parseTokenFromCookie() {
+        
+    }
     
 }

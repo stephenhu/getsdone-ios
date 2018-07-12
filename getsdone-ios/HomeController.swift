@@ -8,11 +8,15 @@
 
 import UIKit
 
+import Alamofire
 import Font_Awesome_Swift
+import SwiftyJSON
 
 class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let cellIdentifier = "cell"
+    
+    let defaults = UserDefaults.standard
     
     var tasks = [["lebronjames", "buy milk", "1d", "5", "2"], ["masters", "get car fixed at mini cs store", "2h", "0", "2"], ["mj23", "get estimate for car damage and take photos at crime spot", "30s", "23", "2"]]
     
@@ -39,7 +43,8 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.tasksTable.delegate = self
         
         self.tasksTable.rowHeight = 120
-        self.tasksTable.reloadData()
+        
+        loadUserInfo()
         
     }
     
@@ -144,14 +149,130 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             
         } else {
-            return []
-        }
+            return []        }
         
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
     }
+        
+    
+    func loadUserInfo() {
+        
+        let properties = defaults.object(forKey: Getsdone.COOKIE) as? [String: Any]
+        
+        print(properties!["cookie"]!)
+        
+        let cookie = HTTPCookie(properties: properties!["cookie"] as! [HTTPCookiePropertyKey: Any])
+        
+        print(cookie)
+        HTTPCookieStorage.shared.setCookie(cookie!)
+        
+        let url = "\(Getsdone.HTTP)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)"
+        
+        Alamofire.request(url, method: .get)
+            .responseJSON{ response in
+                
+                switch response.result {
+                case .failure(let error):
+                    
+                    let ac = UIAlertController(title: "Connection error",
+                                               message: error.localizedDescription,
+                                               preferredStyle: UIAlertControllerStyle.alert)
+                    
+                    let OK = UIAlertAction(title: "OK",
+                                           style: UIAlertActionStyle.default,
+                                           handler: nil)
+                    
+                    ac.addAction(OK)
+                    
+                    self.present(ac, animated: true, completion: nil)
+                    
+                    
+                case .success:
+                    
+                    if let raw = response.result.value {
+
+                        let j = JSON(raw)
+                        
+                        print("faggot")
+                        print(j)
+                        
+                        self.loadOpenTasks(j["id"].string!)
+                        
+                    }
+
+                }
+        }
+        
+    } // loadUserInfo
+    
+    
+    func loadOpenTasks(_ uid: String) {
+        
+        let url = "\(Getsdone.HTTP)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)"
+        
+        print(url)
+        
+        Alamofire.request(url, method: .get)
+            .responseJSON{ response in
+        
+                switch response.result {
+                case .failure(let error):
+                    
+                    let ac = UIAlertController(title: "Connection error",
+                                               message: error.localizedDescription,
+                                               preferredStyle: UIAlertControllerStyle.alert)
+                    
+                    let OK = UIAlertAction(title: "OK",
+                                           style: UIAlertActionStyle.default,
+                                           handler: nil)
+                    
+                    ac.addAction(OK)
+                    
+                    self.present(ac, animated: true, completion: nil)
+                    
+                    
+                case .success:
+                    
+                    if let raw = response.result.value {
+                        
+                        let j = JSON(raw)
+                        
+                        print(j)
+                        var all = [[String]]()
+                        
+                        for (_, task) in j {
+                        
+                            var t = [String]()
+                            // ["lebronjames", "buy milk", "1d", "5", "2"]
+                            //t.append(task["name"].string!)
+                            t.append(task["ownerId"].string!)
+                            t.append(task["task"].string!)
+                            t.append(task["created"].string!)
+                            t.append("3") // comments
+                            t.append(task["id"].string!)
+                            
+                            if task["delegateId"].exists() {
+                                t.append(task["delegateId"]["String"].string!)
+                            } else {
+                                t.append("")
+                            }
+                        
+                            all.append(t)
+                            
+                        }
+                        
+                        self.tasks = all
+                        
+                        self.tasksTable.reloadData()
+                        
+                    }
+                }
+        }
+        
+    } // loadOpenTasks
     
     
     // MARK: Actions
