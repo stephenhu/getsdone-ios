@@ -22,6 +22,7 @@ class Getsdone {
     
     static let COOKIE                   = "cookie"
     static let TOKEN                    = "token"
+    static let TID                      = "tid"
     static let APP_NAME                 = "getsdone"
 
     
@@ -34,8 +35,24 @@ class Getsdone {
     static let GreenColor = UIColor(
         red: 53/255, green: 129/255, blue: 48/255, alpha: 1)
     
-    func parseTokenFromCookie() {
+    static func toAgo(_ d: String) -> String {
         
-    }
+        let f = DateFormatter()
+        
+        f.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        
+        let created = f.date(from: d)
+        
+        let c = DateComponentsFormatter()
+        
+        c.allowedUnits = [.day, .hour, .minute, .second]
+        c.unitsStyle = .abbreviated
+        c.maximumUnitCount = 1
+        
+        let s = c.string(from: created!, to: Date())
+        
+        return s!
+        
+    } // toAgo
     
 }

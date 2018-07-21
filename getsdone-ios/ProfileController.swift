@@ -50,7 +50,7 @@ class ProfileController: UIViewController {
                     
                     if status == 200 {
                         
-                        self.defaults.removeObject(forKey: Getsdone.TOKEN)
+                        self.defaults.removeObject(forKey: Getsdone.COOKIE)
                         
                         self.performSegue(withIdentifier: "loginSegue", sender: self)
                         

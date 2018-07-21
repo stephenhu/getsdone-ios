@@ -18,13 +18,16 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     let defaults = UserDefaults.standard
     
-    var tasks = [["lebronjames", "buy milk", "1d", "5", "2"], ["masters", "get car fixed at mini cs store", "2h", "0", "2"], ["mj23", "get estimate for car damage and take photos at crime spot", "30s", "23", "2"]]
+    var tasks = [[String]]()
     
-    var assigned = [["lebronjames", "take daughter to singing lessons", "4s", "11", "2"], ["morgan", "buy 6 tomatoes with celery", "2h", "3", "2"]]
+    var assigned = [[String]]()
     
-    var closed = [["tedj", "eat breakfast with big el", "30d", "5", "2"]]
+    var completed = [[String]]()
     
-    var deferred = [["ransomware", "my balls itch ooh oh yeah!!", "27m", "2", "2"]]
+    var deferred = [[String]]()
+    
+    var uid     = String()
+    var name    = String()
 
     
     // MARK: Properties
@@ -61,7 +64,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if theView.selectedSegmentIndex == 1 {
             return assigned.count
         } else if theView.selectedSegmentIndex == 2 {
-            return closed.count
+            return completed.count
         } else if theView.selectedSegmentIndex == 3 {
             return deferred.count
         } else {
@@ -87,7 +90,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         } else if theView.selectedSegmentIndex == 1 {
             data = assigned
         } else if theView.selectedSegmentIndex == 2 {
-            data = closed
+            data = completed
         } else if theView.selectedSegmentIndex == 3 {
             data = deferred
         }
@@ -96,7 +99,8 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.user.text = "@\(data[indexPath.item][0])"
         
         cell.task.text = data[indexPath.item][1]
-        cell.ago.text = data[indexPath.item][2]
+        
+        cell.ago.text = Getsdone.toAgo(data[indexPath.item][2])
         cell.ago.setFAColor(color: Getsdone.TealColor)
 
         
@@ -104,7 +108,23 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        var data = [[String]]()
+        
+        if theView.selectedSegmentIndex == 0 {
+            data = tasks
+        } else if theView.selectedSegmentIndex == 1 {
+            data = assigned
+        } else if theView.selectedSegmentIndex == 2 {
+            data = completed
+        } else if theView.selectedSegmentIndex == 3 {
+            data = deferred
+        }
+        
+        defaults.set(data[indexPath.item][4], forKey: Getsdone.TID)
+        
         self.performSegue(withIdentifier: "showTask", sender: self)
+        
     }
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
@@ -121,6 +141,8 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             let completeAction = UITableViewRowAction(style: .normal, title: "Complete")
             { (rowAction, indexPath) in
+                
+                self.completeTask(indexPath)
                 
             }
             
@@ -149,25 +171,66 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             
         } else {
-            return []        }
+            return []
+        }
         
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
     }
+    
+    func completeTask(_ row: IndexPath) {
         
+        let url = "\(Getsdone.HTTP)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)/\(tasks[row.item][4])"
+        
+        Alamofire.request(url, method: .put)
+            .response{ response in
+                
+                if response.error != nil {
+                    
+                    let ac = UIAlertController(title: "Connection error",
+                                               message: response.error?.localizedDescription,
+                                               preferredStyle: UIAlertControllerStyle.alert)
+                    
+                    let OK = UIAlertAction(title: "OK",
+                                           style: UIAlertActionStyle.default,
+                                           handler: nil)
+                    
+                    ac.addAction(OK)
+                    
+                    self.present(ac, animated: true, completion: nil)
+                    
+                    
+                } else if let status = response.response?.statusCode {
+                    
+                    if status == 200 {
+                        
+                        self.loadOpenTasks()
+                        
+                    } else {
+                        
+                        let ac = UIAlertController(title: "Complete task error",
+                                                   message: response.error?.localizedDescription,
+                                                   preferredStyle: UIAlertControllerStyle.alert)
+                        
+                        let OK = UIAlertAction(title: "OK",
+                                               style: UIAlertActionStyle.default,
+                                               handler: nil)
+                        
+                        ac.addAction(OK)
+                        
+                        self.present(ac, animated: true, completion: nil)
+                        
+                    }
+                    
+                }
+                
+        }
+        
+    } // completeTask
     
     func loadUserInfo() {
-        
-        let properties = defaults.object(forKey: Getsdone.COOKIE) as? [String: Any]
-        
-        print(properties!["cookie"]!)
-        
-        let cookie = HTTPCookie(properties: properties!["cookie"] as! [HTTPCookiePropertyKey: Any])
-        
-        print(cookie)
-        HTTPCookieStorage.shared.setCookie(cookie!)
         
         let url = "\(Getsdone.HTTP)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)"
         
@@ -192,14 +255,17 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     
                 case .success:
                     
+                    let status = response.response?.statusCode
+
                     if let raw = response.result.value {
 
                         let j = JSON(raw)
                         
-                        print("faggot")
                         print(j)
+                        self.uid    = j["id"].string!
+                        self.name   = j["name"].string!
                         
-                        self.loadOpenTasks(j["id"].string!)
+                        self.loadOpenTasks()
                         
                     }
 
@@ -209,7 +275,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     } // loadUserInfo
     
     
-    func loadOpenTasks(_ uid: String) {
+    func loadOpenTasks() {
         
         let url = "\(Getsdone.HTTP)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)"
         
@@ -240,21 +306,24 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         
                         let j = JSON(raw)
                         
-                        print(j)
                         var all = [[String]]()
                         
                         for (_, task) in j {
                         
                             var t = [String]()
-                            // ["lebronjames", "buy milk", "1d", "5", "2"]
-                            //t.append(task["name"].string!)
-                            t.append(task["ownerId"].string!)
+
+                            print(task)
+                            
+                            t.append(task["ownerName"].string!)
                             t.append(task["task"].string!)
                             t.append(task["created"].string!)
-                            t.append("3") // comments
+                            
+                            let count = task["comments"].array!.count
+                            
+                            t.append(String(count)) // comments
                             t.append(task["id"].string!)
                             
-                            if task["delegateId"].exists() {
+                            if task["delegateId"]["Valid"].bool! {
                                 t.append(task["delegateId"]["String"].string!)
                             } else {
                                 t.append("")
@@ -275,10 +344,211 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     } // loadOpenTasks
     
     
+    func loadOpenAssignedTasks() {
+        
+        let url = "\(Getsdone.HTTP)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)"
+        
+        print(url)
+        
+        Alamofire.request(url, method: .get)
+            .responseJSON{ response in
+                
+                switch response.result {
+                case .failure(let error):
+                    
+                    let ac = UIAlertController(title: "Connection error",
+                                               message: error.localizedDescription,
+                                               preferredStyle: UIAlertControllerStyle.alert)
+                    
+                    let OK = UIAlertAction(title: "OK",
+                                           style: UIAlertActionStyle.default,
+                                           handler: nil)
+                    
+                    ac.addAction(OK)
+                    
+                    self.present(ac, animated: true, completion: nil)
+                    
+                    
+                case .success:
+                    
+                    if let raw = response.result.value {
+                        
+                        let j = JSON(raw)
+                        
+                        var all = [[String]]()
+                        
+                        for (_, task) in j {
+                            
+                            if task["delegateId"]["Valid"].bool! {
+
+                                var t = [String]()
+
+                                t.append(task["ownerName"].string!)
+                                t.append(task["task"].string!)
+                                t.append(task["created"].string!)
+                                
+                                let count = task["comments"].array!.count
+                                
+                                t.append(String(count)) // comments
+                                t.append(task["id"].string!)
+                                t.append(task["delegateId"]["String"].string!)
+                                
+                                all.append(t)
+
+                            }
+                            
+                        }
+                        
+                        self.assigned = all
+                        
+                        self.tasksTable.reloadData()
+                        
+                    }
+                }
+        }
+        
+    } // loadOpenAssignedTasks
+    
+    
+    func loadCompletedTasks() {
+        
+        let url = "\(Getsdone.HTTP)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)"
+        
+        print(url)
+        
+        Alamofire.request(url, method: .get, parameters: ["view": "completed"])
+            .responseJSON{ response in
+                
+                switch response.result {
+                case .failure(let error):
+                    
+                    let ac = UIAlertController(title: "Connection error",
+                                               message: error.localizedDescription,
+                                               preferredStyle: UIAlertControllerStyle.alert)
+                    
+                    let OK = UIAlertAction(title: "OK",
+                                           style: UIAlertActionStyle.default,
+                                           handler: nil)
+                    
+                    ac.addAction(OK)
+                    
+                    self.present(ac, animated: true, completion: nil)
+                    
+                    
+                case .success:
+                    
+                    if let raw = response.result.value {
+                        
+                        let j = JSON(raw)
+                        
+                        var all = [[String]]()
+                        
+                        for (_, task) in j {
+                            
+                            var t = [String]()
+                            
+                            print(task)
+                            t.append(task["ownerName"].string!)
+                            t.append(task["task"].string!)
+                            t.append(task["created"].string!)
+                            
+                            let count = task["comments"].array!.count
+                            
+                            t.append(String(count)) // comments
+                            t.append(task["id"].string!)
+                            t.append(task["delegateId"]["String"].string!)
+                                
+                            all.append(t)
+                            
+                        }
+                        
+                        self.completed = all
+                        
+                        self.tasksTable.reloadData()
+                        
+                    }
+                }
+        }
+        
+    } // loadCompletedTasks
+    
+    
+    func loadDeferredTasks() {
+        
+        let url = "\(Getsdone.HTTP)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)"
+        
+        print(url)
+        
+        Alamofire.request(url, method: .get, parameters: ["view": "deferred"])
+            .responseJSON{ response in
+                
+                switch response.result {
+                case .failure(let error):
+                    
+                    let ac = UIAlertController(title: "Connection error",
+                                               message: error.localizedDescription,
+                                               preferredStyle: UIAlertControllerStyle.alert)
+                    
+                    let OK = UIAlertAction(title: "OK",
+                                           style: UIAlertActionStyle.default,
+                                           handler: nil)
+                    
+                    ac.addAction(OK)
+                    
+                    self.present(ac, animated: true, completion: nil)
+                    
+                    
+                case .success:
+                    
+                    if let raw = response.result.value {
+                        
+                        let j = JSON(raw)
+                        
+                        var all = [[String]]()
+                        
+                        for (_, task) in j {
+                            
+                            var t = [String]()
+                            
+                            t.append(task["ownerName"].string!)
+                            t.append(task["task"].string!)
+                            t.append(task["created"].string!)
+                            
+                            let count = task["comments"].array!.count
+                            
+                            t.append(String(count)) // comments
+                            t.append(task["id"].string!)
+                            t.append(task["delegateId"]["String"].string!)
+                            
+                            all.append(t)
+                            
+                        }
+                        
+                        self.deferred = all
+                        
+                        self.tasksTable.reloadData()
+                        
+                    }
+                }
+        }
+        
+    } // loadDeferredTasks
+    
+    
     // MARK: Actions
     
     @IBAction func changeView(_ sender: Any) {
-        tasksTable.reloadData()
+        
+        if theView.selectedSegmentIndex == 0 {
+            loadOpenTasks()
+        } else if theView.selectedSegmentIndex == 1 {
+            loadOpenAssignedTasks()
+        } else if theView.selectedSegmentIndex == 2 {
+            loadCompletedTasks()
+        } else if theView.selectedSegmentIndex == 3 {
+            loadDeferredTasks()
+        }
+        
     }
     
     

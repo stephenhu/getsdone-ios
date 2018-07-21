@@ -38,17 +38,12 @@ class LoginController: UIViewController {
     func checkToken() {
         
         if let properties = defaults.object(forKey: Getsdone.COOKIE) as? [String: Any] {
-
-            print("slut")
-            print(properties)
             
             let c = HTTPCookie(properties: properties["cookie"] as! [HTTPCookiePropertyKey: Any])
             
             HTTPCookieStorage.shared.setCookie(c!)
             
             self.performSegue(withIdentifier: "homeSegue", sender: self)
-            
-        } else {
             
         }
         
@@ -108,22 +103,6 @@ class LoginController: UIViewController {
                             
                         }
                         
-                        
-/*                        if let token = HTTPCookieStorage.shared.cookies?[0] {
-
-                            print(token.value)
-                            
-                            if !(token.value.isEmpty) {
-                            
-                                self.defaults.set(
-                                    token.value, forKey: Getsdone.TOKEN)
-                                
-                                self.performSegue(withIdentifier: "homeSegue", sender: self)
-
-                            } 
-                            
-                        }
-  */
                     } else {
 
                         let ac = UIAlertController(title: "Login error",
