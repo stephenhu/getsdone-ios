@@ -10,7 +10,7 @@ import UIKit
 
 import Alamofire
 
-class LoginController: UIViewController {
+class LoginController: UIViewController, UITextFieldDelegate {
     
     let defaults = UserDefaults.standard
     
@@ -28,11 +28,22 @@ class LoginController: UIViewController {
         super.viewDidLoad()
         
         email.becomeFirstResponder()
+        
+        password.delegate = self
     
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        password.resignFirstResponder()
+        
+        login()
+        return true
+        
     }
     
     func checkToken() {

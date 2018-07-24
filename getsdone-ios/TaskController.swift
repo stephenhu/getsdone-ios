@@ -12,23 +12,60 @@ import Alamofire
 import Font_Awesome_Swift
 import SwiftyJSON
 
-class TaskController: UIViewController {
+class TaskController: UIViewController, UITextViewDelegate {
 
     // MARK: Properties
-    @IBOutlet weak var createTaskBtn: UIBarButtonItem!
     @IBOutlet weak var task: UITextView!
+    @IBOutlet weak var createTaskBtn: UIBarButtonItem!
+    @IBOutlet weak var commentBottomConstraint: NSLayoutConstraint!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(notification:)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(notification:)), name: .UIKeyboardWillHide, object: nil)
+        
+        self.task.delegate = self
+    
         task.becomeFirstResponder()
         
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
+        
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    @objc
+    func keyboardWillAppear(notification: NSNotification?) {
+
+        guard let keyboardFrame = notification?.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue else {
+            return
+        }
+     
+        let height: CGFloat
+        if #available(iOS 11.0, *) {
+            height = keyboardFrame.cgRectValue.height - self.view.safeAreaInsets.bottom
+        } else {
+            height = keyboardFrame.cgRectValue.height
+        }
+        
+        commentBottomConstraint.constant = height
+        
+    }
+    
+    @objc
+    func keyboardWillDisappear(notification: NSNotification?) {
+        commentBottomConstraint.constant = 0.0
+    }
+    
     
     func loadUserInfo() {
         

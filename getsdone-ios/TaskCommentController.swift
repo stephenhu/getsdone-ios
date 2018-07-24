@@ -12,7 +12,8 @@ import Alamofire
 import Font_Awesome_Swift
 import SwiftyJSON
 
-class TaskCommentController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TaskCommentController: UIViewController, UITableViewDelegate,
+  UITableViewDataSource, UITextFieldDelegate {
     
     let defaults = UserDefaults.standard
     
@@ -31,28 +32,36 @@ class TaskCommentController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var commentsTable: UITableView!
     @IBOutlet weak var comment: UITextField!
     @IBOutlet weak var commentBtn: UIButton!
+    @IBOutlet weak var svBottomConstraint: NSLayoutConstraint!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
-        icon.setFAIcon(icon: FAType.FAGithubAlt, iconSize: 48, forState: .normal)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(notification:)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(notification:)), name: .UIKeyboardWillHide, object: nil)
         
-        //task.text = "Yi Dian Dian yong le duo lv cha, 5 fen tian, zhen buo ye, zhong bei, qu bing"
-        //username.text = "@stephen"
-        //ago.text = "12s"
+        icon.setFAIcon(icon: FAType.FAGithubAlt, iconSize: 48, forState: .normal)
         
         commentsTable.delegate = self
         commentsTable.dataSource = self
         
         commentsTable.rowHeight = 80
         
-        comment.becomeFirstResponder()
+        //comment.becomeFirstResponder()
         
         tid = defaults.object(forKey: Getsdone.TID) as! String
         
+        comment.delegate = self
+        
         loadUserInfo()
+        
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
         
     }
     
@@ -81,7 +90,40 @@ class TaskCommentController: UIViewController, UITableViewDelegate, UITableViewD
         return cell
         
     }
-
+    
+    @objc
+    func keyboardWillAppear(notification: NSNotification?) {
+        
+        guard let keyboardFrame = notification?.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue else {
+            return
+        }
+        
+        let height: CGFloat
+        if #available(iOS 11.0, *) {
+            height = keyboardFrame.cgRectValue.height - self.view.safeAreaInsets.bottom
+        } else {
+            height = keyboardFrame.cgRectValue.height
+        }
+        
+        svBottomConstraint.constant = height + 60.0
+        
+    }
+    
+    @objc
+    func keyboardWillDisappear(notification: NSNotification?) {
+        svBottomConstraint.constant = 40.0
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    
+        addComment(self)
+        
+        comment.resignFirstResponder()
+        
+        return true
+        
+    }
+    
     
     func loadUserInfo() {
         
@@ -234,6 +276,7 @@ class TaskCommentController: UIViewController, UITableViewDelegate, UITableViewD
                     } else if let status = response.response?.statusCode {
                         
                         if status == 200 {
+                            self.comment.text = ""
                             self.loadTask()
                         } else {
                             
