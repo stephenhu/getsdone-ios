@@ -135,17 +135,28 @@ class TaskCommentController: UIViewController, UITableViewDelegate,
                 switch response.result {
                 case .failure(let error):
                     
-                    let ac = UIAlertController(title: "Connection error",
-                                               message: error.localizedDescription,
-                                               preferredStyle: UIAlertControllerStyle.alert)
-                    
-                    let OK = UIAlertAction(title: "OK",
-                                           style: UIAlertActionStyle.default,
-                                           handler: nil)
-                    
-                    ac.addAction(OK)
-                    
-                    self.present(ac, animated: true, completion: nil)
+                    if response.response?.statusCode == 401 {
+                        
+                        self.defaults.removeObject(forKey: Getsdone.COOKIE)
+                        
+                        self.performSegue(withIdentifier: "startSegue", sender: nil)
+                        
+                    } else {
+
+                        let ac = UIAlertController(title: "Connection error",
+                                                   message: error.localizedDescription,
+                                                   preferredStyle: UIAlertControllerStyle.alert)
+                        
+                        let OK = UIAlertAction(title: "OK",
+                                               style: UIAlertActionStyle.default,
+                                               handler: nil)
+                        
+                        ac.addAction(OK)
+                        
+                        self.present(ac, animated: true, completion: nil)
+                        
+
+                    }
                     
                     
                 case .success:

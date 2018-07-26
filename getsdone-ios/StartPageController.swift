@@ -8,13 +8,18 @@
 
 import UIKit
 
-class StartPageController: UIPageViewController, UIPageViewControllerDelegate,
-UIPageViewControllerDataSource {
+class StartPageController: UIPageViewController, UIPageViewControllerDelegate, UIPageViewControllerDataSource {
+    
+    let defaults = UserDefaults.standard
     
     var pages = [UIViewController]()
     
     // MARK: Properties
     
+    
+    override func viewDidAppear(_ animated: Bool) {
+        checkToken()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,14 +40,12 @@ UIPageViewControllerDataSource {
         pages.append(p3)
         
         self.setViewControllers([p1], direction: UIPageViewControllerNavigationDirection.forward, animated: false, completion: nil)
-
+        
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-    // MARK: Actions
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
     
@@ -69,4 +72,22 @@ UIPageViewControllerDataSource {
     func presentationIndex(for pageViewController: UIPageViewController) -> Int {
         return 0
     }
+    
+    func checkToken() {
+        
+        if let properties = defaults.object(forKey: Getsdone.COOKIE) as? [String: Any] {
+            
+            let c = HTTPCookie(properties: properties["cookie"] as! [HTTPCookiePropertyKey: Any])
+            
+            HTTPCookieStorage.shared.setCookie(c!)
+            
+            self.performSegue(withIdentifier: "homeSegue", sender: self)
+            
+        }
+        
+    }
+    
+    // MARK: Actions
+
+    
 } // StartPageController

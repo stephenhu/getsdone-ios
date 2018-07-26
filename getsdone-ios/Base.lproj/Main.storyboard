@@ -343,6 +343,7 @@
                         <outlet property="svBottomConstraint" destination="c3y-kb-cCE" id="tPJ-rN-xXo"/>
                         <outlet property="task" destination="rWK-bl-SY4" id="9Li-Vg-E4T"/>
                         <outlet property="username" destination="LQi-7E-qcY" id="zSl-zj-DZY"/>
+                        <segue destination="4Te-WV-z7G" kind="show" identifier="startSegue" id="gNB-Bm-4LS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qCC-l6-h6f" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -357,9 +358,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xFk-Id-Vdw">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xFk-Id-Vdw">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Profile" id="DOG-XS-8wb">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="yRy-CT-vvQ">
@@ -367,42 +367,53 @@
                                                 <segue destination="21c-Fh-LQu" kind="show" id="UKj-zK-ZKE"/>
                                             </connections>
                                         </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Logout" id="DTV-bU-9km">
+                                            <connections>
+                                                <action selector="logout:" destination="wVC-Qj-Bsn" id="miG-Rr-s3O"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hQe-z5-QcP">
-                                <rect key="frame" x="16" y="83" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="@username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x0m-SL-IbA">
-                                <rect key="frame" x="16" y="235" width="89" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="status level" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uUy-Jw-USg">
-                                <rect key="frame" x="16" y="277" width="86" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JHe-sb-I0z">
-                                <rect key="frame" x="56" y="342" width="53" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                <state key="normal" title="log out"/>
-                                <connections>
-                                    <action selector="logout:" destination="wVC-Qj-Bsn" eventType="touchUpInside" id="rcy-Tv-bdL"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="QGe-Le-uvv">
+                                <rect key="frame" x="20" y="235" width="335" height="213.5"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hQe-z5-QcP">
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="128"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="@username" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x0m-SL-IbA">
+                                        <rect key="frame" x="0.0" y="138" width="335" height="37.5"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="32"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="status level" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uUy-Jw-USg">
+                                        <rect key="frame" x="0.0" y="185.5" width="335" height="28"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="24"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="pgk-tC-0KK" firstAttribute="trailing" secondItem="QGe-Le-uvv" secondAttribute="trailing" constant="20" id="FoV-9k-QBK"/>
+                            <constraint firstItem="QGe-Le-uvv" firstAttribute="leading" secondItem="pgk-tC-0KK" secondAttribute="leading" constant="20" id="GTp-Uc-gCW"/>
+                            <constraint firstItem="QGe-Le-uvv" firstAttribute="centerY" secondItem="fhw-aX-EBE" secondAttribute="centerY" id="YD8-kk-PaE"/>
+                            <constraint firstItem="xFk-Id-Vdw" firstAttribute="trailing" secondItem="pgk-tC-0KK" secondAttribute="trailing" id="bvq-Dh-tgu"/>
+                            <constraint firstItem="xFk-Id-Vdw" firstAttribute="leading" secondItem="pgk-tC-0KK" secondAttribute="leading" id="lmI-dq-j41"/>
+                            <constraint firstItem="xFk-Id-Vdw" firstAttribute="top" secondItem="pgk-tC-0KK" secondAttribute="top" id="vR3-7g-nC7"/>
+                            <constraint firstItem="QGe-Le-uvv" firstAttribute="centerX" secondItem="fhw-aX-EBE" secondAttribute="centerX" id="zdJ-Ga-jzd"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="pgk-tC-0KK"/>
                     </view>
                     <connections>
+                        <outlet property="icon" destination="hQe-z5-QcP" id="bjs-lI-V0Y"/>
+                        <outlet property="name" destination="x0m-SL-IbA" id="SaV-Ga-bj0"/>
+                        <outlet property="status" destination="uUy-Jw-USg" id="GHE-5K-jI9"/>
                         <segue destination="vfa-OU-5ar" kind="show" identifier="loginSegue" id="fkz-3Q-coZ"/>
+                        <segue destination="4Te-WV-z7G" kind="show" identifier="startSegue" id="Ucy-am-rUt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N86-Op-wlK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -424,7 +435,7 @@
                                         <barButtonItem key="leftBarButtonItem" title="Item" id="d1C-EM-78A">
                                             <color key="tintColor" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <connections>
-                                                <segue destination="wVC-Qj-Bsn" kind="show" id="e0g-i7-32J"/>
+                                                <segue destination="wVC-Qj-Bsn" kind="show" identifier="" id="e0g-i7-32J"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Item" id="sR7-RS-9Fu">
@@ -439,7 +450,7 @@
                                 </items>
                             </navigationBar>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="dNz-rR-tc6">
-                                <rect key="frame" x="10" y="84" width="355" height="504"/>
+                                <rect key="frame" x="10" y="84" width="355" height="553"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ktf-xI-qGN">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="26"/>
@@ -470,7 +481,7 @@
                                         <color key="tintColor" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </segmentedControl>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WnQ-qZ-LkN">
-                                        <rect key="frame" x="0.0" y="90" width="355" height="414"/>
+                                        <rect key="frame" x="0.0" y="90" width="355" height="463"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="reD-KV-3Ca" customClass="TaskViewCell" customModule="getsdone_ios" customModuleProvider="target">
@@ -578,6 +589,8 @@
                         <outlet property="tasksTable" destination="WnQ-qZ-LkN" id="c97-so-fTj"/>
                         <outlet property="theView" destination="ktf-xI-qGN" id="vjR-md-9oi"/>
                         <segue destination="NOr-kp-rgq" kind="show" identifier="showTask" id="GfZ-kv-b27"/>
+                        <segue destination="4Te-WV-z7G" kind="show" identifier="startSegue" id="rqI-LD-9PA"/>
+                        <segue destination="4Te-WV-z7G" kind="show" identifier="startSegue" id="b7M-5W-Gsx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qvM-eQ-VHq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -635,6 +648,7 @@
                         <outlet property="commentBottomConstraint" destination="cCP-fj-bvq" id="3a4-M7-2fe"/>
                         <outlet property="createTaskBtn" destination="wpG-ee-wYH" id="CIU-Nc-KC9"/>
                         <outlet property="task" destination="q9x-rD-Xp9" id="7iu-Tg-8eK"/>
+                        <segue destination="4Te-WV-z7G" kind="show" identifier="startSegue" id="h2m-W3-gf8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="faU-b8-v9Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -798,7 +812,11 @@
         <!--Start Page Controller-->
         <scene sceneID="agK-Gd-dV8">
             <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="min" id="4Te-WV-z7G" customClass="StartPageController" customModule="getsdone_ios" customModuleProvider="target" sceneMemberID="viewController"/>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="min" id="4Te-WV-z7G" customClass="StartPageController" customModule="getsdone_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <connections>
+                        <segue destination="klG-nW-8zb" kind="show" identifier="homeSegue" id="0ZN-R8-uQV"/>
+                    </connections>
+                </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Knp-Xq-hCa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1473" y="-111"/>
@@ -812,13 +830,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="getsdone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KmK-X1-NUp">
-                                <rect key="frame" x="112" y="40" width="151" height="42"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="36"/>
+                                <rect key="frame" x="53.5" y="60" width="268" height="75"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="64"/>
                                 <color key="textColor" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="K3A-kB-UdF">
-                                <rect key="frame" x="50" y="270.5" width="275" height="127.5"/>
+                                <rect key="frame" x="50" y="273.5" width="275" height="120"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Simple" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2i7-Z8-c4e">
                                         <rect key="frame" x="0.0" y="0.0" width="275" height="29"/>
@@ -826,14 +844,14 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Simple task management" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rp7-0G-llF">
-                                        <rect key="frame" x="0.0" y="39" width="275" height="57.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task management" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rp7-0G-llF">
+                                        <rect key="frame" x="0.0" y="39" width="275" height="29"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keep track of tasks" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mKf-Kh-Lhl">
-                                        <rect key="frame" x="0.0" y="106.5" width="275" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manage and track tasks with a very simple interface" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mKf-Kh-Lhl">
+                                        <rect key="frame" x="0.0" y="78" width="275" height="42"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -845,7 +863,7 @@
                         <constraints>
                             <constraint firstItem="K3A-kB-UdF" firstAttribute="leading" secondItem="9f9-ZT-SXW" secondAttribute="leading" constant="50" id="Bfp-D7-7zS"/>
                             <constraint firstItem="K3A-kB-UdF" firstAttribute="centerY" secondItem="Zmg-IC-BnN" secondAttribute="centerY" id="Oza-At-uo7"/>
-                            <constraint firstItem="KmK-X1-NUp" firstAttribute="top" secondItem="9f9-ZT-SXW" secondAttribute="top" constant="20" id="YtG-zF-d9T"/>
+                            <constraint firstItem="KmK-X1-NUp" firstAttribute="top" secondItem="9f9-ZT-SXW" secondAttribute="top" constant="40" id="YtG-zF-d9T"/>
                             <constraint firstItem="K3A-kB-UdF" firstAttribute="centerX" secondItem="Zmg-IC-BnN" secondAttribute="centerX" id="e3y-Oa-Kvu"/>
                             <constraint firstItem="9f9-ZT-SXW" firstAttribute="trailing" secondItem="K3A-kB-UdF" secondAttribute="trailing" constant="50" id="gFf-OL-gT9"/>
                             <constraint firstItem="KmK-X1-NUp" firstAttribute="centerX" secondItem="Zmg-IC-BnN" secondAttribute="centerX" id="mXX-Su-iS4"/>
@@ -877,13 +895,13 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Keep track of others" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cos-tL-vXc">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Social" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cos-tL-vXc">
                                         <rect key="frame" x="0.0" y="30" width="275" height="29"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Assign tasks to family, friends, colleagues, employees, etc." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hB5-fA-6DR">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Assign and track tasks from family, friends, colleagues, employees, etc." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hB5-fA-6DR">
                                         <rect key="frame" x="0.0" y="69" width="275" height="42"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                         <nil key="textColor"/>
@@ -960,7 +978,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get interesting insights into your progress and habits." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ud-m9-T5r">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get interesting insights into your progress and efficiency." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ud-m9-T5r">
                                         <rect key="frame" x="0.0" y="69" width="275" height="42"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
                                         <nil key="textColor"/>
@@ -1010,8 +1028,10 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="xlQ-lH-7TR"/>
-        <segue reference="ONc-VI-dfD"/>
+        <segue reference="3wQ-U8-0B7"/>
+        <segue reference="h2m-W3-gf8"/>
+        <segue reference="fkz-3Q-coZ"/>
         <segue reference="UnS-Fh-isv"/>
+        <segue reference="0ZN-R8-uQV"/>
     </inferredMetricsTieBreakers>
 </document>

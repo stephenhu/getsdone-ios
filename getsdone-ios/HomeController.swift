@@ -135,6 +135,8 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let deferAction = UITableViewRowAction(style: .normal, title: "Defer")
             { (rowAction, indexPath) in
                 
+                self.deferTask(indexPath)
+                
             }
             
             deferAction.backgroundColor = Getsdone.BlueColor
@@ -184,7 +186,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let url = "\(Getsdone.HTTP)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)/\(tasks[row.item][4])"
         
-        Alamofire.request(url, method: .put)
+        Alamofire.request(url, method: .put, parameters: ["action": "completed"])
             .response{ response in
                 
                 if response.error != nil {
@@ -230,18 +232,18 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
     } // completeTask
     
-    func loadUserInfo() {
+    
+    func deferTask(_ row: IndexPath) {
         
-        let url = "\(Getsdone.HTTP)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)"
+        let url = "\(Getsdone.HTTP)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)/\(tasks[row.item][4])"
         
-        Alamofire.request(url, method: .get)
-            .responseJSON{ response in
+        Alamofire.request(url, method: .put, parameters: ["action": "deferred"])
+            .response{ response in
                 
-                switch response.result {
-                case .failure(let error):
+                if response.error != nil {
                     
                     let ac = UIAlertController(title: "Connection error",
-                                               message: error.localizedDescription,
+                                               message: response.error?.localizedDescription,
                                                preferredStyle: UIAlertControllerStyle.alert)
                     
                     let OK = UIAlertAction(title: "OK",
@@ -253,23 +255,104 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     self.present(ac, animated: true, completion: nil)
                     
                     
-                case .success:
+                } else if let status = response.response?.statusCode {
                     
-                    let status = response.response?.statusCode
-
-                    if let raw = response.result.value {
-
-                        let j = JSON(raw)
-                        
-                        print(j)
-                        self.uid    = j["id"].string!
-                        self.name   = j["name"].string!
+                    if status == 200 {
                         
                         self.loadOpenTasks()
                         
+                    } else {
+                        
+                        let ac = UIAlertController(title: "Defer task error",
+                                                   message: response.error?.localizedDescription,
+                                                   preferredStyle: UIAlertControllerStyle.alert)
+                        
+                        let OK = UIAlertAction(title: "OK",
+                                               style: UIAlertActionStyle.default,
+                                               handler: nil)
+                        
+                        ac.addAction(OK)
+                        
+                        self.present(ac, animated: true, completion: nil)
+                        
                     }
-
+                    
                 }
+                
+        }
+        
+    } // deferTask
+    
+    
+    func loadUserInfo() {
+        
+        let url = "\(Getsdone.HTTP)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)"
+        
+        Alamofire.request(url, method: .get)
+            .responseJSON{ response in
+                
+                switch response.result {
+                case .failure(let error):
+                    
+                    if response.response?.statusCode == 401 {
+                        
+                        self.defaults.removeObject(forKey: Getsdone.COOKIE)
+                        
+                        self.performSegue(withIdentifier: "startSegue", sender: nil)
+                        
+                    } else {
+                        
+                        let ac = UIAlertController(title: "Connection error",
+                                                   message: error.localizedDescription,
+                                                   preferredStyle: UIAlertControllerStyle.alert)
+                        
+                        let OK = UIAlertAction(title: "OK",
+                                               style: UIAlertActionStyle.default,
+                                               handler: nil)
+                        
+                        ac.addAction(OK)
+                        
+                        self.present(ac, animated: true, completion: nil)
+                        
+                    }
+                    
+                    
+                case .success:
+                    
+                    if let status = response.response?.statusCode {
+
+                        print(status)
+                        
+                        // TODO: revert to get started page if token invalid
+                        
+                        if status == 200 {
+
+                            if let raw = response.result.value {
+                                
+                                let j = JSON(raw)
+                                
+                                print(j)
+                                self.uid    = j["id"].string!
+                                self.name   = j["name"].string!
+                                
+                                self.loadOpenTasks()
+                                
+                            } else {
+                                print(status)
+                                print(response.result)
+                            }
+
+                        } else {
+                            self.performSegue(withIdentifier: "startSegue", sender: nil)
+                        }
+                        
+                    } else {
+                        print(response.response)
+                    }
+                    
+                    
+                }
+
         }
         
     } // loadUserInfo
