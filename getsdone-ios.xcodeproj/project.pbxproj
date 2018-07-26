@@ -18,6 +18,10 @@
 		8556804420E535B9003D9418 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8556804320E535B9003D9418 /* LoginController.swift */; };
 		8556804620E53690003D9418 /* SignupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8556804520E53690003D9418 /* SignupController.swift */; };
 		8556804820E536D6003D9418 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8556804720E536D6003D9418 /* ProfileController.swift */; };
+		8558EF7421070E3C0050F27A /* StartPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8558EF7321070E3C0050F27A /* StartPageController.swift */; };
+		8558EF7621096D240050F27A /* Start1Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8558EF7521096D240050F27A /* Start1Controller.swift */; };
+		8558EF7821096DC30050F27A /* Start2Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8558EF7721096DC30050F27A /* Start2Controller.swift */; };
+		8558EF7A21096DD90050F27A /* Start3Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8558EF7921096DD90050F27A /* Start3Controller.swift */; };
 		85C105F820DD3F6100BA66CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C105F720DD3F6100BA66CF /* AppDelegate.swift */; };
 		85C105FA20DD3F6100BA66CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C105F920DD3F6100BA66CF /* ViewController.swift */; };
 		85C105FD20DD3F6100BA66CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85C105FB20DD3F6100BA66CF /* Main.storyboard */; };
@@ -63,6 +67,10 @@
 		8556804320E535B9003D9418 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		8556804520E53690003D9418 /* SignupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupController.swift; sourceTree = "<group>"; };
 		8556804720E536D6003D9418 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		8558EF7321070E3C0050F27A /* StartPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartPageController.swift; sourceTree = "<group>"; };
+		8558EF7521096D240050F27A /* Start1Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Start1Controller.swift; sourceTree = "<group>"; };
+		8558EF7721096DC30050F27A /* Start2Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Start2Controller.swift; sourceTree = "<group>"; };
+		8558EF7921096DD90050F27A /* Start3Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Start3Controller.swift; sourceTree = "<group>"; };
 		85C105F420DD3F6100BA66CF /* getsdone-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "getsdone-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		85C105F720DD3F6100BA66CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85C105F920DD3F6100BA66CF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -160,6 +168,10 @@
 				8556804320E535B9003D9418 /* LoginController.swift */,
 				8556804520E53690003D9418 /* SignupController.swift */,
 				8556804720E536D6003D9418 /* ProfileController.swift */,
+				8558EF7321070E3C0050F27A /* StartPageController.swift */,
+				8558EF7521096D240050F27A /* Start1Controller.swift */,
+				8558EF7721096DC30050F27A /* Start2Controller.swift */,
+				8558EF7921096DD90050F27A /* Start3Controller.swift */,
 			);
 			path = "getsdone-ios";
 			sourceTree = "<group>";
@@ -416,7 +428,9 @@
 				8556803E20E2919B003D9418 /* TaskCommentController.swift in Sources */,
 				8556803C20E27F34003D9418 /* TaskController.swift in Sources */,
 				8556803A20E1315C003D9418 /* Getsdone.swift in Sources */,
+				8558EF7421070E3C0050F27A /* StartPageController.swift in Sources */,
 				8556803620DFD238003D9418 /* HomeController.swift in Sources */,
+				8558EF7821096DC30050F27A /* Start2Controller.swift in Sources */,
 				8556804620E53690003D9418 /* SignupController.swift in Sources */,
 				85C105FA20DD3F6100BA66CF /* ViewController.swift in Sources */,
 				8556804220E2993F003D9418 /* CommentCell.swift in Sources */,
@@ -424,7 +438,9 @@
 				85C105F820DD3F6100BA66CF /* AppDelegate.swift in Sources */,
 				852D8CB120DF969C004F7D65 /* MainTabController.swift in Sources */,
 				8556804420E535B9003D9418 /* LoginController.swift in Sources */,
+				8558EF7A21096DD90050F27A /* Start3Controller.swift in Sources */,
 				8556804820E536D6003D9418 /* ProfileController.swift in Sources */,
+				8558EF7621096D240050F27A /* Start1Controller.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

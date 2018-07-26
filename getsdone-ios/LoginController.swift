@@ -27,7 +27,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        email.becomeFirstResponder()
+        //email.becomeFirstResponder()
         
         password.delegate = self
     
