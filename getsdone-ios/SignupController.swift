@@ -62,18 +62,34 @@ class SignupController: UIViewController {
                         self.defaults.removeObject(forKey: Getsdone.COOKIE)
                         
                         if let cookies = HTTPCookieStorage.shared.cookies {
-                        
-                            print("faggot masturbator")
                             
                             var dict = [String: AnyObject]()
                             
                             dict["cookie"] = cookies[0].properties as? AnyObject
                             
+                            print(dict["cookie"])
+                            
                             self.defaults.set(dict, forKey: Getsdone.COOKIE)
+                            
+                            self.performSegue(withIdentifier: "homeSegue", sender: self)
+                            
+                        } else {
+                            
+                            let ac = UIAlertController(title: "Session error",
+                                                       message: "Please try signing up again.    ",
+                                                       preferredStyle: UIAlertControllerStyle.alert)
+                            
+                            let OK = UIAlertAction(title: "OK",
+                                                   style: UIAlertActionStyle.default,
+                                                   handler: nil)
+                            
+                            ac.addAction(OK)
+                            
+                            self.present(ac, animated: true, completion: nil)
                             
                         }
                         
-                        self.performSegue(withIdentifier: "homeSegue", sender: self)
+                        
                         
                     } else {
                         
