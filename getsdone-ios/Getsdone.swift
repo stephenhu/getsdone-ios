@@ -14,9 +14,12 @@ class Getsdone {
     
     static let HTTP                     = "http://"
     static let HTTPS                    = "https://"
-    static let SERVER                   = "127.0.0.1:8888"
-    static let API_ENDPOINT             = "127.0.0.1:8888/api"
-    static let AUTH_ENDPOINT            = "127.0.0.1:8888/auth"
+    //static let SERVER                   = "127.0.0.1:8888"
+    static let SERVER                   = "getsdone.xyz"
+    //static let API_ENDPOINT             = "127.0.0.1:8888/api"
+    //static let AUTH_ENDPOINT            = "127.0.0.1:8888/auth"
+    static let API_ENDPOINT             = "getsdone.xyz/api"
+    static let AUTH_ENDPOINT            = "getsdone.xyz/auth"
     static let API_USERS                = "/users"
     static let API_TASKS                = "/tasks"
     

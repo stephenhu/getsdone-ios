@@ -37,7 +37,7 @@ class ProfileController: UIViewController {
     
     func loadUserInfo() {
         
-        let url = "\(Getsdone.HTTP)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)"
+        let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)"
         
         Alamofire.request(url, method: .get)
             .responseJSON{ response in
@@ -90,7 +90,7 @@ class ProfileController: UIViewController {
     
     @IBAction func logout(_ sender: Any) {
         
-        let url = "\(Getsdone.HTTP)\(Getsdone.AUTH_ENDPOINT)"
+        let url = "\(Getsdone.HTTPS)\(Getsdone.AUTH_ENDPOINT)"
         
         Alamofire.request(url, method: .delete)
             .response{ response in

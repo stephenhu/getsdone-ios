@@ -71,7 +71,7 @@ class TaskController: UIViewController, UITextViewDelegate {
     
     func loadUserInfo() {
         
-        let url = "\(Getsdone.HTTP)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)"
+        let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)"
         
         Alamofire.request(url, method: .get)
             .responseJSON{ response in
@@ -120,7 +120,7 @@ class TaskController: UIViewController, UITextViewDelegate {
     
     func addTask(_ uid: String) {
         
-        let url = "\(Getsdone.HTTP)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)"
+        let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)"
 
         Alamofire.request(url, method: .post, parameters: ["task": task.text!])
             .response{ response in

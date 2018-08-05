@@ -63,7 +63,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     func login() {
     
-        let url = "\(Getsdone.HTTP)\(Getsdone.AUTH_ENDPOINT)"
+        let url = "\(Getsdone.HTTPS)\(Getsdone.AUTH_ENDPOINT)"
         
         Alamofire.request(url, method: .put, parameters:
             ["email": email.text!, "password": password.text!])

@@ -127,7 +127,7 @@ class TaskCommentController: UIViewController, UITableViewDelegate,
     
     func loadUserInfo() {
         
-        let url = "\(Getsdone.HTTP)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)"
+        let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)"
         
         Alamofire.request(url, method: .get)
             .responseJSON{ response in
@@ -184,7 +184,7 @@ class TaskCommentController: UIViewController, UITableViewDelegate,
     
     func loadTask() {
         
-        let url = "\(Getsdone.HTTP)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)/\(tid)"
+        let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)/\(tid)"
         
         print(url)
         
@@ -264,7 +264,7 @@ class TaskCommentController: UIViewController, UITableViewDelegate,
             
         } else {
             
-            let url = "\(Getsdone.HTTP)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)/\(tid)/comments"
+            let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)/\(tid)/comments"
             
             Alamofire.request(url, method: .post, parameters: ["comment": comment.text!])
                 .response{ response in

@@ -184,7 +184,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func completeTask(_ row: IndexPath) {
         
-        let url = "\(Getsdone.HTTP)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)/\(tasks[row.item][4])"
+        let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)/\(tasks[row.item][4])"
         
         Alamofire.request(url, method: .put, parameters: ["action": "completed"])
             .response{ response in
@@ -235,7 +235,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func deferTask(_ row: IndexPath) {
         
-        let url = "\(Getsdone.HTTP)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)/\(tasks[row.item][4])"
+        let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)/\(tasks[row.item][4])"
         
         Alamofire.request(url, method: .put, parameters: ["action": "deferred"])
             .response{ response in
@@ -286,7 +286,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func loadUserInfo() {
         
-        let url = "\(Getsdone.HTTP)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)"
+        let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)"
         
         Alamofire.request(url, method: .get)
             .responseJSON{ response in
@@ -360,7 +360,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func loadOpenTasks() {
         
-        let url = "\(Getsdone.HTTP)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)"
+        let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)"
         
         print(url)
         
@@ -429,7 +429,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func loadOpenAssignedTasks() {
         
-        let url = "\(Getsdone.HTTP)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)"
+        let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)"
         
         print(url)
         
@@ -495,7 +495,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func loadCompletedTasks() {
         
-        let url = "\(Getsdone.HTTP)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)"
+        let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)"
         
         print(url)
         
@@ -558,7 +558,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func loadDeferredTasks() {
         
-        let url = "\(Getsdone.HTTP)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)"
+        let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)"
         
         print(url)
         

@@ -11,7 +11,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class SignupController: UIViewController {
+class SignupController: UIViewController, UITextFieldDelegate {
     
     let defaults = UserDefaults.standard
     
@@ -22,19 +22,30 @@ class SignupController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        email.becomeFirstResponder()
+        //email.becomeFirstResponder()
         
+        password.delegate = self
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        password.resignFirstResponder()
+        
+        signup(self)
+        
+        return true
+        
+    }
+    
     // MARK: Actions
     
     @IBAction func signup(_ sender: Any) {
         
-        let url = "\(Getsdone.HTTP)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)"
+        let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)"
         
         Alamofire.request(url, method: .post,
             parameters: ["email": email.text!, "password": password.text!])
