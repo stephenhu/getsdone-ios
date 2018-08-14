@@ -33,6 +33,7 @@ class TaskCommentController: UIViewController, UITableViewDelegate,
     @IBOutlet weak var comment: UITextField!
     @IBOutlet weak var commentBtn: UIButton!
     @IBOutlet weak var svBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var progress: UIActivityIndicatorView!
     
     
     override func viewDidLoad() {
@@ -129,8 +130,12 @@ class TaskCommentController: UIViewController, UITableViewDelegate,
         
         let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)"
         
+        progress.startAnimating()
+        
         Alamofire.request(url, method: .get)
             .responseJSON{ response in
+        
+                self.progress.stopAnimating()
                 
                 switch response.result {
                 case .failure(let error):
@@ -188,8 +193,12 @@ class TaskCommentController: UIViewController, UITableViewDelegate,
         
         print(url)
         
+        progress.startAnimating()
+        
         Alamofire.request(url, method: .get)
             .responseJSON{ response in
+        
+                self.progress.stopAnimating()
                 
                 switch response.result {
                 case .failure(let error):
@@ -266,8 +275,12 @@ class TaskCommentController: UIViewController, UITableViewDelegate,
             
             let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)/\(tid)/comments"
             
+            progress.startAnimating()
+            
             Alamofire.request(url, method: .post, parameters: ["comment": comment.text!])
                 .response{ response in
+            
+                    self.progress.stopAnimating()
                     
                     if response.error != nil {
                         

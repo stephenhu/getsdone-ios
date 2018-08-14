@@ -169,6 +169,10 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="pe2-1W-B4p">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                <color key="color" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </activityIndicatorView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Rsr-N7-xpd">
                                 <rect key="frame" x="20" y="94" width="335" height="533"/>
                                 <subviews>
@@ -324,7 +328,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="pe2-1W-B4p" firstAttribute="centerY" secondItem="KLQ-Lg-5gd" secondAttribute="centerY" id="0bW-9Q-cku"/>
                             <constraint firstItem="Rsr-N7-xpd" firstAttribute="leading" secondItem="vWL-l1-UoT" secondAttribute="leading" constant="20" id="3ME-ED-hEZ"/>
+                            <constraint firstItem="pe2-1W-B4p" firstAttribute="centerX" secondItem="KLQ-Lg-5gd" secondAttribute="centerX" id="AQO-Sn-UJn"/>
                             <constraint firstItem="Rsr-N7-xpd" firstAttribute="top" secondItem="Vfi-38-OFb" secondAttribute="bottom" constant="30" id="Iiw-Cn-Tqi"/>
                             <constraint firstItem="Vfi-38-OFb" firstAttribute="trailing" secondItem="vWL-l1-UoT" secondAttribute="trailing" id="NlL-0I-10B"/>
                             <constraint firstItem="Vfi-38-OFb" firstAttribute="leading" secondItem="vWL-l1-UoT" secondAttribute="leading" id="VZn-yJ-dmt"/>
@@ -340,6 +346,7 @@
                         <outlet property="commentBtn" destination="3wq-dW-KkN" id="UfE-IU-C4v"/>
                         <outlet property="commentsTable" destination="L5Z-vU-B90" id="0uM-Yu-AQx"/>
                         <outlet property="icon" destination="4m7-yf-Tx9" id="lyb-k4-Uyr"/>
+                        <outlet property="progress" destination="pe2-1W-B4p" id="jm2-4u-Qvj"/>
                         <outlet property="svBottomConstraint" destination="c3y-kb-cCE" id="tPJ-rN-xXo"/>
                         <outlet property="task" destination="rWK-bl-SY4" id="9Li-Vg-E4T"/>
                         <outlet property="username" destination="LQi-7E-qcY" id="zSl-zj-DZY"/>
@@ -449,6 +456,10 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="bUO-NM-Xzf">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                <color key="color" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </activityIndicatorView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="dNz-rR-tc6">
                                 <rect key="frame" x="10" y="84" width="355" height="553"/>
                                 <subviews>
@@ -571,11 +582,13 @@
                         <constraints>
                             <constraint firstItem="IJT-7v-KQX" firstAttribute="top" secondItem="AMU-ep-nOd" secondAttribute="top" id="6Ih-P0-iPS"/>
                             <constraint firstItem="dNz-rR-tc6" firstAttribute="leading" secondItem="AMU-ep-nOd" secondAttribute="leading" constant="10" id="DdE-nd-Zzq"/>
+                            <constraint firstItem="bUO-NM-Xzf" firstAttribute="centerX" secondItem="ODq-tP-XwA" secondAttribute="centerX" id="HdY-Z3-HQ3"/>
                             <constraint firstItem="AMU-ep-nOd" firstAttribute="trailing" secondItem="dNz-rR-tc6" secondAttribute="trailing" constant="10" id="OcS-Ex-2st"/>
                             <constraint firstItem="dNz-rR-tc6" firstAttribute="centerX" secondItem="ODq-tP-XwA" secondAttribute="centerX" id="UOC-QV-fOv"/>
                             <constraint firstItem="IJT-7v-KQX" firstAttribute="leading" secondItem="AMU-ep-nOd" secondAttribute="leading" id="VKm-uV-cXy"/>
                             <constraint firstItem="IJT-7v-KQX" firstAttribute="trailing" secondItem="AMU-ep-nOd" secondAttribute="trailing" id="jvN-NW-dZx"/>
                             <constraint firstItem="dNz-rR-tc6" firstAttribute="top" secondItem="IJT-7v-KQX" secondAttribute="bottom" constant="20" id="mUR-bU-Lg9"/>
+                            <constraint firstItem="bUO-NM-Xzf" firstAttribute="centerY" secondItem="ODq-tP-XwA" secondAttribute="centerY" id="qPC-4E-FaC"/>
                             <constraint firstItem="AMU-ep-nOd" firstAttribute="bottom" secondItem="dNz-rR-tc6" secondAttribute="bottom" constant="30" id="vRl-8H-ENs"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="AMU-ep-nOd"/>
@@ -586,6 +599,7 @@
                     <connections>
                         <outlet property="createTask" destination="sR7-RS-9Fu" id="6Mj-De-42a"/>
                         <outlet property="profile" destination="d1C-EM-78A" id="M9a-K3-BH1"/>
+                        <outlet property="progress" destination="bUO-NM-Xzf" id="faM-xh-5C7"/>
                         <outlet property="tasksTable" destination="WnQ-qZ-LkN" id="c97-so-fTj"/>
                         <outlet property="theView" destination="ktf-xI-qGN" id="vjR-md-9oi"/>
                         <segue destination="NOr-kp-rgq" kind="show" identifier="showTask" id="GfZ-kv-b27"/>
@@ -624,6 +638,10 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="dKS-EO-6q3">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                <color key="color" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </activityIndicatorView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="q9x-rD-Xp9">
                                 <rect key="frame" x="20" y="103" width="335" height="364"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
@@ -638,7 +656,9 @@
                             <constraint firstItem="W8B-Fa-PbN" firstAttribute="top" secondItem="qWG-wQ-UyF" secondAttribute="top" id="BId-Np-UOd"/>
                             <constraint firstItem="W8B-Fa-PbN" firstAttribute="trailing" secondItem="qWG-wQ-UyF" secondAttribute="trailing" id="Ocq-Oj-XLU"/>
                             <constraint firstItem="q9x-rD-Xp9" firstAttribute="centerX" secondItem="dmR-JS-SJD" secondAttribute="centerX" id="Vgx-bw-Abs"/>
+                            <constraint firstItem="dKS-EO-6q3" firstAttribute="centerY" secondItem="dmR-JS-SJD" secondAttribute="centerY" id="acG-Xz-yM6"/>
                             <constraint firstItem="qWG-wQ-UyF" firstAttribute="bottom" secondItem="q9x-rD-Xp9" secondAttribute="bottom" constant="200" id="cCP-fj-bvq"/>
+                            <constraint firstItem="dKS-EO-6q3" firstAttribute="centerX" secondItem="dmR-JS-SJD" secondAttribute="centerX" id="fNS-i2-1Wn"/>
                             <constraint firstItem="qWG-wQ-UyF" firstAttribute="trailing" secondItem="q9x-rD-Xp9" secondAttribute="trailing" constant="20" id="vGN-sn-oWS"/>
                             <constraint firstItem="W8B-Fa-PbN" firstAttribute="centerX" secondItem="dmR-JS-SJD" secondAttribute="centerX" id="xDZ-1T-Qg4"/>
                         </constraints>
@@ -647,6 +667,7 @@
                     <connections>
                         <outlet property="commentBottomConstraint" destination="cCP-fj-bvq" id="3a4-M7-2fe"/>
                         <outlet property="createTaskBtn" destination="wpG-ee-wYH" id="CIU-Nc-KC9"/>
+                        <outlet property="progress" destination="dKS-EO-6q3" id="RgY-Ur-JLM"/>
                         <outlet property="task" destination="q9x-rD-Xp9" id="7iu-Tg-8eK"/>
                         <segue destination="4Te-WV-z7G" kind="show" identifier="startSegue" id="h2m-W3-gf8"/>
                     </connections>
@@ -665,7 +686,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="4qV-Wp-g2S">
-                                <rect key="frame" x="50" y="220" width="275" height="226"/>
+                                <rect key="frame" x="50" y="220" width="275" height="322"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="getsdone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Mg-kt-TiI">
                                         <rect key="frame" x="0.0" y="0.0" width="275" height="37.5"/>
@@ -679,20 +700,32 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="natural" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="adX-GB-Ydq">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="adX-GB-Ydq">
                                         <rect key="frame" x="0.0" y="94" width="275" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="email"/>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="qFG-UQ-WnB">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="qFG-UQ-WnB">
                                         <rect key="frame" x="0.0" y="144" width="275" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
                                     </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="username" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="ys5-dK-TkV">
+                                        <rect key="frame" x="0.0" y="194" width="275" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Usernames can consist of letters, numbers, period, or dash." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5w-hQ-Ipn">
+                                        <rect key="frame" x="0.0" y="244" width="275" height="26"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wwu-df-4EZ">
-                                        <rect key="frame" x="0.0" y="194" width="275" height="32"/>
+                                        <rect key="frame" x="0.0" y="290" width="275" height="32"/>
                                         <color key="backgroundColor" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <state key="normal" title="Sign up">
@@ -704,22 +737,39 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="TXY-he-6Um">
+                                <rect key="frame" x="169" y="315.5" width="37" height="37"/>
+                                <color key="color" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="TXY-he-6Um" firstAttribute="centerY" secondItem="OA4-JU-9HP" secondAttribute="centerY" id="7Zs-bv-kLC"/>
                             <constraint firstItem="4qV-Wp-g2S" firstAttribute="top" secondItem="Pya-2z-Uaz" secondAttribute="top" constant="200" id="U0k-e6-WBE"/>
+                            <constraint firstItem="TXY-he-6Um" firstAttribute="centerX" secondItem="OA4-JU-9HP" secondAttribute="centerX" id="jAb-bZ-g99"/>
                             <constraint firstItem="Pya-2z-Uaz" firstAttribute="trailing" secondItem="4qV-Wp-g2S" secondAttribute="trailing" constant="50" id="kU9-Wi-Ke3"/>
                             <constraint firstItem="4qV-Wp-g2S" firstAttribute="leading" secondItem="Pya-2z-Uaz" secondAttribute="leading" constant="50" id="oQH-hG-90v"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Pya-2z-Uaz"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="tJM-tq-mtf" appends="YES" id="Uba-cx-oov"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="email" destination="adX-GB-Ydq" id="1Is-pj-Yex"/>
                         <outlet property="password" destination="qFG-UQ-WnB" id="7b1-bm-dr3"/>
+                        <outlet property="progress" destination="TXY-he-6Um" id="f0H-4M-UkR"/>
+                        <outlet property="username" destination="ys5-dK-TkV" id="jiZ-ac-sYg"/>
                         <segue destination="21c-Fh-LQu" kind="show" identifier="homeSegue" id="xlQ-lH-7TR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XCL-Xg-Oy0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="tJM-tq-mtf">
+                    <connections>
+                        <action selector="singleTap:" destination="eKR-Nk-HR9" id="gLI-yk-tOH"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-825" y="-823"/>
         </scene>
@@ -786,15 +836,21 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="mPx-KC-NNc">
+                                <rect key="frame" x="169" y="315.5" width="37" height="37"/>
+                                <color key="color" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="3jI-Iu-xRv" firstAttribute="leading" secondItem="c0d-t5-7St" secondAttribute="leading" constant="50" id="1ND-Qj-akm"/>
                             <constraint firstItem="c0d-t5-7St" firstAttribute="trailing" secondItem="3jI-Iu-xRv" secondAttribute="trailing" constant="50" id="DFi-xX-Usr"/>
                             <constraint firstItem="c0d-t5-7St" firstAttribute="trailing" secondItem="l6A-1m-aQv" secondAttribute="trailing" constant="50" id="Gci-uk-8o6"/>
+                            <constraint firstItem="mPx-KC-NNc" firstAttribute="centerY" secondItem="IAQ-uh-rsM" secondAttribute="centerY" id="LlD-eq-llH"/>
                             <constraint firstItem="l6A-1m-aQv" firstAttribute="top" secondItem="c0d-t5-7St" secondAttribute="top" constant="200" id="OgX-Ej-eme"/>
                             <constraint firstItem="l6A-1m-aQv" firstAttribute="leading" secondItem="c0d-t5-7St" secondAttribute="leading" constant="50" id="QlC-LS-sEQ"/>
                             <constraint firstItem="c0d-t5-7St" firstAttribute="bottom" secondItem="3jI-Iu-xRv" secondAttribute="bottom" constant="30" id="dYJ-ox-XR9"/>
+                            <constraint firstItem="mPx-KC-NNc" firstAttribute="centerX" secondItem="IAQ-uh-rsM" secondAttribute="centerX" id="jsw-Tu-Rb0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="c0d-t5-7St"/>
                     </view>
@@ -802,6 +858,7 @@
                         <outlet property="email" destination="scw-s6-u4c" id="F99-72-RYx"/>
                         <outlet property="loginBtn" destination="x6q-MH-GQO" id="Nkd-kh-ybD"/>
                         <outlet property="password" destination="Vvh-Tu-P4l" id="CcS-7e-ceH"/>
+                        <outlet property="progress" destination="mPx-KC-NNc" id="xR9-jL-BiW"/>
                         <segue destination="21c-Fh-LQu" kind="show" identifier="homeSegue" id="en5-Ww-xZM"/>
                     </connections>
                 </viewController>
@@ -1028,10 +1085,10 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="xlQ-lH-7TR"/>
+        <segue reference="3wQ-U8-0B7"/>
         <segue reference="h2m-W3-gf8"/>
         <segue reference="fkz-3Q-coZ"/>
-        <segue reference="UnS-Fh-isv"/>
+        <segue reference="QcW-hQ-CN9"/>
         <segue reference="0ZN-R8-uQV"/>
     </inferredMetricsTieBreakers>
 </document>

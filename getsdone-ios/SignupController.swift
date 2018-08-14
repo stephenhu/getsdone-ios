@@ -18,13 +18,19 @@ class SignupController: UIViewController, UITextFieldDelegate {
     // MARK: Properties
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var password: UITextField!
+    @IBOutlet weak var username: UITextField!
+    @IBOutlet weak var progress: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //email.becomeFirstResponder()
-        
+
+        email.delegate = self
         password.delegate = self
+        username.delegate = self
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -33,9 +39,21 @@ class SignupController: UIViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        password.resignFirstResponder()
+        textField.resignFirstResponder()
         
-        signup(self)
+        if textField == email {
+            password.becomeFirstResponder()
+        } else if textField == password {
+            username.becomeFirstResponder()
+        } else if textField == username {
+            signup(self)
+        } else {
+            email.becomeFirstResponder()
+        }
+        
+        //password.resignFirstResponder()
+        
+        //signup(self)
         
         return true
         
@@ -43,13 +61,43 @@ class SignupController: UIViewController, UITextFieldDelegate {
     
     // MARK: Actions
     
+    @IBAction func singleTap(_ sender: Any) {
+        
+        email.resignFirstResponder()
+        password.resignFirstResponder()
+        username.resignFirstResponder()
+        
+    }
+    
     @IBAction func signup(_ sender: Any) {
+        
+        if email.text!.isEmpty || password.text!.isEmpty || username.text!.isEmpty {
+        
+            let ac = UIAlertController(title: "Signup error",
+                                       message: "Email, password, and username cannot be empty.",
+                                       preferredStyle: UIAlertControllerStyle.alert)
+            
+            let OK = UIAlertAction(title: "OK",
+                                   style: UIAlertActionStyle.default,
+                                   handler: nil)
+            
+            ac.addAction(OK)
+            
+            self.present(ac, animated: true, completion: nil)
+            
+            return
+            
+        }
+        
+        progress.startAnimating()
         
         let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)"
         
         Alamofire.request(url, method: .post,
             parameters: ["email": email.text!, "password": password.text!])
             .response{ response in
+                
+                self.progress.stopAnimating()
                 
                 if response.error != nil {
                     

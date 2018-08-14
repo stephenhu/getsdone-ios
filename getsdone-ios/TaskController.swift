@@ -20,6 +20,7 @@ class TaskController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var task: UITextView!
     @IBOutlet weak var createTaskBtn: UIBarButtonItem!
     @IBOutlet weak var commentBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var progress: UIActivityIndicatorView!
     
     
     override func viewDidLoad() {
@@ -73,8 +74,12 @@ class TaskController: UIViewController, UITextViewDelegate {
         
         let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)"
         
+        progress.startAnimating()
+        
         Alamofire.request(url, method: .get)
             .responseJSON{ response in
+        
+                self.progress.stopAnimating()
                 
                 switch response.result {
                 case .failure(let error):
@@ -122,8 +127,12 @@ class TaskController: UIViewController, UITextViewDelegate {
         
         let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)"
 
+        progress.startAnimating()
+        
         Alamofire.request(url, method: .post, parameters: ["task": task.text!])
             .response{ response in
+        
+                self.progress.stopAnimating()
                 
                 if response.error != nil {
                     

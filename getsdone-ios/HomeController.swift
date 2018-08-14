@@ -35,6 +35,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var profile: UIBarButtonItem!
     @IBOutlet weak var tasksTable: UITableView!
     @IBOutlet weak var theView: UISegmentedControl!
+    @IBOutlet weak var progress: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -186,8 +187,12 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)/\(tasks[row.item][4])"
         
+        progress.startAnimating()
+        
         Alamofire.request(url, method: .put, parameters: ["action": "completed"])
             .response{ response in
+        
+                self.progress.stopAnimating()
                 
                 if response.error != nil {
                     
@@ -237,8 +242,12 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)/\(tasks[row.item][4])"
         
+        progress.startAnimating()
+        
         Alamofire.request(url, method: .put, parameters: ["action": "deferred"])
             .response{ response in
+        
+                self.progress.stopAnimating()
                 
                 if response.error != nil {
                     
@@ -288,8 +297,12 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)"
         
+        progress.startAnimating()
+        
         Alamofire.request(url, method: .get)
             .responseJSON{ response in
+        
+                self.progress.stopAnimating()
                 
                 switch response.result {
                 case .failure(let error):
@@ -364,9 +377,13 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         print(url)
         
+        progress.startAnimating()
+        
         Alamofire.request(url, method: .get)
             .responseJSON{ response in
         
+                self.progress.stopAnimating()
+                
                 switch response.result {
                 case .failure(let error):
                     
@@ -433,8 +450,12 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         print(url)
         
+        progress.startAnimating()
+        
         Alamofire.request(url, method: .get)
             .responseJSON{ response in
+                
+                self.progress.stopAnimating()
                 
                 switch response.result {
                 case .failure(let error):
@@ -499,8 +520,12 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         print(url)
         
+        progress.startAnimating()
+        
         Alamofire.request(url, method: .get, parameters: ["view": "completed"])
             .responseJSON{ response in
+        
+                self.progress.stopAnimating()
                 
                 switch response.result {
                 case .failure(let error):
@@ -562,8 +587,12 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         print(url)
         
+        progress.startAnimating()
+        
         Alamofire.request(url, method: .get, parameters: ["view": "deferred"])
             .responseJSON{ response in
+                
+                self.progress.stopAnimating()
                 
                 switch response.result {
                 case .failure(let error):

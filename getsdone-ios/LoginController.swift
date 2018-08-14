@@ -18,6 +18,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var loginBtn: UIButton!
+    @IBOutlet weak var progress: UIActivityIndicatorView!
     
     
     override func viewDidAppear(_ animated: Bool) {
@@ -29,6 +30,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
         
         //email.becomeFirstResponder()
         
+        email.delegate = self
         password.delegate = self
     
     }
@@ -39,9 +41,17 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        password.resignFirstResponder()
+        textField.resignFirstResponder()
         
-        login()
+        if textField == email {
+            password.becomeFirstResponder()
+        } else if textField == password {
+            login()
+        } else {
+            email.becomeFirstResponder()
+        }
+        
+        
         return true
         
     }
@@ -65,9 +75,13 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
         let url = "\(Getsdone.HTTPS)\(Getsdone.AUTH_ENDPOINT)"
         
+        progress.startAnimating()
+        
         Alamofire.request(url, method: .put, parameters:
             ["email": email.text!, "password": password.text!])
             .response{ response in
+        
+                self.progress.stopAnimating()
                 
                 if response.error != nil {
                     
