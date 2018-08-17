@@ -33,6 +33,8 @@ class TaskController: UIViewController, UITextViewDelegate {
     
         task.becomeFirstResponder()
         
+        self.view.bringSubview(toFront: progress)
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {

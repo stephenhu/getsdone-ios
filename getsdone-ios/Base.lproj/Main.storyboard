@@ -20,19 +20,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="aJb-Fu-EvT">
-                                <rect key="frame" x="48.5" y="266.5" width="279" height="135.5"/>
+                                <rect key="frame" x="48.5" y="266" width="279" height="136.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ULD-dh-Hzi">
-                                        <rect key="frame" x="0.0" y="0.0" width="279" height="101.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="279" height="102.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="getsdone" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oat-jB-c07">
-                                                <rect key="frame" x="0.0" y="0.0" width="279" height="75"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="64"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="279" height="76"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="64"/>
                                                 <color key="textColor" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="version 0.1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6wb-Vk-mS1">
-                                                <rect key="frame" x="0.0" y="85" width="279" height="16.5"/>
+                                                <rect key="frame" x="0.0" y="86" width="279" height="16.5"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -40,7 +40,7 @@
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Copyright © 2018.  Stephen Hu.  All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nEc-9P-fxM">
-                                        <rect key="frame" x="0.0" y="121.5" width="279" height="14"/>
+                                        <rect key="frame" x="0.0" y="122.5" width="279" height="14"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
                                         <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -382,6 +382,10 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="iJs-kE-ouU">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                <color key="color" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </activityIndicatorView>
                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="QGe-Le-uvv">
                                 <rect key="frame" x="20" y="235" width="335" height="213.5"/>
                                 <subviews>
@@ -407,9 +411,11 @@
                         <constraints>
                             <constraint firstItem="pgk-tC-0KK" firstAttribute="trailing" secondItem="QGe-Le-uvv" secondAttribute="trailing" constant="20" id="FoV-9k-QBK"/>
                             <constraint firstItem="QGe-Le-uvv" firstAttribute="leading" secondItem="pgk-tC-0KK" secondAttribute="leading" constant="20" id="GTp-Uc-gCW"/>
+                            <constraint firstItem="iJs-kE-ouU" firstAttribute="centerX" secondItem="fhw-aX-EBE" secondAttribute="centerX" id="J4h-wH-7K9"/>
                             <constraint firstItem="QGe-Le-uvv" firstAttribute="centerY" secondItem="fhw-aX-EBE" secondAttribute="centerY" id="YD8-kk-PaE"/>
                             <constraint firstItem="xFk-Id-Vdw" firstAttribute="trailing" secondItem="pgk-tC-0KK" secondAttribute="trailing" id="bvq-Dh-tgu"/>
                             <constraint firstItem="xFk-Id-Vdw" firstAttribute="leading" secondItem="pgk-tC-0KK" secondAttribute="leading" id="lmI-dq-j41"/>
+                            <constraint firstItem="iJs-kE-ouU" firstAttribute="centerY" secondItem="fhw-aX-EBE" secondAttribute="centerY" id="pYf-XT-OIc"/>
                             <constraint firstItem="xFk-Id-Vdw" firstAttribute="top" secondItem="pgk-tC-0KK" secondAttribute="top" id="vR3-7g-nC7"/>
                             <constraint firstItem="QGe-Le-uvv" firstAttribute="centerX" secondItem="fhw-aX-EBE" secondAttribute="centerX" id="zdJ-Ga-jzd"/>
                         </constraints>
@@ -418,8 +424,8 @@
                     <connections>
                         <outlet property="icon" destination="hQe-z5-QcP" id="bjs-lI-V0Y"/>
                         <outlet property="name" destination="x0m-SL-IbA" id="SaV-Ga-bj0"/>
+                        <outlet property="progress" destination="iJs-kE-ouU" id="UeX-QU-Cnz"/>
                         <outlet property="status" destination="uUy-Jw-USg" id="GHE-5K-jI9"/>
-                        <segue destination="vfa-OU-5ar" kind="show" identifier="loginSegue" id="fkz-3Q-coZ"/>
                         <segue destination="4Te-WV-z7G" kind="show" identifier="startSegue" id="Ucy-am-rUt"/>
                     </connections>
                 </viewController>
@@ -435,6 +441,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="bUO-NM-Xzf">
+                                <rect key="frame" x="169" y="315" width="37" height="37"/>
+                                <color key="color" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </activityIndicatorView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IJT-7v-KQX">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <items>
@@ -456,10 +466,6 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="bUO-NM-Xzf">
-                                <rect key="frame" x="169" y="315" width="37" height="37"/>
-                                <color key="color" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                            </activityIndicatorView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="dNz-rR-tc6">
                                 <rect key="frame" x="10" y="84" width="355" height="504"/>
                                 <subviews>
@@ -684,47 +690,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="4qV-Wp-g2S">
-                                <rect key="frame" x="50" y="220" width="275" height="322"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="4qV-Wp-g2S">
+                                <rect key="frame" x="50" y="225.5" width="275" height="217"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="getsdone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Mg-kt-TiI">
-                                        <rect key="frame" x="0.0" y="0.0" width="275" height="37.5"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="32"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Signup for a free getsdone account!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Mg-kt-TiI">
+                                        <rect key="frame" x="0.0" y="0.0" width="275" height="19"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="16"/>
                                         <color key="textColor" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign up for a free account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QkL-lE-KGt">
-                                        <rect key="frame" x="0.0" y="57.5" width="275" height="16.5"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="adX-GB-Ydq">
-                                        <rect key="frame" x="0.0" y="94" width="275" height="30"/>
+                                        <rect key="frame" x="0.0" y="29" width="275" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="email"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="qFG-UQ-WnB">
-                                        <rect key="frame" x="0.0" y="144" width="275" height="30"/>
+                                        <rect key="frame" x="0.0" y="69" width="275" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="username" textAlignment="natural" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="ys5-dK-TkV">
-                                        <rect key="frame" x="0.0" y="194" width="275" height="30"/>
+                                        <rect key="frame" x="0.0" y="109" width="275" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Usernames can consist of letters, numbers, period, or dash." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5w-hQ-Ipn">
-                                        <rect key="frame" x="0.0" y="244" width="275" height="26"/>
+                                        <rect key="frame" x="0.0" y="149" width="275" height="26"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="11"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wwu-df-4EZ">
-                                        <rect key="frame" x="0.0" y="290" width="275" height="32"/>
+                                        <rect key="frame" x="0.0" y="185" width="275" height="32"/>
                                         <color key="backgroundColor" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <state key="normal" title="Sign up">
@@ -740,15 +740,38 @@
                                 <rect key="frame" x="169" y="315.5" width="37" height="37"/>
                                 <color key="color" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </activityIndicatorView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="led-7H-faI">
+                                <rect key="frame" x="50" y="609" width="275" height="28"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Already signed up?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rZY-Ly-jfk">
+                                        <rect key="frame" x="0.0" y="0.0" width="209" height="28"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pwG-Bh-iqa">
+                                        <rect key="frame" x="209" y="0.0" width="66" height="28"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                        <state key="normal" title="Login"/>
+                                        <connections>
+                                            <segue destination="vfa-OU-5ar" kind="show" id="2Nv-lz-OZX"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="TXY-he-6Um" firstAttribute="centerY" secondItem="OA4-JU-9HP" secondAttribute="centerY" id="7Zs-bv-kLC"/>
-                            <constraint firstItem="4qV-Wp-g2S" firstAttribute="top" secondItem="Pya-2z-Uaz" secondAttribute="top" constant="200" id="U0k-e6-WBE"/>
+                            <constraint firstItem="led-7H-faI" firstAttribute="leading" secondItem="Pya-2z-Uaz" secondAttribute="leading" constant="50" id="CXR-j7-wZK"/>
+                            <constraint firstItem="4qV-Wp-g2S" firstAttribute="centerX" secondItem="OA4-JU-9HP" secondAttribute="centerX" id="GZ2-N8-Jdv"/>
+                            <constraint firstItem="Pya-2z-Uaz" firstAttribute="trailing" secondItem="led-7H-faI" secondAttribute="trailing" constant="50" id="MHT-EN-fec"/>
+                            <constraint firstItem="Pya-2z-Uaz" firstAttribute="bottom" secondItem="led-7H-faI" secondAttribute="bottom" constant="30" id="i7Z-so-l8S"/>
                             <constraint firstItem="TXY-he-6Um" firstAttribute="centerX" secondItem="OA4-JU-9HP" secondAttribute="centerX" id="jAb-bZ-g99"/>
                             <constraint firstItem="Pya-2z-Uaz" firstAttribute="trailing" secondItem="4qV-Wp-g2S" secondAttribute="trailing" constant="50" id="kU9-Wi-Ke3"/>
                             <constraint firstItem="4qV-Wp-g2S" firstAttribute="leading" secondItem="Pya-2z-Uaz" secondAttribute="leading" constant="50" id="oQH-hG-90v"/>
+                            <constraint firstItem="4qV-Wp-g2S" firstAttribute="centerY" secondItem="OA4-JU-9HP" secondAttribute="centerY" id="sBK-HV-Ks8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Pya-2z-Uaz"/>
                         <connections>
@@ -785,28 +808,28 @@
                                 <color key="color" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </activityIndicatorView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="l6A-1m-aQv">
-                                <rect key="frame" x="50" y="220" width="275" height="159.5"/>
+                                <rect key="frame" x="50" y="220" width="275" height="160"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="getsdone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tus-ll-9OG">
-                                        <rect key="frame" x="0.0" y="0.0" width="275" height="37.5"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="32"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="275" height="38"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="32"/>
                                         <color key="textColor" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email" textAlignment="natural" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="scw-s6-u4c">
-                                        <rect key="frame" x="0.0" y="47.5" width="275" height="30"/>
+                                        <rect key="frame" x="0.0" y="48" width="275" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="email"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" clearButtonMode="unlessEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Vvh-Tu-P4l">
-                                        <rect key="frame" x="0.0" y="87.5" width="275" height="30"/>
+                                        <rect key="frame" x="0.0" y="88" width="275" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" secureTextEntry="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x6q-MH-GQO">
-                                        <rect key="frame" x="0.0" y="127.5" width="275" height="32"/>
+                                        <rect key="frame" x="0.0" y="128" width="275" height="32"/>
                                         <color key="backgroundColor" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <state key="normal" title="Login">
@@ -841,6 +864,7 @@
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="3jI-Iu-xRv" firstAttribute="leading" secondItem="c0d-t5-7St" secondAttribute="leading" constant="50" id="1ND-Qj-akm"/>
                             <constraint firstItem="c0d-t5-7St" firstAttribute="trailing" secondItem="3jI-Iu-xRv" secondAttribute="trailing" constant="50" id="DFi-xX-Usr"/>
@@ -852,16 +876,24 @@
                             <constraint firstItem="mPx-KC-NNc" firstAttribute="centerX" secondItem="IAQ-uh-rsM" secondAttribute="centerX" id="jsw-Tu-Rb0"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="c0d-t5-7St"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="Yhl-fB-uMZ" appends="YES" id="ix8-IR-mQT"/>
+                        </connections>
                     </view>
                     <connections>
                         <outlet property="email" destination="scw-s6-u4c" id="F99-72-RYx"/>
-                        <outlet property="loginBtn" destination="x6q-MH-GQO" id="Nkd-kh-ybD"/>
+                        <outlet property="loginBtn" destination="x6q-MH-GQO" id="fsd-Rd-N8z"/>
                         <outlet property="password" destination="Vvh-Tu-P4l" id="CcS-7e-ceH"/>
                         <outlet property="progress" destination="mPx-KC-NNc" id="xR9-jL-BiW"/>
                         <segue destination="21c-Fh-LQu" kind="show" identifier="homeSegue" id="en5-Ww-xZM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zZo-RW-NQG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Yhl-fB-uMZ">
+                    <connections>
+                        <action selector="singleTap:" destination="vfa-OU-5ar" id="cy4-e5-WTh"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="30" y="-846"/>
         </scene>
@@ -870,7 +902,7 @@
             <objects>
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="min" id="4Te-WV-z7G" customClass="StartPageController" customModule="getsdone_ios" customModuleProvider="target" sceneMemberID="viewController">
                     <connections>
-                        <segue destination="klG-nW-8zb" kind="show" identifier="homeSegue" id="0ZN-R8-uQV"/>
+                        <segue destination="21c-Fh-LQu" kind="show" identifier="homeSegue" id="Bv5-2A-Yw1"/>
                     </connections>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Knp-Xq-hCa" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -886,30 +918,30 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="getsdone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KmK-X1-NUp">
-                                <rect key="frame" x="53.5" y="60" width="268" height="75"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="64"/>
+                                <rect key="frame" x="62" y="60" width="251.5" height="76"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="64"/>
                                 <color key="textColor" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="K3A-kB-UdF">
-                                <rect key="frame" x="50" y="273.5" width="275" height="120"/>
+                                <rect key="frame" x="50" y="274.5" width="275" height="119"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Simple" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2i7-Z8-c4e">
-                                        <rect key="frame" x="0.0" y="0.0" width="275" height="29"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="275" height="28.5"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task management" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rp7-0G-llF">
-                                        <rect key="frame" x="0.0" y="39" width="275" height="29"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
+                                        <rect key="frame" x="0.0" y="38.5" width="275" height="28.5"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Manage and track tasks with a very simple interface" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mKf-Kh-Lhl">
-                                        <rect key="frame" x="0.0" y="78" width="275" height="42"/>
+                                        <rect key="frame" x="0.0" y="77" width="275" height="42"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -943,7 +975,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="oQo-Sb-eqZ">
-                                <rect key="frame" x="50" y="278.5" width="275" height="111"/>
+                                <rect key="frame" x="50" y="279" width="275" height="110.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8f4-zQ-MTS">
                                         <rect key="frame" x="0.0" y="0.0" width="275" height="20"/>
@@ -952,15 +984,15 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Social" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cos-tL-vXc">
-                                        <rect key="frame" x="0.0" y="30" width="275" height="29"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
+                                        <rect key="frame" x="0.0" y="30" width="275" height="28.5"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Assign and track tasks from family, friends, colleagues, employees, etc." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hB5-fA-6DR">
-                                        <rect key="frame" x="0.0" y="69" width="275" height="42"/>
+                                        <rect key="frame" x="0.0" y="68.5" width="275" height="42"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -1020,7 +1052,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Heu-cl-YCh">
-                                <rect key="frame" x="50" y="278" width="275" height="111"/>
+                                <rect key="frame" x="50" y="278.5" width="275" height="110.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fWm-kd-bJ2">
                                         <rect key="frame" x="0.0" y="0.0" width="275" height="20"/>
@@ -1029,15 +1061,15 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Progress and insights" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NVN-Dn-jma">
-                                        <rect key="frame" x="0.0" y="30" width="275" height="29"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="24"/>
+                                        <rect key="frame" x="0.0" y="30" width="275" height="28.5"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get interesting insights into your progress and efficiency." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ud-m9-T5r">
-                                        <rect key="frame" x="0.0" y="69" width="275" height="42"/>
+                                        <rect key="frame" x="0.0" y="68.5" width="275" height="42"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
-                                        <nil key="textColor"/>
+                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -1084,10 +1116,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="xlQ-lH-7TR"/>
-        <segue reference="rqI-LD-9PA"/>
-        <segue reference="fkz-3Q-coZ"/>
+        <segue reference="UKj-zK-ZKE"/>
+        <segue reference="Ucy-am-rUt"/>
+        <segue reference="2Nv-lz-OZX"/>
         <segue reference="QcW-hQ-CN9"/>
-        <segue reference="Lvv-IR-wV5"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -55,6 +55,8 @@ class TaskCommentController: UIViewController, UITableViewDelegate,
         
         comment.delegate = self
         
+        self.view.bringSubview(toFront: progress)
+        
         loadUserInfo()
         
     }

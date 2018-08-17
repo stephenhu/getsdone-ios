@@ -21,13 +21,18 @@ class ProfileController: UIViewController {
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var status: UILabel!
+    @IBOutlet weak var progress: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         icon.setFAIconWithName(icon: FAType.FAUserO, textColor: UIColor.black)
      
+        self.view.bringSubview(toFront: progress)
+        
         loadUserInfo()
+        
+        
         
     }
     
@@ -39,8 +44,12 @@ class ProfileController: UIViewController {
         
         let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)"
         
+        self.progress.startAnimating()
+        
         Alamofire.request(url, method: .get)
             .responseJSON{ response in
+                
+                self.progress.stopAnimating()
                 
                 switch response.result {
                 case .failure(let error):
@@ -92,8 +101,12 @@ class ProfileController: UIViewController {
         
         let url = "\(Getsdone.HTTPS)\(Getsdone.AUTH_ENDPOINT)"
         
+        self.progress.startAnimating()
+        
         Alamofire.request(url, method: .delete)
             .response{ response in
+        
+                self.progress.stopAnimating()
                 
                 if response.error != nil {
                     

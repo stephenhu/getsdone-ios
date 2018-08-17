@@ -19,6 +19,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var progress: UIActivityIndicatorView!
+
     
     
     override func viewDidAppear(_ animated: Bool) {
@@ -32,6 +33,10 @@ class LoginController: UIViewController, UITextFieldDelegate {
         
         email.delegate = self
         password.delegate = self
+        
+        loginBtn.layer.cornerRadius = 5
+        
+        self.view.bringSubview(toFront: progress)
     
     }
     
@@ -172,5 +177,13 @@ class LoginController: UIViewController, UITextFieldDelegate {
         }
         
     } // loginClicked
+    
+    @IBAction func singleTap(_ sender: Any) {
+        
+        email.resignFirstResponder()
+        password.resignFirstResponder()
+        
+    }
+    
     
 } // LoginController

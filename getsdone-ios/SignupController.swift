@@ -30,6 +30,8 @@ class SignupController: UIViewController, UITextFieldDelegate {
         password.delegate = self
         username.delegate = self
         
+        self.view.bringSubview(toFront: progress)
+        
         
     }
     

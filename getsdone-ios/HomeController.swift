@@ -48,6 +48,8 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.tasksTable.rowHeight = 120
         
+        self.view.bringSubview(toFront: progress)
+        
         loadUserInfo()
         
     }
