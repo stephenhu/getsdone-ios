@@ -128,7 +128,7 @@ class ProfileController: UIViewController {
                         
                         self.defaults.removeObject(forKey: Getsdone.COOKIE)
                         
-                        self.performSegue(withIdentifier: "loginSegue", sender: self)
+                        self.performSegue(withIdentifier: "startSegue", sender: self)
                         
                     } else {
                         
