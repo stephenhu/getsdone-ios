@@ -74,7 +74,7 @@ class TaskController: UIViewController, UITextViewDelegate {
     
     func loadUserInfo() {
         
-        let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)"
+        let url = "\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)"
         
         progress.startAnimating()
         
@@ -127,7 +127,7 @@ class TaskController: UIViewController, UITextViewDelegate {
     
     func addTask(_ uid: String) {
         
-        let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)"
+        let url = "\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)"
 
         progress.startAnimating()
         

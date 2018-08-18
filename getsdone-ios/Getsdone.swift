@@ -12,14 +12,10 @@ import UIKit
 class Getsdone {
     
     
-    static let HTTP                     = "http://"
-    static let HTTPS                    = "https://"
-    //static let SERVER                   = "127.0.0.1:8888"
-    static let SERVER                   = "getsdone.xyz"
-    //static let API_ENDPOINT             = "127.0.0.1:8888/api"
-    //static let AUTH_ENDPOINT            = "127.0.0.1:8888/auth"
-    static let API_ENDPOINT             = "getsdone.xyz/api"
-    static let AUTH_ENDPOINT            = "getsdone.xyz/auth"
+    static let API_ENDPOINT             = "http://127.0.0.1:8888/api"
+    static let AUTH_ENDPOINT            = "http://127.0.0.1:8888/auth"
+    //static let API_ENDPOINT             = "https://getsdone.xyz/api"
+    //static let AUTH_ENDPOINT            = "https://getsdone.xyz/auth"
     static let API_USERS                = "/users"
     static let API_TASKS                = "/tasks"
     
@@ -57,5 +53,20 @@ class Getsdone {
         return s!
         
     } // toAgo
-    
+
+    static func toReadableDate(_ d: String) -> String {
+        
+        let f1 = DateFormatter()
+        
+        f1.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        
+        let created = f1.date(from: d)
+        
+        let f2 = DateFormatter()
+        
+        f2.dateFormat = "MMM dd, yyyy"
+        
+        return f2.string(from: created!)
+        
+    } // toReadableDate
 }

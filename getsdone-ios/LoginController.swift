@@ -34,7 +34,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
         email.delegate = self
         password.delegate = self
         
-        loginBtn.layer.cornerRadius = 5
+        //loginBtn.layer.cornerRadius = 5
         
         self.view.bringSubview(toFront: progress)
     
@@ -78,7 +78,7 @@ class LoginController: UIViewController, UITextFieldDelegate {
     
     func login() {
     
-        let url = "\(Getsdone.HTTPS)\(Getsdone.AUTH_ENDPOINT)"
+        let url = "\(Getsdone.AUTH_ENDPOINT)"
         
         progress.startAnimating()
         

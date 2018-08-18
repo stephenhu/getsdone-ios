@@ -32,7 +32,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // MARK: Properties
     @IBOutlet weak var createTask: UIBarButtonItem!
-    @IBOutlet weak var profile: UIBarButtonItem!
+    //@IBOutlet weak var profile: UIBarButtonItem!
     @IBOutlet weak var tasksTable: UITableView!
     @IBOutlet weak var theView: UISegmentedControl!
     @IBOutlet weak var progress: UIActivityIndicatorView!
@@ -41,7 +41,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         
         createTask.setFAIcon(icon: FAType.FAEdit, iconSize: 24)
-        profile.setFAIcon(icon: FAType.FAMehO, iconSize: 24)
+        //profile.setFAIcon(icon: FAType.FAMehO, iconSize: 24)
         
         self.tasksTable.dataSource = self
         self.tasksTable.delegate = self
@@ -187,7 +187,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func completeTask(_ row: IndexPath) {
         
-        let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)/\(tasks[row.item][4])"
+        let url = "\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)/\(tasks[row.item][4])"
         
         progress.startAnimating()
         
@@ -242,7 +242,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func deferTask(_ row: IndexPath) {
         
-        let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)/\(tasks[row.item][4])"
+        let url = "\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)/\(tasks[row.item][4])"
         
         progress.startAnimating()
         
@@ -297,8 +297,10 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func loadUserInfo() {
         
-        let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)"
         
+        let url = "\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)"
+        
+        print(url)
         progress.startAnimating()
         
         Alamofire.request(url, method: .get)
@@ -308,6 +310,9 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 
                 switch response.result {
                 case .failure(let error):
+                    
+                    print("fuckrow")
+                    print(response.response)
                     
                     if response.response?.statusCode == 401 {
                         
@@ -375,7 +380,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func loadOpenTasks() {
         
-        let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)"
+        let url = "\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)"
         
         print(url)
         
@@ -448,7 +453,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func loadOpenAssignedTasks() {
         
-        let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)"
+        let url = "\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)"
         
         print(url)
         
@@ -518,7 +523,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func loadCompletedTasks() {
         
-        let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)"
+        let url = "\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)"
         
         print(url)
         
@@ -585,7 +590,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func loadDeferredTasks() {
         
-        let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)"
+        let url = "\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)"
         
         print(url)
         

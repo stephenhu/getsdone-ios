@@ -22,6 +22,7 @@ class ProfileController: UIViewController {
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var status: UILabel!
     @IBOutlet weak var progress: UIActivityIndicatorView!
+    @IBOutlet weak var since: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,8 +33,6 @@ class ProfileController: UIViewController {
         
         loadUserInfo()
         
-        
-        
     }
     
     override func didReceiveMemoryWarning() {
@@ -42,7 +41,7 @@ class ProfileController: UIViewController {
     
     func loadUserInfo() {
         
-        let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)"
+        let url = "\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)"
         
         self.progress.startAnimating()
         
@@ -85,7 +84,8 @@ class ProfileController: UIViewController {
                         print(j)
                         
                         self.name.text = "@\(j["name"].string!)"
-                        self.status.text = "Level: \(j["rankName"].string!)"
+                        self.status.text = j["rankName"].string!
+                        self.since.text = Getsdone.toReadableDate(j["created"].string!)
                     
                         
                     }
@@ -99,7 +99,7 @@ class ProfileController: UIViewController {
     
     @IBAction func logout(_ sender: Any) {
         
-        let url = "\(Getsdone.HTTPS)\(Getsdone.AUTH_ENDPOINT)"
+        let url = "\(Getsdone.AUTH_ENDPOINT)"
         
         self.progress.startAnimating()
         

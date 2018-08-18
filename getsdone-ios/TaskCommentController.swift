@@ -130,7 +130,7 @@ class TaskCommentController: UIViewController, UITableViewDelegate,
     
     func loadUserInfo() {
         
-        let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)"
+        let url = "\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)"
         
         progress.startAnimating()
         
@@ -191,7 +191,7 @@ class TaskCommentController: UIViewController, UITableViewDelegate,
     
     func loadTask() {
         
-        let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)/\(tid)"
+        let url = "\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)/\(tid)"
         
         print(url)
         
@@ -275,7 +275,7 @@ class TaskCommentController: UIViewController, UITableViewDelegate,
             
         } else {
             
-            let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)/\(tid)/comments"
+            let url = "\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)/\(tid)/comments"
             
             progress.startAnimating()
             

@@ -93,10 +93,12 @@ class SignupController: UIViewController, UITextFieldDelegate {
         
         progress.startAnimating()
         
-        let url = "\(Getsdone.HTTPS)\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)"
+        let url = "\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)"
         
         Alamofire.request(url, method: .post,
-            parameters: ["email": email.text!, "password": password.text!])
+                          parameters: ["email": email.text!,
+                                       "password": password.text!,
+                                       "name": username.text!])
             .response{ response in
                 
                 self.progress.stopAnimating()
@@ -155,7 +157,7 @@ class SignupController: UIViewController, UITextFieldDelegate {
                     } else {
                         
                         let ac = UIAlertController(title: "Signup error",
-                                                   message: "Unable to register account, please use a valid email address.",
+                                                   message: "Unable to sign up, email and username must be unique.",
                                                    preferredStyle: UIAlertControllerStyle.alert)
                         
                         let OK = UIAlertAction(title: "OK",
