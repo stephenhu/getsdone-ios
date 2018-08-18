@@ -18,10 +18,18 @@ class MainTabController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tabs.items?[0].setFAIcon(icon: FAType.FAHome)
+        /*tabs.items?[0].setFAIcon(icon: FAType.FAHome)
         tabs.items?[1].setFAIcon(icon: FAType.FAUsers)
         tabs.items?[2].setFAIcon(icon: FAType.FABarChartO)
-        tabs.items?[3].setFAIcon(icon: FAType.FAHeart)
+        tabs.items?[3].setFAIcon(icon: FAType.FAHeart)*/
+        
+        tabs.items?[0].setFAIcon(icon: FAType.FAHome, size: nil, textColor: .black, backgroundColor: .clear, selectedTextColor: Getsdone.TealColor, selectedBackgroundColor: .clear)
+        
+        tabs.items?[1].setFAIcon(icon: FAType.FAUsers, size: nil, textColor: .black, backgroundColor: .clear, selectedTextColor: Getsdone.TealColor, selectedBackgroundColor: .clear)
+        
+        tabs.items?[2].setFAIcon(icon: FAType.FABarChartO, size: nil, textColor: .black, backgroundColor: .clear, selectedTextColor: Getsdone.TealColor, selectedBackgroundColor: .clear)
+        
+        tabs.items?[3].setFAIcon(icon: FAType.FAHeart, size: nil, textColor: .black, backgroundColor: .clear, selectedTextColor: Getsdone.TealColor, selectedBackgroundColor: .clear)
         
     }
     
