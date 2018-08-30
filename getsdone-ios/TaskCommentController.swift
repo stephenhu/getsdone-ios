@@ -275,7 +275,7 @@ class TaskCommentController: UIViewController, UITableViewDelegate,
             
         } else {
             
-            let url = "\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)/\(tid)/comments"
+            let url = "\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)/\(tid)\(Getsdone.API_COMMENTS)"
             
             progress.startAnimating()
             

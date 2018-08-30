@@ -22,6 +22,11 @@
 		8558EF7621096D240050F27A /* Start1Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8558EF7521096D240050F27A /* Start1Controller.swift */; };
 		8558EF7821096DC30050F27A /* Start2Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8558EF7721096DC30050F27A /* Start2Controller.swift */; };
 		8558EF7A21096DD90050F27A /* Start3Controller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8558EF7921096DD90050F27A /* Start3Controller.swift */; };
+		856A160C212C6A070043AECC /* ContactController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856A160B212C6A070043AECC /* ContactController.swift */; };
+		856A160E212C6C350043AECC /* ContactViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856A160D212C6C350043AECC /* ContactViewCell.swift */; };
+		856A16102131C7250043AECC /* AboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856A160F2131C7250043AECC /* AboutController.swift */; };
+		856A16122131CA3D0043AECC /* AddContactController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856A16112131CA3D0043AECC /* AddContactController.swift */; };
+		856A16142132F0A50043AECC /* RequestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856A16132132F0A50043AECC /* RequestController.swift */; };
 		85C105F820DD3F6100BA66CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C105F720DD3F6100BA66CF /* AppDelegate.swift */; };
 		85C105FA20DD3F6100BA66CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C105F920DD3F6100BA66CF /* ViewController.swift */; };
 		85C105FD20DD3F6100BA66CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85C105FB20DD3F6100BA66CF /* Main.storyboard */; };
@@ -71,6 +76,11 @@
 		8558EF7521096D240050F27A /* Start1Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Start1Controller.swift; sourceTree = "<group>"; };
 		8558EF7721096DC30050F27A /* Start2Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Start2Controller.swift; sourceTree = "<group>"; };
 		8558EF7921096DD90050F27A /* Start3Controller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Start3Controller.swift; sourceTree = "<group>"; };
+		856A160B212C6A070043AECC /* ContactController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactController.swift; sourceTree = "<group>"; };
+		856A160D212C6C350043AECC /* ContactViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewCell.swift; sourceTree = "<group>"; };
+		856A160F2131C7250043AECC /* AboutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutController.swift; sourceTree = "<group>"; };
+		856A16112131CA3D0043AECC /* AddContactController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContactController.swift; sourceTree = "<group>"; };
+		856A16132132F0A50043AECC /* RequestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestController.swift; sourceTree = "<group>"; };
 		85C105F420DD3F6100BA66CF /* getsdone-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "getsdone-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		85C105F720DD3F6100BA66CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85C105F920DD3F6100BA66CF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -172,6 +182,11 @@
 				8558EF7521096D240050F27A /* Start1Controller.swift */,
 				8558EF7721096DC30050F27A /* Start2Controller.swift */,
 				8558EF7921096DD90050F27A /* Start3Controller.swift */,
+				856A160B212C6A070043AECC /* ContactController.swift */,
+				856A160D212C6C350043AECC /* ContactViewCell.swift */,
+				856A160F2131C7250043AECC /* AboutController.swift */,
+				856A16112131CA3D0043AECC /* AddContactController.swift */,
+				856A16132132F0A50043AECC /* RequestController.swift */,
 			);
 			path = "getsdone-ios";
 			sourceTree = "<group>";
@@ -430,6 +445,7 @@
 				8556803A20E1315C003D9418 /* Getsdone.swift in Sources */,
 				8558EF7421070E3C0050F27A /* StartPageController.swift in Sources */,
 				8556803620DFD238003D9418 /* HomeController.swift in Sources */,
+				856A160E212C6C350043AECC /* ContactViewCell.swift in Sources */,
 				8558EF7821096DC30050F27A /* Start2Controller.swift in Sources */,
 				8556804620E53690003D9418 /* SignupController.swift in Sources */,
 				85C105FA20DD3F6100BA66CF /* ViewController.swift in Sources */,
@@ -438,8 +454,12 @@
 				85C105F820DD3F6100BA66CF /* AppDelegate.swift in Sources */,
 				852D8CB120DF969C004F7D65 /* MainTabController.swift in Sources */,
 				8556804420E535B9003D9418 /* LoginController.swift in Sources */,
+				856A160C212C6A070043AECC /* ContactController.swift in Sources */,
 				8558EF7A21096DD90050F27A /* Start3Controller.swift in Sources */,
 				8556804820E536D6003D9418 /* ProfileController.swift in Sources */,
+				856A16102131C7250043AECC /* AboutController.swift in Sources */,
+				856A16142132F0A50043AECC /* RequestController.swift in Sources */,
+				856A16122131CA3D0043AECC /* AddContactController.swift in Sources */,
 				8558EF7621096D240050F27A /* Start1Controller.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -36,12 +36,14 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var tasksTable: UITableView!
     @IBOutlet weak var theView: UISegmentedControl!
     @IBOutlet weak var progress: UIActivityIndicatorView!
+    @IBOutlet weak var settings: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         createTask.setFAIcon(icon: FAType.FAEdit, iconSize: 24)
         //profile.setFAIcon(icon: FAType.FAMehO, iconSize: 24)
+        settings.setFAIcon(icon: FAType.FASliders, iconSize: 24)
         
         self.tasksTable.dataSource = self
         self.tasksTable.delegate = self
@@ -82,7 +84,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
             withIdentifier: cellIdentifier, for: indexPath) as! TaskViewCell
         
         cell.owner.setFAIcon(icon: FAType.FAFacebookSquare, iconSize: 48, forState: .normal)
-        cell.owner.setTitleColor(UIColor.black, for: .normal)
+        cell.owner.setTitleColor(.red, for: .normal)
         //cell.comments.setFAIcon(icon: FAType.FACommentO, forState: .normal)
         
         
@@ -310,9 +312,6 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 
                 switch response.result {
                 case .failure(let error):
-                    
-                    print("fuckrow")
-                    print(response.response)
                     
                     if response.response?.statusCode == 401 {
                         

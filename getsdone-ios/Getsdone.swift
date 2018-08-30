@@ -18,11 +18,17 @@ class Getsdone {
     //static let AUTH_ENDPOINT            = "https://getsdone.xyz/auth"
     static let API_USERS                = "/users"
     static let API_TASKS                = "/tasks"
+    static let API_CONTACTS             = "/contacts"
+    static let API_COMMENTS             = "/comments"
+    static let API_NOTIFICATIONS        = "/notifications"
     
     static let COOKIE                   = "cookie"
     static let TOKEN                    = "token"
     static let TID                      = "tid"
     static let APP_NAME                 = "getsdone"
+    
+    static let CONTACT_ACCEPTED         = "accepted"
+    static let CONTACT_DECLINED         = "declined"
 
     
     static let TealColor = UIColor(
