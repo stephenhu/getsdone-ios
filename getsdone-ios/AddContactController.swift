@@ -145,6 +145,35 @@ class AddContactController: UIViewController {
                         
                         self.performSegue(withIdentifier: "contactSegue", sender: self)
                         
+                    } else if status == 404 {
+                        
+                        let ac = UIAlertController(title: "Add contact error",
+                                                   message: "User not found.",
+                                                   preferredStyle: UIAlertControllerStyle.alert)
+                        
+                        let OK = UIAlertAction(title: "OK",
+                                               style: UIAlertActionStyle.default,
+                                               handler: nil)
+                        
+                        ac.addAction(OK)
+                        
+                        self.present(ac, animated: true, completion: nil)
+                        
+                    } else if status == 500 {
+                        
+                        let ac = UIAlertController(title: "Add contact error",
+                                                   message: "Contact already exists or has been requested.",
+                                                   preferredStyle: UIAlertControllerStyle.alert)
+                        
+                        let OK = UIAlertAction(title: "OK",
+                                               style: UIAlertActionStyle.default,
+                                               handler: nil)
+                        
+                        ac.addAction(OK)
+                        
+                        self.present(ac, animated: true, completion: nil)
+                        
+                        
                     } else {
                         
                         let ac = UIAlertController(title: "Add contact error",

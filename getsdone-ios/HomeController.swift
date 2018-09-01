@@ -420,6 +420,14 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
                             print(task)
                             
+                            if task["delegateId"]["Valid"].bool! {
+                                
+                                if task["delegateId"]["String"].string! != self.uid {
+                                    continue
+                                }
+                                
+                            }
+                            
                             t.append(task["ownerName"].string!)
                             t.append(task["task"].string!)
                             t.append(task["created"].string!)
@@ -491,6 +499,10 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
                             
                             if task["delegateId"]["Valid"].bool! {
 
+                                if task["delegateId"]["String"].string! == self.uid {
+                                    continue
+                                }
+                                
                                 var t = [String]()
 
                                 t.append(task["ownerName"].string!)
