@@ -50,6 +50,8 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.tasksTable.rowHeight = 120
         
+        
+        
         self.view.bringSubview(toFront: progress)
         
         loadUserInfo()
@@ -140,7 +142,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let deferAction = UITableViewRowAction(style: .normal, title: "Defer")
             { (rowAction, indexPath) in
                 
-                self.deferTask(indexPath)
+                self.updateTask(indexPath, state: Getsdone.UPDATE_TASK_DEFERRED)
                 
             }
             
@@ -149,7 +151,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let completeAction = UITableViewRowAction(style: .normal, title: "Complete")
             { (rowAction, indexPath) in
                 
-                self.completeTask(indexPath)
+                self.updateTask(indexPath, state: Getsdone.UPDATE_TASK_COMPLETED)
                 
             }
             
@@ -170,6 +172,8 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let undeferAction = UITableViewRowAction(style: .normal, title: "Undefer")
             { (rowAction, indexPath) in
                 
+                self.updateTask(indexPath, state: Getsdone.UPDATE_TASK_UNDEFERRED)
+                
             }
             
             undeferAction.backgroundColor = Getsdone.BlueColor
@@ -187,13 +191,42 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
     }
     
-    func completeTask(_ row: IndexPath) {
+    
+    func updateTask(_ row: IndexPath, state: String) {
         
-        let url = "\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)/\(tasks[row.item][4])"
+        var taskType = [[String]]()
+        
+        if state == Getsdone.UPDATE_TASK_UNDEFERRED {
+            
+            if deferred[row.item][5] != uid {
+                
+                let ac = UIAlertController(title: "Update task error",
+                                           message: "Only the delegate can defer this task.",
+                                           preferredStyle: UIAlertControllerStyle.alert)
+                
+                let OK = UIAlertAction(title: "OK",
+                                       style: UIAlertActionStyle.default,
+                                       handler: nil)
+                
+                ac.addAction(OK)
+                
+                self.present(ac, animated: true, completion: nil)
+                
+                return
+                
+            }
+            
+            taskType = deferred
+            
+        } else {
+            taskType = tasks
+        }
+        
+        let url = "\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)/\(taskType[row.item][4])"
         
         progress.startAnimating()
         
-        Alamofire.request(url, method: .put, parameters: ["action": "completed"])
+        Alamofire.request(url, method: .put, parameters: ["action": state])
             .response{ response in
         
                 self.progress.stopAnimating()
@@ -217,11 +250,15 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     
                     if status == 200 {
                         
-                        self.loadOpenTasks()
+                        if state == Getsdone.UPDATE_TASK_UNDEFERRED {
+                            self.loadDeferredTasks()
+                        } else {
+                            self.loadOpenTasks()
+                        }
                         
                     } else {
                         
-                        let ac = UIAlertController(title: "Complete task error",
+                        let ac = UIAlertController(title: "Update task error",
                                                    message: response.error?.localizedDescription,
                                                    preferredStyle: UIAlertControllerStyle.alert)
                         
@@ -233,60 +270,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         
                         self.present(ac, animated: true, completion: nil)
                         
-                    }
-                    
-                }
-                
-        }
-        
-    } // completeTask
-    
-    
-    func deferTask(_ row: IndexPath) {
-        
-        let url = "\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)/\(tasks[row.item][4])"
-        
-        progress.startAnimating()
-        
-        Alamofire.request(url, method: .put, parameters: ["action": "deferred"])
-            .response{ response in
-        
-                self.progress.stopAnimating()
-                
-                if response.error != nil {
-                    
-                    let ac = UIAlertController(title: "Connection error",
-                                               message: response.error?.localizedDescription,
-                                               preferredStyle: UIAlertControllerStyle.alert)
-                    
-                    let OK = UIAlertAction(title: "OK",
-                                           style: UIAlertActionStyle.default,
-                                           handler: nil)
-                    
-                    ac.addAction(OK)
-                    
-                    self.present(ac, animated: true, completion: nil)
-                    
-                    
-                } else if let status = response.response?.statusCode {
-                    
-                    if status == 200 {
                         
-                        self.loadOpenTasks()
-                        
-                    } else {
-                        
-                        let ac = UIAlertController(title: "Defer task error",
-                                                   message: response.error?.localizedDescription,
-                                                   preferredStyle: UIAlertControllerStyle.alert)
-                        
-                        let OK = UIAlertAction(title: "OK",
-                                               style: UIAlertActionStyle.default,
-                                               handler: nil)
-                        
-                        ac.addAction(OK)
-                        
-                        self.present(ac, animated: true, completion: nil)
                         
                     }
                     
@@ -294,7 +278,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 
         }
         
-    } // deferTask
+    } // updateTask
     
     
     func loadUserInfo() {
@@ -466,7 +450,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         progress.startAnimating()
         
-        Alamofire.request(url, method: .get)
+        Alamofire.request(url, method: .get, parameters: ["view": "assigned"])
             .responseJSON{ response in
                 
                 self.progress.stopAnimating()
@@ -492,13 +476,13 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     if let raw = response.result.value {
                         
                         let j = JSON(raw)
-                        
+
                         var all = [[String]]()
                         
                         for (_, task) in j {
                             
                             if task["delegateId"]["Valid"].bool! {
-
+                                
                                 if task["delegateId"]["String"].string! == self.uid {
                                     continue
                                 }

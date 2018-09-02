@@ -29,6 +29,10 @@ class Getsdone {
     
     static let CONTACT_ACCEPTED         = "accepted"
     static let CONTACT_DECLINED         = "declined"
+    
+    static let UPDATE_TASK_DEFERRED     = "deferred"
+    static let UPDATE_TASK_UNDEFERRED   = "undeferred"
+    static let UPDATE_TASK_COMPLETED    = "completed"
 
     
     static let TealColor = UIColor(

@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "getsdone-ios/HomeController.swift"
-            timestampString = "557507717.089872"
+            timestampString = "557588107.021149"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "380"
-            endingLineNumber = "380"
+            startingLineNumber = "364"
+            endingLineNumber = "364"
             landmarkName = "loadOpenTasks()"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "getsdone-ios/HomeController.swift"
-            timestampString = "557507717.090367"
+            timestampString = "557588107.0221241"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "313"
-            endingLineNumber = "313"
+            startingLineNumber = "297"
+            endingLineNumber = "297"
             landmarkName = "loadUserInfo()"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "getsdone-ios/HomeController.swift"
-            timestampString = "557507717.090691"
+            timestampString = "557588107.022699"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "314"
-            endingLineNumber = "314"
+            startingLineNumber = "298"
+            endingLineNumber = "298"
             landmarkName = "loadUserInfo()"
             landmarkType = "7">
          </BreakpointContent>

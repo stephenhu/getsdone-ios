@@ -116,7 +116,25 @@ class TaskController: UIViewController, UITextViewDelegate {
                         
                         print(j)
                         
-                        self.addTask(j["id"].string!)
+                        let username = "@\(j["name"].string!)"
+                        
+                        if self.task.text!.contains(username) {
+                            
+                            let ac = UIAlertController(title: "Create task error",
+                                                       message: "Cannot delegate task to oneself, please remove @\(j["name"].string!)",
+                                preferredStyle: UIAlertControllerStyle.alert)
+                            
+                            let OK = UIAlertAction(title: "OK",
+                                                   style: UIAlertActionStyle.default,
+                                                   handler: nil)
+                            
+                            ac.addAction(OK)
+                            
+                            self.present(ac, animated: true, completion: nil)
+                            
+                        } else {
+                            self.addTask(j["id"].string!)
+                        }
                         
                     }
                     
@@ -155,6 +173,20 @@ class TaskController: UIViewController, UITextViewDelegate {
                 
                     if status == 200 {
                         self.performSegue(withIdentifier: "homeSegue", sender: self)
+                    } else if status == 409 {
+                      
+                        let ac = UIAlertController(title: "Create task error",
+                                                   message: "All task delegates must be added to your contacts in order to create tasks for them",
+                                                   preferredStyle: UIAlertControllerStyle.alert)
+                        
+                        let OK = UIAlertAction(title: "OK",
+                                               style: UIAlertActionStyle.default,
+                                               handler: nil)
+                        
+                        ac.addAction(OK)
+                        
+                        self.present(ac, animated: true, completion: nil)
+                        
                     } else {
                         
                         let ac = UIAlertController(title: "Add task error",
