@@ -254,5 +254,9 @@ class ContactController: UIViewController, UITableViewDelegate,
     
     // MARK: Actions
     
+    @IBAction func unwind(segue: UIStoryboardSegue) {
+    
+    }
+    
     
 } // ContactController

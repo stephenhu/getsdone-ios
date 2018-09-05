@@ -326,7 +326,7 @@
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" pagingEnabled="YES" dataMode="prototypes" style="plain" separatorStyle="singleLineEtched" rowHeight="72" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JRr-rU-TY6">
-                                <rect key="frame" x="5" y="94" width="365" height="543"/>
+                                <rect key="frame" x="5" y="94" width="365" height="494"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="Lyw-IB-nJk" customClass="ContactViewCell" customModule="getsdone_ios" customModuleProvider="target">
@@ -622,7 +622,7 @@
                                     <navigationItem title="Add Contact" id="Jwj-h0-VDB">
                                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="BHE-x5-aLv">
                                             <connections>
-                                                <segue destination="GAL-lt-h0I" kind="show" id="gcU-TC-7iY"/>
+                                                <segue destination="A2y-ID-Fs8" kind="unwind" unwindAction="unwindWithSegue:" id="cGm-ag-uvU"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Request" id="lRm-1h-fxs">
@@ -665,10 +665,11 @@
                     <connections>
                         <outlet property="email" destination="euy-wI-tI5" id="6Av-J0-1mp"/>
                         <outlet property="progress" destination="Bba-SP-YMp" id="YMd-34-pnK"/>
-                        <segue destination="GAL-lt-h0I" kind="show" identifier="contactSegue" id="WjV-7H-UNB"/>
+                        <segue destination="A2y-ID-Fs8" kind="unwind" identifier="backSegue" unwindAction="unwindWithSegue:" id="G2p-w7-Oap"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UsM-1c-Pp5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="A2y-ID-Fs8" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1526" y="1053"/>
         </scene>
@@ -691,7 +692,7 @@
                                     <navigationItem title="Contact Requests" id="OXA-bp-hDB">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="d1u-CM-Vyz">
                                             <connections>
-                                                <segue destination="21c-Fh-LQu" kind="show" id="ljv-q2-eKm"/>
+                                                <segue destination="AAD-oD-bGM" kind="unwind" unwindAction="unwindWithSegue:" id="U5N-P6-PuL"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -762,9 +763,11 @@
                     <connections>
                         <outlet property="progress" destination="AYz-aX-JJG" id="FSq-LI-V7b"/>
                         <outlet property="requestsTable" destination="yUL-Ch-52M" id="o21-SE-MVO"/>
+                        <segue destination="AAD-oD-bGM" kind="unwind" unwindAction="unwindWithSegue:" id="YMc-nK-cKr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="szp-73-iHd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="AAD-oD-bGM" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2386.4000000000001" y="1032.2338830584708"/>
         </scene>
@@ -1434,10 +1437,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ljv-q2-eKm"/>
+        <segue reference="en5-Ww-xZM"/>
         <segue reference="rqI-LD-9PA"/>
         <segue reference="ONc-VI-dfD"/>
         <segue reference="UnS-Fh-isv"/>
-        <segue reference="WjV-7H-UNB"/>
     </inferredMetricsTieBreakers>
 </document>

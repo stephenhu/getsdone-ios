@@ -143,7 +143,7 @@ class AddContactController: UIViewController {
                     
                     if status == 200 {
                         
-                        self.performSegue(withIdentifier: "contactSegue", sender: self)
+                        self.performSegue(withIdentifier: "backSegue", sender: nil)
                         
                     } else if status == 404 {
                         
