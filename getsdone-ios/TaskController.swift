@@ -172,7 +172,7 @@ class TaskController: UIViewController, UITextViewDelegate {
                 } else if let status = response.response?.statusCode {
                 
                     if status == 200 {
-                        self.performSegue(withIdentifier: "homeSegue", sender: self)
+                        self.performSegue(withIdentifier: "backSegue", sender: self)
                     } else if status == 409 {
                       
                         let ac = UIAlertController(title: "Create task error",

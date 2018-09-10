@@ -49,8 +49,6 @@ class TaskCommentController: UIViewController, UITableViewDelegate,
         
         commentsTable.rowHeight = 80
         
-        //comment.becomeFirstResponder()
-        
         tid = defaults.object(forKey: Getsdone.TID) as! String
         
         comment.delegate = self
@@ -97,19 +95,27 @@ class TaskCommentController: UIViewController, UITableViewDelegate,
     @objc
     func keyboardWillAppear(notification: NSNotification?) {
         
-        guard let keyboardFrame = notification?.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue else {
+        guard let keyboardFrame = notification?.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue else {
             return
         }
         
         let height: CGFloat
         if #available(iOS 11.0, *) {
-            height = keyboardFrame.cgRectValue.height - self.view.safeAreaInsets.bottom
+            height = keyboardFrame.cgRectValue.height + self.view.safeAreaInsets.bottom
         } else {
+            
             height = keyboardFrame.cgRectValue.height
         }
         
-        svBottomConstraint.constant = height + 60.0
+        //var rect = self.view.frame
         
+        //rect.size.height = rect.size.height - keyboardFrame.cgRectValue.height - 34
+        print("FREAK")
+        print(height)
+        print(svBottomConstraint.constant)
+        svBottomConstraint.constant = height
+        //tableBottomConstraint.constant = height
+
     }
     
     @objc
@@ -303,6 +309,7 @@ class TaskCommentController: UIViewController, UITableViewDelegate,
                         
                         if status == 200 {
                             self.comment.text = ""
+                            self.comment.resignFirstResponder()
                             self.loadTask()
                         } else {
                             
@@ -327,5 +334,6 @@ class TaskCommentController: UIViewController, UITableViewDelegate,
         }
         
     }
+    
     
 } // TaskCommentController

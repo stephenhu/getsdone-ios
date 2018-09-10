@@ -409,7 +409,7 @@
                                     <navigationItem title="Comments" id="1EE-v6-Eaj">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="BPU-Pb-JFw">
                                             <connections>
-                                                <segue destination="21c-Fh-LQu" kind="show" id="wlc-Ks-OcH"/>
+                                                <segue destination="QNf-9R-ELH" kind="unwind" unwindAction="unwindHomeWithSegue:" id="lY8-Xi-mqL"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -567,9 +567,6 @@
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <constraints>
-                                    <constraint firstItem="UxH-Xq-2d2" firstAttribute="top" secondItem="L5Z-vU-B90" secondAttribute="bottom" constant="5" id="wEZ-ZY-1O5"/>
-                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -597,9 +594,11 @@
                         <outlet property="task" destination="rWK-bl-SY4" id="9Li-Vg-E4T"/>
                         <outlet property="username" destination="LQi-7E-qcY" id="zSl-zj-DZY"/>
                         <segue destination="4Te-WV-z7G" kind="show" identifier="startSegue" id="gNB-Bm-4LS"/>
+                        <segue destination="QNf-9R-ELH" kind="unwind" identifier="goHome" unwindAction="unwindHomeWithSegue:" id="d9v-mh-tbn"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qCC-l6-h6f" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="QNf-9R-ELH" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2844" y="294.60269865067471"/>
         </scene>
@@ -955,7 +954,7 @@
                                             <color key="tintColor" red="0.0039215686269999999" green="0.50588235290000005" blue="0.72941176470000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <connections>
                                                 <action selector="cancel:" destination="JEK-OH-avc" id="exi-So-rd1"/>
-                                                <segue destination="21c-Fh-LQu" kind="show" identifier="homeSegue" id="3wQ-U8-0B7"/>
+                                                <segue destination="JEK-OH-avc" kind="unwind" identifier="backSegue" unwindAction="unwindHomeWithSegue:" id="O2l-JS-ZeA"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Create" id="wpG-ee-wYH">
@@ -1438,7 +1437,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="en5-Ww-xZM"/>
-        <segue reference="rqI-LD-9PA"/>
+        <segue reference="gNB-Bm-4LS"/>
         <segue reference="ONc-VI-dfD"/>
         <segue reference="UnS-Fh-isv"/>
     </inferredMetricsTieBreakers>
