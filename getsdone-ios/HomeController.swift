@@ -30,6 +30,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var name    = String()
 
     var selectedView = 0
+    var ascending = 0
     
     // MARK: Properties
     @IBOutlet weak var createTask: UIBarButtonItem!
@@ -41,7 +42,8 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var notasks: UILabel!
     
     override func viewDidAppear(_ animated: Bool) {
-        refresh()
+        
+        loadUserInfo()
         
     }
     
@@ -63,9 +65,8 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         notasks.setFAColor(color: .clear)
         
+        self.view.bringSubview(toFront: notasks)
         self.view.bringSubview(toFront: progress)
-        
-        loadUserInfo()
         
     }
     
@@ -206,6 +207,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func refresh() {
     
         selectedView = defaults.integer(forKey: Getsdone.DEFAULTS_VIEW)
+        ascending = defaults.integer(forKey: Getsdone.DEFAULTS_SORT)
         
         if selectedView == 3 {
             
@@ -323,7 +325,6 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func loadUserInfo() {
         
-        
         let url = "\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)"
         
         print(url)
@@ -378,7 +379,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
                                 self.uid    = j["id"].string!
                                 self.name   = j["name"].string!
                                 
-                                self.loadOpenTasks()
+                                self.refresh()
                                 
                             } else {
                                 print(status)
@@ -402,10 +403,6 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     func loadOpenTasks() {
-        
-        if uid == "" {
-            print("TODO: need to go back to the login page")
-        }
         
         let url = "\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)"
         
@@ -475,7 +472,11 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
                             
                         }
                         
-                        self.tasks = all
+                        if self.ascending == 0 {
+                            self.tasks = all.reversed()
+                        } else {
+                            self.tasks = all
+                        }
                         
                         self.viewName.text = "Open (\(self.tasks.count))"
                         
@@ -497,7 +498,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func loadOpenAssignedTasks() {
         
         let url = "\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)"
-        
+
         print(url)
         
         progress.startAnimating()
@@ -557,7 +558,11 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
                             
                         }
                         
-                        self.assigned = all
+                        if self.ascending == 0 {
+                            self.assigned = all.reversed()
+                        } else {
+                            self.assigned = all
+                        }
                         
                         self.viewName.text = "Delegated (\(self.assigned.count))"
                         
@@ -579,7 +584,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func loadCompletedTasks() {
         
         let url = "\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)"
-        
+
         print(url)
         
         progress.startAnimating()
@@ -632,7 +637,11 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
                             
                         }
                         
-                        self.completed = all
+                        if self.ascending == 0 {
+                            self.completed = all.reversed()
+                        } else {
+                            self.completed = all
+                        }
                         
                         self.viewName.text = "Completed (\(self.completed.count))"
                         
@@ -654,7 +663,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func loadDeferredTasks() {
         
         let url = "\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)"
-        
+
         print(url)
         
         progress.startAnimating()
@@ -706,7 +715,11 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
                             
                         }
                         
-                        self.deferred = all
+                        if self.ascending == 0 {
+                            self.deferred = all.reversed()
+                        } else {
+                            self.deferred = all
+                        }
                         
                         self.viewName.text = "Deferred (\(self.deferred.count))"
                         

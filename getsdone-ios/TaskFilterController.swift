@@ -19,48 +19,59 @@ class TaskFilterController: UIViewController {
     @IBOutlet weak var delegatedBtn: UIButton!
     @IBOutlet weak var deferredBtn: UIButton!
     @IBOutlet weak var completedBtn: UIButton!
+    @IBOutlet weak var ascending: UISwitch!
+    @IBOutlet weak var openLbl: UILabel!
+    @IBOutlet weak var delegatedLbl: UILabel!
+    @IBOutlet weak var completedLbl: UILabel!
+    @IBOutlet weak var deferredLbl: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let view = defaults.integer(forKey: Getsdone.DEFAULTS_VIEW)
+        let sort = defaults.integer(forKey: Getsdone.DEFAULTS_SORT)
         
-        openBtn.setFAIcon(icon: FAType.FACheck, forState: .normal)
-        delegatedBtn.setFAIcon(icon: FAType.FACheck, forState: .normal)
-        deferredBtn.setFAIcon(icon: FAType.FACheck, forState: .normal)
-        completedBtn.setFAIcon(icon: FAType.FACheck, forState: .normal)
+        openLbl.setFAIcon(icon: FAType.FACheck, iconSize: 16)
+        delegatedLbl.setFAIcon(icon: FAType.FACheck, iconSize: 16)
+        deferredLbl.setFAIcon(icon: FAType.FACheck, iconSize: 16)
+        completedLbl.setFAIcon(icon: FAType.FACheck, iconSize: 16)
 
         if view == 1 {
 
-            openBtn.setFATitleColor(color: .clear)
-            delegatedBtn.setFATitleColor(color: Getsdone.TealColor)
-            deferredBtn.setFATitleColor(color: .clear)
-            completedBtn.setFATitleColor(color: .clear)
-
+            openLbl.setFAColor(color: .clear)
+            delegatedLbl.setFAColor(color: Getsdone.TealColor)
+            completedLbl.setFAColor(color: .clear)
+            deferredLbl.setFAColor(color: .clear)
+            
         } else if view == 2 {
 
-            openBtn.setFATitleColor(color: .clear)
-            delegatedBtn.setFATitleColor(color: .clear)
-            deferredBtn.setFATitleColor(color: .clear)
-            completedBtn.setFATitleColor(color: Getsdone.TealColor)
+            openLbl.setFAColor(color: .clear)
+            delegatedLbl.setFAColor(color: .clear)
+            completedLbl.setFAColor(color: Getsdone.TealColor)
+            deferredLbl.setFAColor(color: .clear)
 
             
         } else if view == 3 {
 
-            openBtn.setFATitleColor(color: .clear)
-            delegatedBtn.setFATitleColor(color: .clear)
-            deferredBtn.setFATitleColor(color: Getsdone.TealColor)
-            completedBtn.setFATitleColor(color: .clear)
+            openLbl.setFAColor(color: .clear)
+            delegatedLbl.setFAColor(color: .clear)
+            completedLbl.setFAColor(color: .clear)
+            deferredLbl.setFAColor(color: Getsdone.TealColor)
 
         } else {
             
-            openBtn.setFATitleColor(color: Getsdone.TealColor)
-            delegatedBtn.setFATitleColor(color: .clear)
-            deferredBtn.setFATitleColor(color: .clear)
-            completedBtn.setFATitleColor(color: .clear)
+            openLbl.setFAColor(color: Getsdone.TealColor)
+            delegatedLbl.setFAColor(color: .clear)
+            completedLbl.setFAColor(color: .clear)
+            deferredLbl.setFAColor(color: .clear)
             
         }
         
+        if sort == 1 {
+            ascending.setOn(false, animated: true)
+        } else {
+            ascending.setOn(true, animated: true)
+        }
         
     }
     
@@ -74,20 +85,20 @@ class TaskFilterController: UIViewController {
         
         defaults.set(0, forKey: Getsdone.DEFAULTS_VIEW)
         
-        openBtn.setTitleColor(Getsdone.TealColor, for: .normal)
-        delegatedBtn.setTitleColor(.clear, for: .normal)
-        deferredBtn.setTitleColor(.clear, for: .normal)
-        completedBtn.setTitleColor(.clear, for: .normal)
+        openLbl.setFAColor(color: Getsdone.TealColor)
+        delegatedLbl.setFAColor(color: .clear)
+        completedLbl.setFAColor(color: .clear)
+        deferredLbl.setFAColor(color: .clear)
     }
     
     @IBAction func selectDelegatedView(_ sender: Any) {
 
         defaults.set(1, forKey: Getsdone.DEFAULTS_VIEW)
         
-        openBtn.setTitleColor(.clear, for: .normal)
-        delegatedBtn.setTitleColor(Getsdone.TealColor, for: .normal)
-        deferredBtn.setTitleColor(.clear, for: .normal)
-        completedBtn.setTitleColor(.clear, for: .normal)
+        openLbl.setFAColor(color: .clear)
+        delegatedLbl.setFAColor(color: Getsdone.TealColor)
+        completedLbl.setFAColor(color: .clear)
+        deferredLbl.setFAColor(color: .clear)
 
     }
     
@@ -95,10 +106,10 @@ class TaskFilterController: UIViewController {
 
         defaults.set(3, forKey: Getsdone.DEFAULTS_VIEW)
         
-        openBtn.setTitleColor(.clear, for: .normal)
-        delegatedBtn.setTitleColor(.clear, for: .normal)
-        deferredBtn.setTitleColor(Getsdone.TealColor, for: .normal)
-        completedBtn.setTitleColor(.clear, for: .normal)
+        openLbl.setFAColor(color: .clear)
+        delegatedLbl.setFAColor(color: .clear)
+        completedLbl.setFAColor(color: .clear)
+        deferredLbl.setFAColor(color: Getsdone.TealColor)
 
     }
     
@@ -106,12 +117,22 @@ class TaskFilterController: UIViewController {
 
         defaults.set(2, forKey: Getsdone.DEFAULTS_VIEW)
         
-        openBtn.setTitleColor(.clear, for: .normal)
-        delegatedBtn.setTitleColor(.clear, for: .normal)
-        deferredBtn.setTitleColor(.clear, for: .normal)
-        completedBtn.setTitleColor(Getsdone.TealColor, for: .normal)
+        openLbl.setFAColor(color: .clear)
+        delegatedLbl.setFAColor(color: .clear)
+        completedLbl.setFAColor(color: Getsdone.TealColor)
+        deferredLbl.setFAColor(color: .clear)
 
     }
     
+    @IBAction func toggleAscending(_ sender: Any) {
+        
+        if ascending.isOn {
+            defaults.set(0, forKey: Getsdone.DEFAULTS_SORT)
+        } else {
+            defaults.set(1, forKey: Getsdone.DEFAULTS_SORT)
+        }
+        
+        
+    }
     
 } // TaskFilterController
