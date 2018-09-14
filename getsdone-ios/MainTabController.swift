@@ -30,7 +30,7 @@ class MainTabController: UITabBarController {
         tabs.items?[2].setFAIcon(icon: FAType.FABarChartO, size: nil, textColor: .black, backgroundColor: .clear, selectedTextColor: Getsdone.TealColor, selectedBackgroundColor: .clear)
         
         tabs.items?[3].setFAIcon(icon: FAType.FAHeart, size: nil, textColor: .black, backgroundColor: .clear, selectedTextColor: Getsdone.TealColor, selectedBackgroundColor: .clear)
-        
+
     }
     
     override func didReceiveMemoryWarning() {

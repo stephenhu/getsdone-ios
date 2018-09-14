@@ -27,6 +27,7 @@
 		856A16102131C7250043AECC /* AboutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856A160F2131C7250043AECC /* AboutController.swift */; };
 		856A16122131CA3D0043AECC /* AddContactController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856A16112131CA3D0043AECC /* AddContactController.swift */; };
 		856A16142132F0A50043AECC /* RequestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 856A16132132F0A50043AECC /* RequestController.swift */; };
+		85971296214B62D7006ABD0B /* TaskFilterController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85971295214B62D7006ABD0B /* TaskFilterController.swift */; };
 		85C105F820DD3F6100BA66CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C105F720DD3F6100BA66CF /* AppDelegate.swift */; };
 		85C105FA20DD3F6100BA66CF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85C105F920DD3F6100BA66CF /* ViewController.swift */; };
 		85C105FD20DD3F6100BA66CF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85C105FB20DD3F6100BA66CF /* Main.storyboard */; };
@@ -81,6 +82,7 @@
 		856A160F2131C7250043AECC /* AboutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutController.swift; sourceTree = "<group>"; };
 		856A16112131CA3D0043AECC /* AddContactController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddContactController.swift; sourceTree = "<group>"; };
 		856A16132132F0A50043AECC /* RequestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestController.swift; sourceTree = "<group>"; };
+		85971295214B62D7006ABD0B /* TaskFilterController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskFilterController.swift; sourceTree = "<group>"; };
 		85C105F420DD3F6100BA66CF /* getsdone-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "getsdone-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		85C105F720DD3F6100BA66CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		85C105F920DD3F6100BA66CF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				856A160F2131C7250043AECC /* AboutController.swift */,
 				856A16112131CA3D0043AECC /* AddContactController.swift */,
 				856A16132132F0A50043AECC /* RequestController.swift */,
+				85971295214B62D7006ABD0B /* TaskFilterController.swift */,
 			);
 			path = "getsdone-ios";
 			sourceTree = "<group>";
@@ -448,6 +451,7 @@
 				856A160E212C6C350043AECC /* ContactViewCell.swift in Sources */,
 				8558EF7821096DC30050F27A /* Start2Controller.swift in Sources */,
 				8556804620E53690003D9418 /* SignupController.swift in Sources */,
+				85971296214B62D7006ABD0B /* TaskFilterController.swift in Sources */,
 				85C105FA20DD3F6100BA66CF /* ViewController.swift in Sources */,
 				8556804220E2993F003D9418 /* CommentCell.swift in Sources */,
 				8556803820DFEA1A003D9418 /* TaskViewCell.swift in Sources */,

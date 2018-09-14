@@ -12,10 +12,10 @@ import UIKit
 class Getsdone {
     
     
-    static let API_ENDPOINT             = "http://127.0.0.1:8888/api"
-    static let AUTH_ENDPOINT            = "http://127.0.0.1:8888/auth"
-    //static let API_ENDPOINT             = "https://getsdone.xyz/api"
-    //static let AUTH_ENDPOINT            = "https://getsdone.xyz/auth"
+    //static let API_ENDPOINT             = "http://127.0.0.1:8888/api"
+    //static let AUTH_ENDPOINT            = "http://127.0.0.1:8888/auth"
+    static let API_ENDPOINT             = "https://getsdone.xyz/api"
+    static let AUTH_ENDPOINT            = "https://getsdone.xyz/auth"
     static let API_USERS                = "/users"
     static let API_TASKS                = "/tasks"
     static let API_CONTACTS             = "/contacts"
@@ -26,6 +26,15 @@ class Getsdone {
     static let TOKEN                    = "token"
     static let TID                      = "tid"
     static let APP_NAME                 = "getsdone"
+    
+    static let DEFAULTS_VIEW            = "getsdone.view"
+    static let DEFAULTS_SORT            = "getsdone.sort"
+    
+    static let FILTER_VIEW_OPEN         = 0
+    static let FILTER_VIEW_DELEGATED    = 1
+    static let FILTER_VIEW_COMPLETED    = 2
+    static let FILTER_VIEW_DEFERRED     = 3
+
     
     static let CONTACT_ACCEPTED         = "accepted"
     static let CONTACT_DECLINED         = "declined"

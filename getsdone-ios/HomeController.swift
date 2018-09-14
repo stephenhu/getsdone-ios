@@ -29,28 +29,39 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var uid     = String()
     var name    = String()
 
+    var selectedView = 0
     
     // MARK: Properties
     @IBOutlet weak var createTask: UIBarButtonItem!
     //@IBOutlet weak var profile: UIBarButtonItem!
     @IBOutlet weak var tasksTable: UITableView!
-    @IBOutlet weak var theView: UISegmentedControl!
-    @IBOutlet weak var progress: UIActivityIndicatorView!
     @IBOutlet weak var settings: UIBarButtonItem!
+    @IBOutlet weak var progress: UIActivityIndicatorView!
+    @IBOutlet weak var viewName: UILabel!
+    @IBOutlet weak var notasks: UILabel!
+    
+    override func viewDidAppear(_ animated: Bool) {
+        refresh()
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         createTask.setFAIcon(icon: FAType.FAEdit, iconSize: 24)
-        //profile.setFAIcon(icon: FAType.FAMehO, iconSize: 24)
-        settings.setFAIcon(icon: FAType.FASliders, iconSize: 24)
+        
+        settings.setFAIcon(icon: FAType.FAFilter, iconSize: 24)
+        
+        //notasks.setFAIcon(icon: FAType.FAOptinMonster, iconSize: 72)
+        notasks.setFAText(prefixText: "",
+                          icon: FAType.FAOptinMonster, postfixText: "No tasks found.", size: 18, iconSize: 72)
         
         self.tasksTable.dataSource = self
         self.tasksTable.delegate = self
         
         self.tasksTable.rowHeight = 120
         
-        
+        notasks.setFAColor(color: .clear)
         
         self.view.bringSubview(toFront: progress)
         
@@ -68,11 +79,11 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if theView.selectedSegmentIndex == 1 {
+        if selectedView == 1 {
             return assigned.count
-        } else if theView.selectedSegmentIndex == 2 {
+        } else if selectedView == 2 {
             return completed.count
-        } else if theView.selectedSegmentIndex == 3 {
+        } else if selectedView == 3 {
             return deferred.count
         } else {
             return tasks.count
@@ -85,20 +96,20 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tasksTable.dequeueReusableCell(
             withIdentifier: cellIdentifier, for: indexPath) as! TaskViewCell
         
-        cell.owner.setFAIcon(icon: FAType.FAFacebookSquare, iconSize: 48, forState: .normal)
-        cell.owner.setTitleColor(.red, for: .normal)
+        cell.owner.setFAIcon(icon: FAType.FAUserO, iconSize: 48, forState: .normal)
+        cell.owner.setTitleColor(Getsdone.BlueColor, for: .normal)
         //cell.comments.setFAIcon(icon: FAType.FACommentO, forState: .normal)
         
         
         var data = [[String]]()
         
-        if theView.selectedSegmentIndex == 0 {
+        if selectedView == 0 {
             data = tasks
-        } else if theView.selectedSegmentIndex == 1 {
+        } else if selectedView == 1 {
             data = assigned
-        } else if theView.selectedSegmentIndex == 2 {
+        } else if selectedView == 2 {
             data = completed
-        } else if theView.selectedSegmentIndex == 3 {
+        } else if selectedView == 3 {
             data = deferred
         }
         
@@ -118,13 +129,13 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         var data = [[String]]()
         
-        if theView.selectedSegmentIndex == 0 {
+        if selectedView == 0 {
             data = tasks
-        } else if theView.selectedSegmentIndex == 1 {
+        } else if selectedView == 1 {
             data = assigned
-        } else if theView.selectedSegmentIndex == 2 {
+        } else if selectedView == 2 {
             data = completed
-        } else if theView.selectedSegmentIndex == 3 {
+        } else if selectedView == 3 {
             data = deferred
         }
         
@@ -136,7 +147,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
-        if theView.selectedSegmentIndex == 0 {
+        if selectedView == 0 {
             
         
             let deferAction = UITableViewRowAction(style: .normal, title: "Defer")
@@ -167,7 +178,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
             return [completeAction, deferAction, cloneAction]
             
         
-        } else if theView.selectedSegmentIndex == 3 {
+        } else if selectedView == 3 {
 
             let undeferAction = UITableViewRowAction(style: .normal, title: "Undefer")
             { (rowAction, indexPath) in
@@ -190,6 +201,35 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
     }
+    
+    
+    func refresh() {
+    
+        selectedView = defaults.integer(forKey: Getsdone.DEFAULTS_VIEW)
+        
+        if selectedView == 3 {
+            
+            viewName.text = "Deferred"
+            loadDeferredTasks()
+            
+        } else if selectedView == 1 {
+            
+            viewName.text = "Delegated"
+            loadOpenAssignedTasks()
+            
+        } else if selectedView == 2 {
+            
+            viewName.text = "Completed"
+            loadCompletedTasks()
+            
+        } else {
+            
+            viewName.text = "Open"
+            loadOpenTasks()
+            
+        }
+        
+    } // refresh
     
     
     func updateTask(_ row: IndexPath, state: String) {
@@ -363,6 +403,10 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func loadOpenTasks() {
         
+        if uid == "" {
+            print("TODO: need to go back to the login page")
+        }
+        
         let url = "\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)/\(uid)\(Getsdone.API_TASKS)"
         
         print(url)
@@ -432,6 +476,14 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         }
                         
                         self.tasks = all
+                        
+                        self.viewName.text = "Open (\(self.tasks.count))"
+                        
+                        if self.tasks.count == 0 {
+                            self.notasks.setFAColor(color: Getsdone.BlueColor)
+                        } else {
+                            self.notasks.setFAColor(color: .clear)
+                        }
                         
                         self.tasksTable.reloadData()
                         
@@ -507,6 +559,14 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         
                         self.assigned = all
                         
+                        self.viewName.text = "Delegated (\(self.assigned.count))"
+                        
+                        if self.assigned.count == 0 {
+                            self.notasks.setFAColor(color: Getsdone.BlueColor)
+                        } else {
+                            self.notasks.setFAColor(color: .clear)
+                        }
+                        
                         self.tasksTable.reloadData()
                         
                     }
@@ -574,6 +634,14 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         
                         self.completed = all
                         
+                        self.viewName.text = "Completed (\(self.completed.count))"
+                        
+                        if self.completed.count == 0 {
+                            self.notasks.setFAColor(color: Getsdone.BlueColor)
+                        } else {
+                            self.notasks.setFAColor(color: .clear)
+                        }
+                        
                         self.tasksTable.reloadData()
                         
                     }
@@ -640,6 +708,14 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         
                         self.deferred = all
                         
+                        self.viewName.text = "Deferred (\(self.deferred.count))"
+                        
+                        if self.deferred.count == 0 {
+                            self.notasks.setFAColor(color: Getsdone.BlueColor)
+                        } else {
+                            self.notasks.setFAColor(color: .clear)
+                        }
+                        
                         self.tasksTable.reloadData()
                         
                     }
@@ -650,20 +726,6 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     
     // MARK: Actions
-    
-    @IBAction func changeView(_ sender: Any) {
-        
-        if theView.selectedSegmentIndex == 0 {
-            loadOpenTasks()
-        } else if theView.selectedSegmentIndex == 1 {
-            loadOpenAssignedTasks()
-        } else if theView.selectedSegmentIndex == 2 {
-            loadCompletedTasks()
-        } else if theView.selectedSegmentIndex == 3 {
-            loadDeferredTasks()
-        }
-        
-    }
     
     @IBAction func unwindHome(segue: UIStoryboardSegue) {
         

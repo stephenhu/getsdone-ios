@@ -42,7 +42,7 @@ class TaskCommentController: UIViewController, UITableViewDelegate,
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(notification:)), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(notification:)), name: .UIKeyboardWillHide, object: nil)
         
-        icon.setFAIcon(icon: FAType.FAGithubAlt, iconSize: 48, forState: .normal)
+        icon.setFAIcon(icon: FAType.FAUserO, iconSize: 48, forState: .normal)
         
         commentsTable.delegate = self
         commentsTable.dataSource = self
@@ -83,7 +83,7 @@ class TaskCommentController: UIViewController, UITableViewDelegate,
         let cell = commentsTable.dequeueReusableCell(
             withIdentifier: cellIdentifier, for: indexPath) as! CommentCell
         
-        cell.icon.setFAIcon(icon: FAType.FAGithub, iconSize: 24, forState: .normal)
+        cell.icon.setFAIcon(icon: FAType.FAUserO, iconSize: 24, forState: .normal)
         cell.comment.text = commentCache[indexPath.item][1]
         cell.name.text = "@\(commentCache[indexPath.item][0])"
         cell.ago.text = Getsdone.toAgo(commentCache[indexPath.item][2])

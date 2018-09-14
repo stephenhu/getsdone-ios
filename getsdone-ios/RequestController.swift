@@ -55,7 +55,7 @@ class RequestController: UIViewController, UITableViewDelegate,
         let cell = requestsTable.dequeueReusableCell(
             withIdentifier: cellIdentifier, for: indexPath) as! ContactViewCell
         
-        cell.icon.setFAIconWithName(icon: FAType.FALinkedin, textColor: Getsdone.TealColor)
+        cell.icon.setFAIconWithName(icon: FAType.FAUserO, textColor: Getsdone.BlueColor)
         
         cell.name.text = contacts[indexPath.item][0]
         cell.state.text = contacts[indexPath.item][1]

@@ -60,7 +60,7 @@ class ContactController: UIViewController, UITableViewDelegate,
         let cell = contactTable.dequeueReusableCell(
             withIdentifier: cellIdentifier, for: indexPath) as! ContactViewCell
 
-        cell.icon.setFAIconWithName(icon: FAType.FALinkedin, textColor: Getsdone.TealColor)
+        cell.icon.setFAIconWithName(icon: FAType.FAUserO, textColor: Getsdone.BlueColor)
         cell.name.text = contacts[indexPath.item][0]
         
         if contacts[indexPath.item][1] == "requested" {
