@@ -52,7 +52,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         createTask.setFAIcon(icon: FAType.FAEdit, iconSize: 24)
         
-        settings.setFAIcon(icon: FAType.FAFilter, iconSize: 24)
+        settings.setFAIcon(icon: FAType.FASliders, iconSize: 24)
         
         //notasks.setFAIcon(icon: FAType.FAOptinMonster, iconSize: 72)
         notasks.setFAText(prefixText: "",

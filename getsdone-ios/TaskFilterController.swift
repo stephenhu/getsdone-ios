@@ -24,9 +24,17 @@ class TaskFilterController: UIViewController {
     @IBOutlet weak var delegatedLbl: UILabel!
     @IBOutlet weak var completedLbl: UILabel!
     @IBOutlet weak var deferredLbl: UILabel!
+    @IBOutlet weak var viewStack: UIStackView!
+    @IBOutlet weak var sortStack: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        viewStack.layer.borderColor = UIColor.blue.cgColor
+        viewStack.layer.borderWidth = 2
+        
+        sortStack.layer.borderColor = UIColor.blue.cgColor
+        sortStack.layer.borderWidth = 2
         
         let view = defaults.integer(forKey: Getsdone.DEFAULTS_VIEW)
         let sort = defaults.integer(forKey: Getsdone.DEFAULTS_SORT)
