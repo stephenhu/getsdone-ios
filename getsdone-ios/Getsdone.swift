@@ -21,6 +21,7 @@ class Getsdone {
     static let API_CONTACTS             = "/contacts"
     static let API_COMMENTS             = "/comments"
     static let API_NOTIFICATIONS        = "/notifications"
+    static let API_RANKS                = "/ranks"
     
     static let COOKIE                   = "cookie"
     static let TOKEN                    = "token"

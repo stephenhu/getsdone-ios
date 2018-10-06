@@ -19,6 +19,7 @@ class ProfileController: UIViewController {
     
     var uid = String()
     
+    var ranks       = [[String]]()
     var tasks       = [[String]]()
     var open        = [[String]]()
     var completed   = [[String]]()
@@ -34,11 +35,12 @@ class ProfileController: UIViewController {
     @IBOutlet weak var totalChart: LineChartView!
     @IBOutlet weak var ranking: UIProgressView!
     @IBOutlet weak var avgCompleteLbl: UILabel!
+    @IBOutlet weak var nextLevelLbl: UILabel!
     
     override func viewDidAppear(_ animated: Bool) {
         
-        loadAllTasks()
-        totalUpdate()
+        loadUserInfo()
+        //totalUpdate()
         
     }
     
@@ -51,7 +53,7 @@ class ProfileController: UIViewController {
         
         self.view.bringSubview(toFront: progress)
         
-        loadUserInfo()
+        
         
         totalChart.drawGridBackgroundEnabled = false
         
@@ -63,28 +65,20 @@ class ProfileController: UIViewController {
     }
     
     
-    func totalUpdate() {
+    func totalUpdate(openData: [Int], closedData: [Int], days: [String]) {
         
-        let e1 = ChartDataEntry(x: 1, y: 20.0)
-        let e2 = ChartDataEntry(x: 2, y: 4)
-        let e3 = ChartDataEntry(x: 3, y: 30)
-        let e4 = ChartDataEntry(x: 4, y: 8)
-        let e5 = ChartDataEntry(x: 5, y: 6)
-        let e6 = ChartDataEntry(x: 6, y: 3)
-        let e7 = ChartDataEntry(x: 7, y: 1)
+        let e = openData.enumerated().map { x, y in return ChartDataEntry(x: Double(x), y: Double(y))}
+        let f = closedData.enumerated().map { x, y in return ChartDataEntry(x: Double(x), y: Double(y))}
         
-        let ds1 = LineChartDataSet(values: [e1, e2, e3, e4, e5, e6, e7], label: "Open")
+        let ds1 = LineChartDataSet(values: e, label: "Open")
+        let ds2 = LineChartDataSet(values: f, label: "Closed")
+        
+        /*let nf = NumberFormatter()
+        nf.generatesDecimalNumbers = false
         
         
-        let f1 = ChartDataEntry(x: 1, y: 2.0)
-        let f2 = ChartDataEntry(x: 2, y: 10.0)
-        let f3 = ChartDataEntry(x: 3, y: 12.0)
-        let f4 = ChartDataEntry(x: 4, y: 15.0)
-        let f5 = ChartDataEntry(x: 5, y: 20.0)
-        let f6 = ChartDataEntry(x: 6, y: 13.0)
-        let f7 = ChartDataEntry(x: 7, y: 1.0)
-        
-        let ds2 = LineChartDataSet(values: [f1, f2, f3, f4, f5, f6, f7], label: "Closed")
+        ds2.valueFormatter = nf as? IValueFormatter
+        */
         
         ds1.axisDependency = .left
         
@@ -115,7 +109,7 @@ class ProfileController: UIViewController {
         ds2.fillColor = UIColor.red
         ds2.fillAlpha = 0.1
         
-        let days = ["", "Sep 10", "Sep 11", "Sep 12", "Sep 13", "Sep 14", "Sep 15", "Sep 16"]
+        //let days = ["Sep 10", "Sep 11", "Sep 12", "Sep 13", "Sep 14", "Sep 15", "Sep 16"]
         //let data = BarChartData(xVals: days, dataSets: [dataSet])
         let data = LineChartData(dataSets: [ds1, ds2])
         
@@ -128,14 +122,18 @@ class ProfileController: UIViewController {
         
         //totalChart.gridBackgroundColor = .clear
         totalChart.leftAxis.drawGridLinesEnabled = false
-        totalChart.leftAxis.drawZeroLineEnabled = false
+        totalChart.leftAxis.drawZeroLineEnabled = true
         totalChart.leftAxis.drawTopYLabelEntryEnabled = false
         totalChart.leftAxis.drawBottomYLabelEntryEnabled = false
         totalChart.leftAxis.drawLabelsEnabled = false
         totalChart.leftAxis.drawAxisLineEnabled = false
-        totalChart.leftAxis.granularity = 1
+        totalChart.leftAxis.granularity = 1.0
         totalChart.leftAxis.decimals = 0
         totalChart.leftAxis.granularityEnabled = true
+
+        //totalChart.leftAxis.valueFormatter = nf as? IAxisValueFormatter
+
+        //totalChart.leftAxis.valueFormatter.minimumFractionDigits = 0
         //totalChart.leftAxis.valueFormatter = IndexAxisValueFormatter(values: days)
         
         totalChart.rightAxis.drawGridLinesEnabled = false
@@ -145,18 +143,26 @@ class ProfileController: UIViewController {
         totalChart.rightAxis.drawTopYLabelEntryEnabled = false
         totalChart.rightAxis.drawZeroLineEnabled = false
         totalChart.rightAxis.decimals = 0
-        totalChart.xAxis.labelTextColor = .clear
+        totalChart.xAxis.labelTextColor = .black
         
         totalChart.xAxis.drawGridLinesEnabled = false
         totalChart.xAxis.granularity = 1
         totalChart.xAxis.labelPosition = .bottom
         totalChart.xAxis.decimals = 0
-        totalChart.xAxis.valueFormatter = IndexAxisValueFormatter(values: days)
+        
+        let f1 = DateFormatter()
+        f1.dateFormat = "MM-dd-yyyy"
+        
+        let f2 = DateFormatter()
+        f2.dateFormat = "MMM dd"
+        
+        let daysf = days.map { x in return f2.string(from: f1.date(from: x)!) }
+        totalChart.xAxis.valueFormatter = IndexAxisValueFormatter(values: daysf)
         //totalChart.drawValueAboveBarEnabled = false
         
         totalChart.xAxis.granularityEnabled = true
         //totalChart.xAxis.setLabelCount(days.count, force: true)
-        totalChart.xAxis.labelRotationAngle = -45
+        //totalChart.xAxis.labelRotationAngle = -45
         
         
         totalChart.legend.enabled = true
@@ -215,7 +221,7 @@ class ProfileController: UIViewController {
                         
                         self.uid = j["id"].string!
                         self.name.text = "@\(j["name"].string!)"
-                        self.status.text = j["rankName"].string!
+                        //self.status.text = "Level \(j["rankName"].string!)"
                         self.since.text = Getsdone.toReadableDate(j["created"].string!)
                     
                         self.loadAllTasks()
@@ -226,6 +232,65 @@ class ProfileController: UIViewController {
         }
         
     } // loadUserInfo
+    
+    
+    func loadRanks() {
+        
+        let url = "\(Getsdone.API_ENDPOINT)\(Getsdone.API_RANKS)"
+        print(url)
+        
+        progress.startAnimating()
+        
+        Alamofire.request(url, method: .get)
+            .responseJSON{ response in
+                
+                self.progress.stopAnimating()
+                
+                switch response.result {
+                case .failure(let error):
+                    
+                    let ac = UIAlertController(title: "Connection error",
+                                               message: error.localizedDescription,
+                                               preferredStyle: UIAlertControllerStyle.alert)
+                    
+                    let OK = UIAlertAction(title: "OK",
+                                           style: UIAlertActionStyle.default,
+                                           handler: nil)
+                    
+                    ac.addAction(OK)
+                    
+                    self.present(ac, animated: true, completion: nil)
+                    
+                    
+                case .success:
+                    
+                    if let raw = response.result.value {
+                        
+                        let j = JSON(raw)
+                        
+                        var all = [[String]]()
+                        
+                        for (_, rank) in j {
+                            
+                            var r = [String]()
+                            
+                            r.append(rank["id"].string!)
+                            r.append(rank["name"].string!)
+                            r.append(String(rank["count"].int!))
+                            
+                            all.append(r)
+                            
+                        }
+                        
+                        self.ranks = all
+                        self.showRanking()
+                        //self.tasksTable.reloadData()
+                        
+                    }
+                }
+        }
+        
+    } // loadRanks
     
     
     func loadAllTasks() {
@@ -269,8 +334,6 @@ class ProfileController: UIViewController {
                             
                             var t = [String]()
                             
-                            //print(task)
-                            
                             if task["delegateId"]["Valid"].bool! {
                                 
                                 if task["delegateId"]["String"].string! != self.uid {
@@ -289,6 +352,7 @@ class ProfileController: UIViewController {
                                 t.append("")
                             }
                             
+
                             //let count = task["comments"].array!.count
                             
                             //t.append(String(count)) // comments
@@ -296,6 +360,12 @@ class ProfileController: UIViewController {
                             
                             if task["delegateId"]["Valid"].bool! {
                                 t.append(task["delegateId"]["String"].string!)
+                            } else {
+                                t.append("")
+                            }
+
+                            if task["deferred"].bool! {
+                                t.append("deferred")
                             } else {
                                 t.append("")
                             }
@@ -324,13 +394,17 @@ class ProfileController: UIViewController {
 
         var completedTmp = [[String]]()
         var openTmp = [[String]]()
-        
+        // TODO: don't count deferred
         for task in tasks {
             
             if task[3] != "" {
                 completedTmp.append(task)
             } else {
-                openTmp.append(task)
+                
+                if task[6] != "deferred" {
+                    openTmp.append(task)
+                }
+                
             }
             
             
@@ -339,49 +413,118 @@ class ProfileController: UIViewController {
         self.completed = completedTmp
         self.open = openTmp
         
-        print(completedTmp.count)
-        print(openTmp.count)
+        let dp = last5d()
         
-        last7d()
+        totalUpdate(openData: dp.openL7, closedData: dp.closedL7, days: dp.days)
+        
+        loadRanks()
         
     } // analyzeTasks
     
-    func last7d() -> [String] {
-
-        var res = [String]()
+    
+    func getLastDays(_ count: Int) -> [String] {
         
-        print(tasks.count)
+        if count < 1 {
+            print("days must be 0 or more error")
+        }
+        
+        var last = [String]()
+        
         let d = Date()
         
-        print(d)
+        var c = Calendar.current
         
-        let c = Calendar.current
+        c.timeZone = TimeZone(abbreviation: "UTC")!
+    
         
-        print(c.dateComponents([.day, .month], from: d))
-  
-        for task in open {
+        let f = DateFormatter()
         
-            print(task[2])
+        f.dateFormat = "MM-dd-yyyy"
+        
+        let sd = f.string(from: d)
+        
+        //last.append(sd)
+ 
+        var com = DateComponents()
+        
+        for i in (0..<count).reversed() {
             
-            let f = DateFormatter()
+            com.day = i * -1
             
-            f.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+            let d2 = f.date(from: sd)
+            let n = c.date(byAdding: com, to: d2!)
             
-            let created = f.date(from: task[2])
-            
-            if created! > d {
-                
-            }
-            
-            
+            last.append(f.string(from: n!))
             
         }
         
+        return last
+        
+    } // getLastDays
+    
+    
+    func last5d() -> (openL7: [Int], closedL7: [Int], days: [String]) {
+
+        var openRes = [Int]()
+        var closedRes = [Int]()
+        
+        let l5 = getLastDays(5)
+
+        let f = DateFormatter()
+        f.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+
+        let f2 = DateFormatter()
+        f2.dateFormat = "MM-dd-yyyy"
+
+        for day in l5 {
+
+            var openCount = 0
+            var closedCount = 0
+            
+            for task in tasks {
+                
+                let created = f.date(from: task[2])
+                let cstr = f2.string(from: created!)
+                
+                if task[3] != "" {
+
+                    let actual  = f.date(from: task[3])
+                    let astr = f2.string(from: actual!)
+                    
+                    if astr == day {
+                        closedCount = closedCount + 1
+                    }
+                    
+                    if cstr <= day && astr >= day {
+                        openCount = openCount + 1
+                    }
+                    
+                } else {
+                
+                    if cstr <= day {
+                        
+                        if task[6] != "deferred" {
+                          openCount = openCount + 1
+                        }
+                        
+                    }
+                }
+                
+                
+                
+            }
+            
+            openRes.append(openCount)
+            closedRes.append(closedCount)
+
+        }
+        
         averageComplete()
-        return res
+
+        return (openRes, closedRes, l5)
         
         
-    } // last7d
+    } // last5d
     
     
     func averageComplete() {
@@ -392,15 +535,12 @@ class ProfileController: UIViewController {
         
         f.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         
-        
         for task in completed {
         
             let created = f.date(from: task[2])
             let actual  = f.date(from: task[3])
             
             let delta = actual?.timeIntervalSince(created!)
-            
-            print(delta)
             
             total = total + Int(delta!)
             
@@ -416,10 +556,38 @@ class ProfileController: UIViewController {
         
         let x = f2.string(from: ti)
         
-        print(x)
         avgCompleteLbl.text = x!
         
     } // averageComplete
+    
+    func showRanking() {
+        
+        var plevel = "1"
+        
+        for r in ranks {
+        
+            if completed.count < Int(r[2])! {
+ 
+                let remain = Int(r[2])! - completed.count
+                self.nextLevelLbl.text = "\(remain) tasks until next level"
+                self.status.text = "Level \(plevel)"
+                
+                print(r[2])
+                let p = Float(completed.count)/Float(r[2])!
+                
+                print(p)
+                self.ranking.setProgress(p, animated: true)
+                break
+                
+            }
+            
+            plevel = r[1]
+            
+
+            
+        }
+        
+    } // showRanking
     
     
     // MARK: Actions
