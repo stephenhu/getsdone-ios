@@ -91,6 +91,24 @@ class SignupController: UIViewController, UITextFieldDelegate {
             
         }
         
+        if password.text!.count < 8 {
+            
+            let ac = UIAlertController(title: "Signup error",
+                                       message: "Password must be at least 7 characters",
+                                       preferredStyle: UIAlertControllerStyle.alert)
+            
+            let OK = UIAlertAction(title: "OK",
+                                   style: UIAlertActionStyle.default,
+                                   handler: nil)
+            
+            ac.addAction(OK)
+            
+            self.present(ac, animated: true, completion: nil)
+            
+            return
+            
+        }
+        
         progress.startAnimating()
         
         let url = "\(Getsdone.API_ENDPOINT)\(Getsdone.API_USERS)"

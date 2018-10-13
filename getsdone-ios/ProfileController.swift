@@ -162,7 +162,7 @@ class ProfileController: UIViewController {
         totalChart.leftAxis.drawTopYLabelEntryEnabled = false
         totalChart.leftAxis.drawBottomYLabelEntryEnabled = false
         totalChart.leftAxis.drawLabelsEnabled = true
-        totalChart.leftAxis.drawAxisLineEnabled = true
+        totalChart.leftAxis.drawAxisLineEnabled = false
         totalChart.leftAxis.granularity = 1.0
         totalChart.leftAxis.decimals = 0
         totalChart.leftAxis.granularityEnabled = true
@@ -186,7 +186,7 @@ class ProfileController: UIViewController {
         
         //totalChart.xAxis.
         totalChart.xAxis.drawGridLinesEnabled = false
-        totalChart.xAxis.drawAxisLineEnabled = true
+        totalChart.xAxis.drawAxisLineEnabled = false
         totalChart.xAxis.granularity = 1
         totalChart.xAxis.labelPosition = .bottom
         totalChart.xAxis.labelTextColor = .black
@@ -614,10 +614,8 @@ class ProfileController: UIViewController {
                 self.nextLevelLbl.text = "\(remain) tasks until next level"
                 self.status.text = "Level \(plevel)"
                 
-                print(r[2])
                 let p = Float(completed.count)/Float(r[2])!
                 
-                print(p)
                 self.ranking.setProgress(p, animated: true)
                 break
                 
