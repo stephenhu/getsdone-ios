@@ -67,11 +67,24 @@ class ProfileController: UIViewController {
     
     func totalUpdate(openData: [Int], closedData: [Int], days: [String]) {
         
-        let e = openData.enumerated().map { x, y in return ChartDataEntry(x: Double(x), y: Double(y))}
-        let f = closedData.enumerated().map { x, y in return ChartDataEntry(x: Double(x), y: Double(y))}
+        let e = openData.enumerated().map { x, y in return BarChartDataEntry(x: Double(x), y: Double(y))}
+        let f = closedData.enumerated().map { x, y in return BarChartDataEntry(x: Double(x), y: Double(y))}
+        
+        //var f = [ChartDataEntry]()
+        /*
+        for (i, _) in days.enumerated() {
+            f.append(ChartDataEntry(x: Double(i), yValues: [Double(openData[i]), Double(closedData[i]) * -1]))
+        }*/
         
         let ds1 = LineChartDataSet(values: e, label: "Open")
         let ds2 = LineChartDataSet(values: f, label: "Closed")
+        
+        //let dsx = BarChartDataSet(values: f, label: "")
+        
+        //dsx.colors = [Getsdone.TealColor, UIColor.red]
+        //dsx.stackLabels = ["Open", "Closed"]
+        //dsx.valueTextColor = .clear
+        
         
         /*let nf = NumberFormatter()
         nf.generatesDecimalNumbers = false
@@ -80,7 +93,7 @@ class ProfileController: UIViewController {
         ds2.valueFormatter = nf as? IValueFormatter
         */
         
-        ds1.axisDependency = .left
+        //ds1.axisDependency = .left
         
         //let gradientColors = [Getsdone.TealColor.cgColor, UIColor.clear.cgColor] as CFArray
         //let colorLocations: [CGFloat] = [1.0, 0.0]
@@ -89,7 +102,7 @@ class ProfileController: UIViewController {
         
         ds1.colors = [Getsdone.TealColor]
         //dataSet.setCircleColor(UIColor.red)
-        ds1.mode = .cubicBezier
+        ds1.mode = .horizontalBezier
         ds1.lineWidth = 1
         ds1.drawCircleHoleEnabled = false
         ds1.drawCirclesEnabled = false
@@ -98,9 +111,10 @@ class ProfileController: UIViewController {
         ds1.fillColor = Getsdone.TealColor
         //dataSet.valueFont = UIFont(name: "Arial", size: 28.0)!
         ds1.fillAlpha = 0.1
+        ds1.drawValuesEnabled = false
         
         ds2.colors = [UIColor.red]
-        ds2.mode = .cubicBezier
+        ds2.mode = .horizontalBezier
         ds2.lineWidth = 1
         ds2.drawCircleHoleEnabled = false
         ds2.drawCirclesEnabled = false
@@ -108,29 +122,54 @@ class ProfileController: UIViewController {
         ds2.drawFilledEnabled = true
         ds2.fillColor = UIColor.red
         ds2.fillAlpha = 0.1
+        ds2.drawValuesEnabled = false
         
         //let days = ["Sep 10", "Sep 11", "Sep 12", "Sep 13", "Sep 14", "Sep 15", "Sep 16"]
         //let data = BarChartData(xVals: days, dataSets: [dataSet])
+        
         let data = LineChartData(dataSets: [ds1, ds2])
+        
+        //let data = LineChartData(dataSets: [dsx])
+        
+        let format = NumberFormatter()
+        format.generatesDecimalNumbers = false
+        let formatter = DefaultValueFormatter(formatter: format)
+        data.setValueFormatter(formatter)
+        
+        // (bar width + bar space) * # bars + group space = 1.0
+        // (0.2 + 0.1) * 3 + 0.1 = 1.0
+        //data.groupBars(fromX: 0, groupSpace: 0.1, barSpace: 0.03)
+        
+        //let w = data.groupWidth(groupSpace: 0.1, barSpace: 0.1)
+        
+        //print("fago")
+        //print(w)
+        
+        //data.barWidth = 0.2
         
         totalChart.data = data
         
-        totalChart.chartDescription?.text = "Open vs Closed"
-        //totalChart.chartDescription?.enabled = false
+        //totalChart.chartDescription?.text = "Open vs Closed"
+        //totalChart.drawValueAboveBarEnabled = false
+        totalChart.chartDescription?.enabled = false
         totalChart.drawBordersEnabled = false
+        
         
         
         //totalChart.gridBackgroundColor = .clear
         totalChart.leftAxis.drawGridLinesEnabled = false
-        totalChart.leftAxis.drawZeroLineEnabled = true
+        totalChart.leftAxis.drawZeroLineEnabled = false
         totalChart.leftAxis.drawTopYLabelEntryEnabled = false
         totalChart.leftAxis.drawBottomYLabelEntryEnabled = false
-        totalChart.leftAxis.drawLabelsEnabled = false
-        totalChart.leftAxis.drawAxisLineEnabled = false
+        totalChart.leftAxis.drawLabelsEnabled = true
+        totalChart.leftAxis.drawAxisLineEnabled = true
         totalChart.leftAxis.granularity = 1.0
         totalChart.leftAxis.decimals = 0
         totalChart.leftAxis.granularityEnabled = true
-
+        totalChart.leftAxis.axisMinimum = 0
+        //totalChart.leftAxis.axisMaximum = 100
+        
+        //totalChart.leftAxis.labelTextColor = .white
         //totalChart.leftAxis.valueFormatter = nf as? IAxisValueFormatter
 
         //totalChart.leftAxis.valueFormatter.minimumFractionDigits = 0
@@ -143,12 +182,16 @@ class ProfileController: UIViewController {
         totalChart.rightAxis.drawTopYLabelEntryEnabled = false
         totalChart.rightAxis.drawZeroLineEnabled = false
         totalChart.rightAxis.decimals = 0
-        totalChart.xAxis.labelTextColor = .black
+        totalChart.rightAxis.drawBottomYLabelEntryEnabled = false
         
+        //totalChart.xAxis.
         totalChart.xAxis.drawGridLinesEnabled = false
+        totalChart.xAxis.drawAxisLineEnabled = true
         totalChart.xAxis.granularity = 1
         totalChart.xAxis.labelPosition = .bottom
+        totalChart.xAxis.labelTextColor = .black
         totalChart.xAxis.decimals = 0
+        
         
         let f1 = DateFormatter()
         f1.dateFormat = "MM-dd-yyyy"
@@ -161,15 +204,12 @@ class ProfileController: UIViewController {
         //totalChart.drawValueAboveBarEnabled = false
         
         totalChart.xAxis.granularityEnabled = true
-        //totalChart.xAxis.setLabelCount(days.count, force: true)
-        //totalChart.xAxis.labelRotationAngle = -45
-        
         
         totalChart.legend.enabled = true
         totalChart.doubleTapToZoomEnabled = false
   
     
-        //totalChart.notifyDataSetChanged()
+        totalChart.notifyDataSetChanged()
 
         
     } // totalUpdate
@@ -413,9 +453,9 @@ class ProfileController: UIViewController {
         self.completed = completedTmp
         self.open = openTmp
         
-        let dp = last5d()
+        let dp = lastd()
         
-        totalUpdate(openData: dp.openL7, closedData: dp.closedL7, days: dp.days)
+        totalUpdate(openData: dp.open, closedData: dp.closed, days: dp.days)
         
         loadRanks()
         
@@ -463,12 +503,12 @@ class ProfileController: UIViewController {
     } // getLastDays
     
     
-    func last5d() -> (openL7: [Int], closedL7: [Int], days: [String]) {
+    func lastd() -> (open: [Int], closed: [Int], days: [String]) {
 
         var openRes = [Int]()
         var closedRes = [Int]()
         
-        let l5 = getLastDays(5)
+        let dates = getLastDays(5)
 
         let f = DateFormatter()
         f.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
@@ -476,7 +516,7 @@ class ProfileController: UIViewController {
         let f2 = DateFormatter()
         f2.dateFormat = "MM-dd-yyyy"
 
-        for day in l5 {
+        for day in dates {
 
             var openCount = 0
             var closedCount = 0
@@ -495,7 +535,7 @@ class ProfileController: UIViewController {
                         closedCount = closedCount + 1
                     }
                     
-                    if cstr <= day && astr >= day {
+                    if cstr <= day && astr > day {
                         openCount = openCount + 1
                     }
                     
@@ -521,15 +561,15 @@ class ProfileController: UIViewController {
         
         averageComplete()
 
-        return (openRes, closedRes, l5)
+        return (openRes, closedRes, dates)
         
         
-    } // last5d
+    } // lastd
     
     
     func averageComplete() {
         
-        var total = 0
+        var total = 0.0
         
         let f = DateFormatter()
         
@@ -542,11 +582,13 @@ class ProfileController: UIViewController {
             
             let delta = actual?.timeIntervalSince(created!)
             
-            total = total + Int(delta!)
+            total = total + delta!
             
         }
         
-        let ti = TimeInterval(roundf(Float(total))/Float(completed.count))
+        let ti = TimeInterval(total/Double(completed.count))
+        
+        print(ti)
         
         let f2 = DateComponentsFormatter()
         
