@@ -10,6 +10,7 @@ import UIKit
 
 import Alamofire
 import Font_Awesome_Swift
+import Kingfisher
 import SwiftyJSON
 
 class ContactController: UIViewController, UITableViewDelegate,
@@ -60,7 +61,17 @@ class ContactController: UIViewController, UITableViewDelegate,
         let cell = contactTable.dequeueReusableCell(
             withIdentifier: cellIdentifier, for: indexPath) as! ContactViewCell
 
-        cell.icon.setFAIconWithName(icon: FAType.FAUserO, textColor: Getsdone.BlueColor)
+        if contacts[indexPath.item][4] != "" {
+            
+            let img = URL(string: "\(Getsdone.ROOT_ENDPOINT)/\(contacts[indexPath.item][4])")
+            
+            //print(img)
+            cell.icon.kf.setImage(with: img)
+            
+        } else {
+          cell.icon.setFAIconWithName(icon: FAType.FAUser, textColor: Getsdone.BlueColor)
+        }
+        
         cell.name.text = contacts[indexPath.item][0]
         
         if contacts[indexPath.item][1] == "requested" {
@@ -130,8 +141,8 @@ class ContactController: UIViewController, UITableViewDelegate,
                                 
                                 let j = JSON(raw)
                                 
-                                print(j)
                                 self.uid = j["id"].string!
+                                //self.
                                 self.loadContacts()
                                 
                             } else {
@@ -206,7 +217,6 @@ class ContactController: UIViewController, UITableViewDelegate,
                                 
                                 let j = JSON(raw)
                                 
-                                print(j)
                                 var all = [[String]]()
                                 
                                 for (_, contact) in j {
@@ -220,6 +230,12 @@ class ContactController: UIViewController, UITableViewDelegate,
                                         c.append(contact["state"].string!)
                                         c.append(contact["contactId"].string!)
                                         c.append(contact["id"].string!)
+                                        
+                                        if contact["contactIcon"]["Valid"].bool! {
+                                            c.append(contact["contactIcon"]["String"].string!)
+                                        } else {
+                                            c.append("")
+                                        }
                                         
                                         all.append(c)
 

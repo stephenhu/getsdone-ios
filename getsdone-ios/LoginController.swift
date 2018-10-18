@@ -9,6 +9,7 @@
 import UIKit
 
 import Alamofire
+import CryptoSwift
 
 class LoginController: UIViewController, UITextFieldDelegate {
     
@@ -37,6 +38,8 @@ class LoginController: UIViewController, UITextFieldDelegate {
         //loginBtn.layer.cornerRadius = 5
         
         self.view.bringSubview(toFront: progress)
+        
+        //checkGravatar()
     
     }
     

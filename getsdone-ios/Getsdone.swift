@@ -14,19 +14,24 @@ class Getsdone {
     
     static let API_ENDPOINT             = "http://127.0.0.1:8888/api"
     static let AUTH_ENDPOINT            = "http://127.0.0.1:8888/auth"
+    static let ROOT_ENDPOINT            = "http://127.0.0.1:8888"
     //static let API_ENDPOINT             = "https://getsdone.xyz/api"
     //static let AUTH_ENDPOINT            = "https://getsdone.xyz/auth"
+    //static let ROOT_ENDPOINT            = "https://getsdone.xyz"
     static let API_USERS                = "/users"
     static let API_TASKS                = "/tasks"
     static let API_CONTACTS             = "/contacts"
     static let API_COMMENTS             = "/comments"
     static let API_NOTIFICATIONS        = "/notifications"
     static let API_RANKS                = "/ranks"
+    static let API_ICONS                = "/icons"
     
     static let COOKIE                   = "cookie"
     static let TOKEN                    = "token"
     static let TID                      = "tid"
     static let APP_NAME                 = "getsdone"
+    
+    static let GRAVATAR                 = "https://gravatar.com/avatar"
     
     static let DEFAULTS_VIEW            = "getsdone.view"
     static let DEFAULTS_SORT            = "getsdone.sort"
@@ -45,6 +50,8 @@ class Getsdone {
     static let UPDATE_TASK_DEFERRED     = "deferred"
     static let UPDATE_TASK_UNDEFERRED   = "undeferred"
     static let UPDATE_TASK_COMPLETED    = "completed"
+    
+    static let MEDIA_TYPE_IMAGE         = "public.image"
 
     
     static let TealColor = UIColor(
@@ -55,6 +62,9 @@ class Getsdone {
     
     static let GreenColor = UIColor(
         red: 53/255, green: 129/255, blue: 48/255, alpha: 1)
+    
+    static let RedColor = UIColor(
+        red: 255/255, green: 59/255, blue: 48/255, alpha: 1)
     
     static func toAgo(_ d: String) -> String {
         

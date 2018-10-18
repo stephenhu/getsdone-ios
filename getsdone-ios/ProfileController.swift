@@ -6,16 +6,20 @@
 //  Copyright © 2018 stephenhu. All rights reserved.
 //
 
+//import Photos
 import UIKit
 
 import Alamofire
 import Charts
 import Font_Awesome_Swift
+import Kingfisher
 import SwiftyJSON
 
-class ProfileController: UIViewController {
+class ProfileController: UIViewController, UIImagePickerControllerDelegate,
+  UINavigationControllerDelegate {
     
     let defaults = UserDefaults.standard
+    let picker = UIImagePickerController()
     
     var uid = String()
     
@@ -36,6 +40,7 @@ class ProfileController: UIViewController {
     @IBOutlet weak var ranking: UIProgressView!
     @IBOutlet weak var avgCompleteLbl: UILabel!
     @IBOutlet weak var nextLevelLbl: UILabel!
+    @IBOutlet weak var iconUpdateBtn: UIButton!
     
     override func viewDidAppear(_ animated: Bool) {
         
@@ -53,9 +58,11 @@ class ProfileController: UIViewController {
         
         self.view.bringSubview(toFront: progress)
         
+        picker.delegate = self
         
         
-        totalChart.drawGridBackgroundEnabled = false
+        
+        //totalChart.drawGridBackgroundEnabled = false
         
         
     }
@@ -63,6 +70,86 @@ class ProfileController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        let mediaType = info[UIImagePickerControllerMediaType] as? String
+        
+        if mediaType! == Getsdone.MEDIA_TYPE_IMAGE {
+        
+            let imageURL = info[UIImagePickerControllerImageURL] as? URL
+            
+            let d = try! Data(contentsOf: imageURL!)
+            
+            let img = UIImage(data: d)!
+            
+            let thumb = img.kf.resize(to: CGSize(width: 128, height: 128))
+            
+            uploadIcon(thumb)
+            
+            
+        }
+        
+        dismiss(animated: true, completion: nil)
+        
+    } // imagePickerController
+    
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    } // imagePickerControllerDidCancel
+    
+    
+    func uploadIcon(_ image: UIImage) {
+        
+        let url = "\(Getsdone.API_ENDPOINT)\(Getsdone.API_ICONS)"
+        
+        print(url)
+        
+       /*
+        Alamofire.upload(
+            multipartFormData: { multipartFormData in
+                multipartFormData.append(image., withName: "icon")
+        }, to: url, encodingCompletion: { (result) in
+            switch result {
+            case .success(let upload, _, _):
+                upload.response{ response in
+                    // reload page
+                }
+            case .failure(let encodingError):
+                print(encodingError)
+            }
+        })
+        */
+        
+        let d = UIImagePNGRepresentation(image)!
+        
+        Alamofire.upload(
+            multipartFormData: { multipartFormData in
+                multipartFormData.append(d, withName: "icon", fileName: "icon.png", mimeType: "image/png")
+        }, to: url, encodingCompletion: { (result) in
+            switch result {
+            case .success(let upload, _, _):
+                upload.response{ response in
+                    print(response)
+                    self.loadAllTasks()
+                }
+            case .failure(let encodingError):
+                print(encodingError)
+            }
+        })
+        
+        
+        /*
+        print(d.count)
+        Alamofire.upload(d, to: url).response {
+            response in
+            
+            print(response)
+        }
+        */
+    } // uploadIcon
     
     
     func totalUpdate(openData: [Int], closedData: [Int], days: [String]) {
@@ -77,7 +164,7 @@ class ProfileController: UIViewController {
         }*/
         
         let ds1 = LineChartDataSet(values: e, label: "Open")
-        let ds2 = LineChartDataSet(values: f, label: "Closed")
+        let ds2 = LineChartDataSet(values: f, label: "Completed")
         
         //let dsx = BarChartDataSet(values: f, label: "")
         
@@ -103,7 +190,7 @@ class ProfileController: UIViewController {
         ds1.colors = [Getsdone.TealColor]
         //dataSet.setCircleColor(UIColor.red)
         ds1.mode = .horizontalBezier
-        ds1.lineWidth = 1
+        ds1.lineWidth = 1.2
         ds1.drawCircleHoleEnabled = false
         ds1.drawCirclesEnabled = false
         //dataSet.circleRadius = 4
@@ -113,9 +200,9 @@ class ProfileController: UIViewController {
         ds1.fillAlpha = 0.1
         ds1.drawValuesEnabled = false
         
-        ds2.colors = [UIColor.red]
+        ds2.colors = [Getsdone.RedColor]
         ds2.mode = .horizontalBezier
-        ds2.lineWidth = 1
+        ds2.lineWidth = 1.2
         ds2.drawCircleHoleEnabled = false
         ds2.drawCirclesEnabled = false
         //dataSet.circleRadius = 4
@@ -153,8 +240,7 @@ class ProfileController: UIViewController {
         //totalChart.drawValueAboveBarEnabled = false
         totalChart.chartDescription?.enabled = false
         totalChart.drawBordersEnabled = false
-        
-        
+        totalChart.drawGridBackgroundEnabled = false
         
         //totalChart.gridBackgroundColor = .clear
         totalChart.leftAxis.drawGridLinesEnabled = false
@@ -168,8 +254,7 @@ class ProfileController: UIViewController {
         totalChart.leftAxis.granularityEnabled = true
         totalChart.leftAxis.axisMinimum = 0
         //totalChart.leftAxis.axisMaximum = 100
-        
-        //totalChart.leftAxis.labelTextColor = .white
+        totalChart.leftAxis.labelTextColor = .black
         //totalChart.leftAxis.valueFormatter = nf as? IAxisValueFormatter
 
         //totalChart.leftAxis.valueFormatter.minimumFractionDigits = 0
@@ -257,13 +342,23 @@ class ProfileController: UIViewController {
                         
                         let j = JSON(raw)
                         
-                        //print(j)
+                        print(j)
                         
                         self.uid = j["id"].string!
                         self.name.text = "@\(j["name"].string!)"
                         //self.status.text = "Level \(j["rankName"].string!)"
                         self.since.text = Getsdone.toReadableDate(j["created"].string!)
                     
+                        if j["icon"]["Valid"].bool! {
+                        
+                            let ico = URL(string: "\(Getsdone.ROOT_ENDPOINT)/\(j["icon"]["String"].string!)")
+                            
+                            print(ico)
+                            
+                            self.icon.kf.setImage(with: ico)
+                            
+                        }
+                        
                         self.loadAllTasks()
                         
                     }
@@ -632,5 +727,19 @@ class ProfileController: UIViewController {
     
     // MARK: Actions
     
+    @IBAction func updateIcon(_ sender: Any) {
+        
+        // PhotoBrowser
+        // Create thumbnail
+        // Upload
+        // refresh page
+        
+        picker.allowsEditing = false
+        picker.sourceType = .photoLibrary
+        picker.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
+        
+        present(picker, animated: true, completion: nil)
+        
+    }
     
 } // ProfileController

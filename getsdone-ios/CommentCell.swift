@@ -11,7 +11,8 @@ import UIKit
 class CommentCell: UITableViewCell {
     
     // MARK: Properties
-    @IBOutlet weak var icon: UIButton!
+
+    @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var comment: UILabel!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var ago: UILabel!

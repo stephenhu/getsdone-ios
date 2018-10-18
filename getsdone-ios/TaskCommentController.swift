@@ -10,6 +10,7 @@ import UIKit
 
 import Alamofire
 import Font_Awesome_Swift
+import Kingfisher
 import SwiftyJSON
 
 class TaskCommentController: UIViewController, UITableViewDelegate,
@@ -25,7 +26,7 @@ class TaskCommentController: UIViewController, UITableViewDelegate,
     var commentCache = [[String]]()
     
     // MARK: Properties
-    @IBOutlet weak var icon: UIButton!
+    @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var task: UILabel!
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var ago: UILabel!
@@ -42,7 +43,7 @@ class TaskCommentController: UIViewController, UITableViewDelegate,
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillAppear(notification:)), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillDisappear(notification:)), name: .UIKeyboardWillHide, object: nil)
         
-        icon.setFAIcon(icon: FAType.FAUserO, iconSize: 48, forState: .normal)
+        //icon.setFAIcon(icon: FAType.FAUser, iconSize: 48, forState: .normal)
         
         commentsTable.delegate = self
         commentsTable.dataSource = self
@@ -83,7 +84,20 @@ class TaskCommentController: UIViewController, UITableViewDelegate,
         let cell = commentsTable.dequeueReusableCell(
             withIdentifier: cellIdentifier, for: indexPath) as! CommentCell
         
-        cell.icon.setFAIcon(icon: FAType.FAUserO, iconSize: 24, forState: .normal)
+        if commentCache[indexPath.item][4] != "" {
+            
+            let img = URL(string: "\(Getsdone.ROOT_ENDPOINT)/\(commentCache[indexPath.item][4])")
+
+            cell.icon.kf.setImage(with: img)
+            
+        } else {
+            //cell.icon.setFAIconWithName(icon: FAType.FAUser, textColor: .black)
+            
+            cell.icon.setFAIconWithName(icon: FAType.FAUser, textColor: .black, orientation: UIImageOrientation.up, backgroundColor: .clear, size: CGSize(width: 24, height: 24))
+            
+            
+        }
+        
         cell.comment.text = commentCache[indexPath.item][1]
         cell.name.text = "@\(commentCache[indexPath.item][0])"
         cell.ago.text = Getsdone.toAgo(commentCache[indexPath.item][2])
@@ -110,9 +124,6 @@ class TaskCommentController: UIViewController, UITableViewDelegate,
         //var rect = self.view.frame
         
         //rect.size.height = rect.size.height - keyboardFrame.cgRectValue.height - 34
-        print("FREAK")
-        print(height)
-        print(svBottomConstraint.constant)
         svBottomConstraint.constant = height
         //tableBottomConstraint.constant = height
 
@@ -184,7 +195,6 @@ class TaskCommentController: UIViewController, UITableViewDelegate,
                         
                         self.uid = j["id"].string!
                         
-                        
                         self.loadTask()
                         
                     }
@@ -230,11 +240,20 @@ class TaskCommentController: UIViewController, UITableViewDelegate,
                         
                         let j = JSON(raw)
                         
-                        print(j)
-                        
                         self.task.text = j["task"].string!
                         self.ago.text = Getsdone.toAgo(j["created"].string!)
                         self.username.text = "@\(j["ownerName"].string!)"
+                        
+                        if j["ownerIcon"]["Valid"].bool! {
+                            
+                            let img = URL(string: "\(Getsdone.ROOT_ENDPOINT)/\(j["ownerIcon"]["String"].string!)")
+                            
+                            self.icon.kf.setImage(with: img)
+                            
+                        } else {
+                            self.icon.setFAIconWithName(icon: FAType.FAUser, textColor: .black)
+                        }
+
                         
                         var list = [[String]]()
                         
@@ -246,6 +265,12 @@ class TaskCommentController: UIViewController, UITableViewDelegate,
                             c.append(com["comment"].string!)
                             c.append(com["created"].string!)
                             c.append(com["id"].string!)
+                            
+                            if com["userIcon"]["Valid"].bool! {
+                                c.append(com["userIcon"]["String"].string!)
+                            } else {
+                                c.append("")
+                            }
                             
                             list.append(c)
                             

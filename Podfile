@@ -12,6 +12,7 @@ target 'getsdone-ios' do
   pod "Font-Awesome-Swift", "~> 1.7.2"
   pod "CryptoSwift", "~> 0.10.0"
   pod "Charts"
+  pod "Kingfisher"
 
   target 'getsdone-iosTests' do
     inherit! :search_paths

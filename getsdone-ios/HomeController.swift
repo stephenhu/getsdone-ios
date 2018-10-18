@@ -10,6 +10,7 @@ import UIKit
 
 import Alamofire
 import Font_Awesome_Swift
+import Kingfisher
 import SwiftyJSON
 
 class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -97,8 +98,8 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tasksTable.dequeueReusableCell(
             withIdentifier: cellIdentifier, for: indexPath) as! TaskViewCell
         
-        cell.owner.setFAIcon(icon: FAType.FAUserO, iconSize: 48, forState: .normal)
-        cell.owner.setTitleColor(Getsdone.BlueColor, for: .normal)
+        //cell.owner.setFAIcon(icon: FAType.FAUserO, iconSize: 48, forState: .normal)
+        //cell.owner.setTitleColor(Getsdone.BlueColor, for: .normal)
         //cell.comments.setFAIcon(icon: FAType.FACommentO, forState: .normal)
         
         
@@ -121,6 +122,16 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         cell.ago.text = Getsdone.toAgo(data[indexPath.item][2])
         cell.ago.setFAColor(color: Getsdone.TealColor)
+        
+        if data[indexPath.item][6] != "" {
+            
+            let img = URL(string: "\(Getsdone.ROOT_ENDPOINT)/\(data[indexPath.item][6])")
+            
+            cell.owner.kf.setImage(with: img)
+            
+        } else {
+            cell.owner.setFAIconWithName(icon: FAType.FAUser, textColor: .black)
+        }
 
         
         return cell
@@ -365,7 +376,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     
                     if let status = response.response?.statusCode {
 
-                        print(status)
+                        //print(status)
                         
                         // TODO: revert to get started page if token invalid
                         
@@ -375,7 +386,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
                                 
                                 let j = JSON(raw)
                                 
-                                print(j)
+                                //print(j)
                                 self.uid    = j["id"].string!
                                 self.name   = j["name"].string!
                                 
@@ -443,7 +454,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         
                             var t = [String]()
 
-                            print(task)
+                            //print(task)
                             
                             if task["delegateId"]["Valid"].bool! {
                                 
@@ -464,6 +475,12 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
                             
                             if task["delegateId"]["Valid"].bool! {
                                 t.append(task["delegateId"]["String"].string!)
+                            } else {
+                                t.append("")
+                            }
+                            
+                            if task["ownerIcon"]["Valid"].bool! {
+                                t.append(task["ownerIcon"]["String"].string!)
                             } else {
                                 t.append("")
                             }
@@ -552,6 +569,12 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
                                 t.append(task["id"].string!)
                                 t.append(task["delegateId"]["String"].string!)
                                 
+                                if task["ownerIcon"]["Valid"].bool! {
+                                    t.append(task["ownerIcon"]["String"].string!)
+                                } else {
+                                    t.append("")
+                                }
+                                
                                 all.append(t)
 
                             }
@@ -622,7 +645,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
                             
                             var t = [String]()
                             
-                            print(task)
+                            //print(task)
                             t.append(task["ownerName"].string!)
                             t.append(task["task"].string!)
                             t.append(task["created"].string!)
@@ -632,7 +655,13 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
                             t.append(String(count)) // comments
                             t.append(task["id"].string!)
                             t.append(task["delegateId"]["String"].string!)
-                                
+                            
+                            if task["ownerIcon"]["Valid"].bool! {
+                                t.append(task["ownerIcon"]["String"].string!)
+                            } else {
+                                t.append("")
+                            }
+                            
                             all.append(t)
                             
                         }
@@ -710,6 +739,12 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
                             t.append(String(count)) // comments
                             t.append(task["id"].string!)
                             t.append(task["delegateId"]["String"].string!)
+                            
+                            if task["ownerIcon"]["Valid"].bool! {
+                                t.append(task["ownerIcon"]["String"].string!)
+                            } else {
+                                t.append("")
+                            }
                             
                             all.append(t)
                             

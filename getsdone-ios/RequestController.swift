@@ -10,6 +10,7 @@ import UIKit
 
 import Alamofire
 import Font_Awesome_Swift
+import Kingfisher
 import SwiftyJSON
 
 class RequestController: UIViewController, UITableViewDelegate,
@@ -55,7 +56,15 @@ class RequestController: UIViewController, UITableViewDelegate,
         let cell = requestsTable.dequeueReusableCell(
             withIdentifier: cellIdentifier, for: indexPath) as! ContactViewCell
         
-        cell.icon.setFAIconWithName(icon: FAType.FAUserO, textColor: Getsdone.BlueColor)
+        if contacts[indexPath.item][4] != "" {
+            
+            let img = URL(string: "\(Getsdone.ROOT_ENDPOINT)/\(contacts[indexPath.item][4])")
+            
+            cell.icon.kf.setImage(with: img)
+            
+        } else {
+            cell.icon.setFAIconWithName(icon: FAType.FAUser, textColor: .black)
+        }
         
         cell.name.text = contacts[indexPath.item][0]
         cell.state.text = contacts[indexPath.item][1]
@@ -214,11 +223,16 @@ class RequestController: UIViewController, UITableViewDelegate,
                                     
                                     var c = [String]()
                                     
-                                    print(contact)
                                     c.append(contact["contactName"].string!)
                                     c.append(contact["state"].string!)
                                     c.append(contact["contactId"].string!)
                                     c.append(contact["userId"].string!)
+                                    
+                                    if contact["contactIcon"]["Valid"].bool! {
+                                        c.append(contact["contactIcon"]["String"].string!)
+                                    } else {
+                                        c.append("")
+                                    }
                                     
                                     all.append(c)
                                     

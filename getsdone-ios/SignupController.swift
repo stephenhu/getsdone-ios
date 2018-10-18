@@ -60,6 +60,7 @@ class SignupController: UIViewController, UITextFieldDelegate {
         return true
         
     }
+
     
     // MARK: Actions
     
@@ -192,7 +193,7 @@ class SignupController: UIViewController, UITextFieldDelegate {
                 
         }
         
-    }
+    } // signup
     
     
 } // SignupController
