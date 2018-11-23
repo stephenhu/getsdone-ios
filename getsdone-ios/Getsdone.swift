@@ -54,17 +54,30 @@ class Getsdone {
     static let MEDIA_TYPE_IMAGE         = "public.image"
 
     
+    // #0181BA
     static let TealColor = UIColor(
         red: 1/255, green: 129/255, blue: 186/255, alpha: 1)
-
+    
+    // #
     static let BlueColor = UIColor(
         red: 1/34, green: 68/255, blue: 102/255, alpha: 1)
+    
+    // #3993BA
+    static let LightTealColor = UIColor(
+        red: 27/255, green: 147/255, blue: 186/255, alpha: 1)
     
     static let GreenColor = UIColor(
         red: 53/255, green: 129/255, blue: 48/255, alpha: 1)
     
     static let RedColor = UIColor(
         red: 255/255, green: 59/255, blue: 48/255, alpha: 1)
+    
+    static let PinkColor = UIColor(
+        red: 255/255, green: 59/255, blue: 48/255, alpha: 0.3)
+    
+    // #EDEDED
+    static let LightGrayColor = UIColor(
+        red: 215/255, green: 215/255, blue: 215/255, alpha: 0.3)
     
     static func toAgo(_ d: String) -> String {
         
@@ -101,4 +114,39 @@ class Getsdone {
         return f2.string(from: created!)
         
     } // toReadableDate
+    
+
+    static func highlights(_ t: String) -> NSAttributedString {
+        
+        let attrStr = NSMutableAttributedString(string: t)
+        
+        let regExs = ["#[a-z0-9]+", "@[a-z0-9]+"]
+        let highlightColors = [Getsdone.TealColor, Getsdone.PinkColor]
+        
+        var index = 0
+        
+        for r in regExs {
+
+            let re = try? NSRegularExpression(pattern: r,                                              options: .caseInsensitive)
+            
+            let matches = re?.matches(
+                in: t, options: [], range: NSRange(location: 0,
+                length: t.count))
+            
+            for m in matches! {
+                
+                attrStr.addAttribute(
+                    NSAttributedStringKey.foregroundColor,
+                    value: highlightColors[index], range: m.range)
+                
+            }
+
+            index += 1
+            
+        }
+
+        return attrStr
+        
+    } // highlightHashtags
+    
 }

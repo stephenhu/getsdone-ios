@@ -240,7 +240,7 @@ class TaskCommentController: UIViewController, UITableViewDelegate,
                         
                         let j = JSON(raw)
                         
-                        self.task.text = j["task"].string!
+                        self.task.attributedText = Getsdone.highlights(j["task"].string!)
                         self.ago.text = Getsdone.toAgo(j["created"].string!)
                         self.username.text = "@\(j["ownerName"].string!)"
                         

@@ -36,11 +36,13 @@ class ProfileController: UIViewController, UIImagePickerControllerDelegate,
     @IBOutlet weak var status: UILabel!
     @IBOutlet weak var progress: UIActivityIndicatorView!
     @IBOutlet weak var since: UILabel!
-    @IBOutlet weak var totalChart: LineChartView!
+    @IBOutlet weak var totalChart: BarChartView!
     @IBOutlet weak var ranking: UIProgressView!
     @IBOutlet weak var avgCompleteLbl: UILabel!
     @IBOutlet weak var nextLevelLbl: UILabel!
     @IBOutlet weak var iconUpdateBtn: UIButton!
+    @IBOutlet weak var totalLbl: UILabel!
+    @IBOutlet weak var currentLevelLbl: UILabel!
     
     override func viewDidAppear(_ animated: Bool) {
         
@@ -60,6 +62,15 @@ class ProfileController: UIViewController, UIImagePickerControllerDelegate,
         
         picker.delegate = self
         
+        totalChart.pinchZoomEnabled = false
+        totalChart.legend.enabled = true
+        totalChart.doubleTapToZoomEnabled = false
+        totalChart.borderLineWidth = 1
+        totalChart.borderColor = Getsdone.LightGrayColor
+        totalChart.drawValueAboveBarEnabled = true
+        totalChart.chartDescription?.enabled = false
+        totalChart.drawBordersEnabled = false
+        totalChart.drawGridBackgroundEnabled = false
         
         
         //totalChart.drawGridBackgroundEnabled = false
@@ -154,17 +165,17 @@ class ProfileController: UIViewController, UIImagePickerControllerDelegate,
     
     func totalUpdate(openData: [Int], closedData: [Int], days: [String]) {
         
+        //let e = openData.enumerated().map { x, y in return ChartDataEntry(x: Double(x), y: Double(y))}
+        //let e = openData.enumerated().map { x, y in return ChartDataEntry(x: Double(x), y: Double(y))}
+        //let f = closedData.enumerated().map { x, y in return ChartDataEntry(x: Double(x), y: Double(y))}
+        
         let e = openData.enumerated().map { x, y in return BarChartDataEntry(x: Double(x), y: Double(y))}
         let f = closedData.enumerated().map { x, y in return BarChartDataEntry(x: Double(x), y: Double(y))}
         
-        //var f = [ChartDataEntry]()
-        /*
-        for (i, _) in days.enumerated() {
-            f.append(ChartDataEntry(x: Double(i), yValues: [Double(openData[i]), Double(closedData[i]) * -1]))
-        }*/
-        
-        let ds1 = LineChartDataSet(values: e, label: "Open")
-        let ds2 = LineChartDataSet(values: f, label: "Completed")
+        //let ds1 = LineChartDataSet(values: e, label: "Open")
+        let ds1 = BarChartDataSet(values: e, label: "Open")
+        //let ds2 = LineChartDataSet(values: f, label: "Completed")
+        let ds2 = BarChartDataSet(values: f, label: "Completed")
         
         //let dsx = BarChartDataSet(values: f, label: "")
         
@@ -172,94 +183,105 @@ class ProfileController: UIViewController, UIImagePickerControllerDelegate,
         //dsx.stackLabels = ["Open", "Closed"]
         //dsx.valueTextColor = .clear
         
-        
-        /*let nf = NumberFormatter()
-        nf.generatesDecimalNumbers = false
-        
-        
-        ds2.valueFormatter = nf as? IValueFormatter
-        */
-        
-        //ds1.axisDependency = .left
-        
-        //let gradientColors = [Getsdone.TealColor.cgColor, UIColor.clear.cgColor] as CFArray
-        //let colorLocations: [CGFloat] = [1.0, 0.0]
-        
-        //guard let gradient = CG
-        
         ds1.colors = [Getsdone.TealColor]
+        //ds1.barBorderColor = Getsdone.BlueColor
+        //ds1.barBorderWidth = 1
         //dataSet.setCircleColor(UIColor.red)
-        ds1.mode = .horizontalBezier
-        ds1.lineWidth = 1.2
-        ds1.drawCircleHoleEnabled = false
-        ds1.drawCirclesEnabled = false
-        //dataSet.circleRadius = 4
-        ds1.drawFilledEnabled = true
-        ds1.fillColor = Getsdone.TealColor
-        //dataSet.valueFont = UIFont(name: "Arial", size: 28.0)!
-        ds1.fillAlpha = 0.1
-        ds1.drawValuesEnabled = false
+        //ds1.mode = .horizontalBezier
         
-        ds2.colors = [Getsdone.RedColor]
-        ds2.mode = .horizontalBezier
-        ds2.lineWidth = 1.2
-        ds2.drawCircleHoleEnabled = false
-        ds2.drawCirclesEnabled = false
+        //ds1.lineWidth = 3.5
+        //ds1.drawCircleHoleEnabled = false
+        //ds1.drawCirclesEnabled = false
         //dataSet.circleRadius = 4
-        ds2.drawFilledEnabled = true
-        ds2.fillColor = UIColor.red
-        ds2.fillAlpha = 0.1
-        ds2.drawValuesEnabled = false
+        //ds1.drawFilledEnabled = true
+        //let g1 = [Getsdone.LightTealColor.cgColor, Getsdone.TealColor.cgColor] as CFArray
+        
+        //let cl:[CGFloat] = [0.0, 1.0]
+        
+        //let gr = CGGradient.init(colorsSpace: CGColorSpaceCreateDeviceRGB(),
+        //                         colors: g1, locations: cl)
+        
+        //ds1.fill = Fill.fillWithLinearGradient(gr!, angle: 90.0)
+        //ds1.fillColor = Getsdone.TealColor
+        //dataSet.valueFont = UIFont(name: "Arial", size: 28.0)!
+        //ds1.fillAlpha = 0.1
+        ds1.drawValuesEnabled = true
+        
+        //ds2.colors = [Getsdone.RedColor]
+        ds2.colors = [UIColor.red]
+        //ds2.barBorderColor = Getsdone.RedColor
+        //ds2.barBorderWidth = 1
+        //ds2.mode = .horizontalBezier
+        //ds2.lineWidth = 3.5
+        //ds2.drawCircleHoleEnabled = false
+        //ds2.drawCirclesEnabled = false
+        //dataSet.circleRadius = 4
+        //ds2.drawFilledEnabled = true
+        //ds2.fillColor = UIColor.red
+        //ds2.fillAlpha = 0.1
+        //ds2.drawValuesEnabled = false
         
         //let days = ["Sep 10", "Sep 11", "Sep 12", "Sep 13", "Sep 14", "Sep 15", "Sep 16"]
         //let data = BarChartData(xVals: days, dataSets: [dataSet])
         
-        let data = LineChartData(dataSets: [ds1, ds2])
+        //let data = LineChartData(dataSets: [ds1, ds2])
         
-        //let data = LineChartData(dataSets: [dsx])
+        //let data = CombinedChartData()
+        
+        //data.lineData = LineChartData(dataSet: ds1)
+        
+        //data.barData = BarChartData(dataSet: ds2)
+        // (bar width + bar space) * # bars + group space = 1.0
+        // (0.3 + 0.05) * 2 + 0.3  = 1
+        // (0.3 + 0.05) * 2 + 0.3 = 1.00
+        //let data = LineChartData(dataSets: [ds1, ds2])
+        
+        let groupSpace = 0.3
+        let barSpace = 0.05
+        let barWidth = 0.3
+        let groupCount = 5.0
+        
+        let data = BarChartData(dataSets: [ds1, ds2])
+        
+        data.barWidth = barWidth
         
         let format = NumberFormatter()
+        
         format.generatesDecimalNumbers = false
+        
         let formatter = DefaultValueFormatter(formatter: format)
+        
         data.setValueFormatter(formatter)
         
-        // (bar width + bar space) * # bars + group space = 1.0
-        // (0.2 + 0.1) * 3 + 0.1 = 1.0
-        //data.groupBars(fromX: 0, groupSpace: 0.1, barSpace: 0.03)
-        
-        //let w = data.groupWidth(groupSpace: 0.1, barSpace: 0.1)
-        
-        //print("fago")
-        //print(w)
-        
-        //data.barWidth = 0.2
-        
         totalChart.data = data
+
+        data.groupBars(fromX: Double(0),
+                       groupSpace: groupSpace, barSpace: barSpace)
         
         //totalChart.chartDescription?.text = "Open vs Closed"
-        //totalChart.drawValueAboveBarEnabled = false
-        totalChart.chartDescription?.enabled = false
-        totalChart.drawBordersEnabled = false
-        totalChart.drawGridBackgroundEnabled = false
+
         
         //totalChart.gridBackgroundColor = .clear
         totalChart.leftAxis.drawGridLinesEnabled = false
         totalChart.leftAxis.drawZeroLineEnabled = false
-        totalChart.leftAxis.drawTopYLabelEntryEnabled = false
+        totalChart.leftAxis.drawTopYLabelEntryEnabled = true
         totalChart.leftAxis.drawBottomYLabelEntryEnabled = false
-        totalChart.leftAxis.drawLabelsEnabled = true
+        totalChart.leftAxis.drawLabelsEnabled = false
         totalChart.leftAxis.drawAxisLineEnabled = false
-        totalChart.leftAxis.granularity = 1.0
+        //totalChart.leftAxis.granularity = 1.0
         totalChart.leftAxis.decimals = 0
         totalChart.leftAxis.granularityEnabled = true
         totalChart.leftAxis.axisMinimum = 0
-        //totalChart.leftAxis.axisMaximum = 100
+        //totalChart.leftAxis.axisMaximum = totalChart.leftAxis.axisMaximum + 1
         totalChart.leftAxis.labelTextColor = .black
+        totalChart.leftAxis.drawTopYLabelEntryEnabled = true
         //totalChart.leftAxis.valueFormatter = nf as? IAxisValueFormatter
 
         //totalChart.leftAxis.valueFormatter.minimumFractionDigits = 0
         //totalChart.leftAxis.valueFormatter = IndexAxisValueFormatter(values: days)
         
+        totalChart.rightAxis.enabled = false
+        /*
         totalChart.rightAxis.drawGridLinesEnabled = false
         totalChart.rightAxis.drawZeroLineEnabled = false
         totalChart.rightAxis.drawAxisLineEnabled = false
@@ -268,14 +290,22 @@ class ProfileController: UIViewController, UIImagePickerControllerDelegate,
         totalChart.rightAxis.drawZeroLineEnabled = false
         totalChart.rightAxis.decimals = 0
         totalChart.rightAxis.drawBottomYLabelEntryEnabled = false
+        */
         
-        //totalChart.xAxis.
         totalChart.xAxis.drawGridLinesEnabled = false
         totalChart.xAxis.drawAxisLineEnabled = false
         totalChart.xAxis.granularity = 1
         totalChart.xAxis.labelPosition = .bottom
         totalChart.xAxis.labelTextColor = .black
-        totalChart.xAxis.decimals = 0
+        totalChart.xAxis.avoidFirstLastClippingEnabled = true
+        totalChart.xAxis.axisMinimum = 0
+        totalChart.xAxis.centerAxisLabelsEnabled = true
+
+        
+        
+        totalChart.xAxis.axisMaximum = Double(0) + data.groupWidth(groupSpace: groupSpace, barSpace: barSpace) * groupCount
+        //totalChart.xAxis.axisMaximum = totalChart.xAxis.axisMaximum + 1
+        
         
         
         let f1 = DateFormatter()
@@ -286,13 +316,10 @@ class ProfileController: UIViewController, UIImagePickerControllerDelegate,
         
         let daysf = days.map { x in return f2.string(from: f1.date(from: x)!) }
         totalChart.xAxis.valueFormatter = IndexAxisValueFormatter(values: daysf)
+        
         //totalChart.drawValueAboveBarEnabled = false
         
-        totalChart.xAxis.granularityEnabled = true
-        
-        totalChart.legend.enabled = true
-        totalChart.doubleTapToZoomEnabled = false
-  
+        //totalChart.xAxis.granularityEnabled = true
     
         totalChart.notifyDataSetChanged()
 
@@ -353,10 +380,10 @@ class ProfileController: UIViewController, UIImagePickerControllerDelegate,
                         
                             let ico = URL(string: "\(Getsdone.ROOT_ENDPOINT)/\(j["icon"]["String"].string!)")
                             
-                            print(ico)
-                            
                             self.icon.kf.setImage(with: ico)
                             
+                        } else {
+                            self.icon.setFAIconWithName(icon: FAType.FAUser, textColor: .black)
                         }
                         
                         self.loadAllTasks()
@@ -666,34 +693,40 @@ class ProfileController: UIViewController, UIImagePickerControllerDelegate,
         
         var total = 0.0
         
-        let f = DateFormatter()
-        
-        f.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        
-        for task in completed {
-        
-            let created = f.date(from: task[2])
-            let actual  = f.date(from: task[3])
+        if completed.count == 0 {
+                avgCompleteLbl.text = "N/A"
+        } else {
+
+            let f = DateFormatter()
             
-            let delta = actual?.timeIntervalSince(created!)
+            f.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
             
-            total = total + delta!
+            for task in completed {
+                
+                let created = f.date(from: task[2])
+                let actual  = f.date(from: task[3])
+                
+                let delta = actual?.timeIntervalSince(created!)
+                
+                total = total + delta!
+                
+            }
             
+            let ti = TimeInterval(total/Double(completed.count))
+            
+            print(ti)
+            
+            let f2 = DateComponentsFormatter()
+            
+            f2.allowedUnits = [.day, .hour, .minute, .second]
+            f2.unitsStyle = .abbreviated
+            f2.maximumUnitCount = 1
+            
+            let x = f2.string(from: ti)
+            
+            avgCompleteLbl.text = x!
+
         }
-        
-        let ti = TimeInterval(total/Double(completed.count))
-        
-        print(ti)
-        
-        let f2 = DateComponentsFormatter()
-        
-        f2.allowedUnits = [.day, .hour, .minute, .second]
-        f2.unitsStyle = .abbreviated
-        f2.maximumUnitCount = 1
-        
-        let x = f2.string(from: ti)
-        
-        avgCompleteLbl.text = x!
         
     } // averageComplete
     
@@ -706,8 +739,10 @@ class ProfileController: UIViewController, UIImagePickerControllerDelegate,
             if completed.count < Int(r[2])! {
  
                 let remain = Int(r[2])! - completed.count
-                self.nextLevelLbl.text = "\(remain) tasks until next level"
-                self.status.text = "Level \(plevel)"
+                self.nextLevelLbl.text = "Tasks until next level"
+                self.status.text = "\(remain)"
+                self.currentLevelLbl.text = "Level \(plevel) "
+                self.totalLbl.text = "\(completed.count)"
                 
                 let p = Float(completed.count)/Float(r[2])!
                 

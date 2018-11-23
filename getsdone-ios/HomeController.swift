@@ -41,6 +41,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var progress: UIActivityIndicatorView!
     @IBOutlet weak var viewName: UILabel!
     @IBOutlet weak var notasks: UILabel!
+    @IBOutlet weak var taskCount: UILabel!
     
     override func viewDidAppear(_ animated: Bool) {
         
@@ -118,7 +119,7 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.comments.setFAText(prefixText: "", icon: FAType.FACommentO, postfixText: " \(data[indexPath.item][3])", size: 12, iconSize: 12)
         cell.user.text = "@\(data[indexPath.item][0])"
         
-        cell.task.text = data[indexPath.item][1]
+        cell.task.attributedText = Getsdone.highlights(data[indexPath.item][1])
         
         cell.ago.text = Getsdone.toAgo(data[indexPath.item][2])
         cell.ago.setFAColor(color: Getsdone.TealColor)
@@ -495,7 +496,8 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
                             self.tasks = all
                         }
                         
-                        self.viewName.text = "Open (\(self.tasks.count))"
+                        self.viewName.text = "Open"
+                        self.taskCount.text = "\(self.tasks.count)"
                         
                         if self.tasks.count == 0 {
                             self.notasks.setFAColor(color: Getsdone.BlueColor)
@@ -587,7 +589,8 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
                             self.assigned = all
                         }
                         
-                        self.viewName.text = "Delegated (\(self.assigned.count))"
+                        self.viewName.text = "Delegated"
+                        self.taskCount.text = "\(self.assigned.count)"
                         
                         if self.assigned.count == 0 {
                             self.notasks.setFAColor(color: Getsdone.BlueColor)
@@ -672,7 +675,8 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
                             self.completed = all
                         }
                         
-                        self.viewName.text = "Completed (\(self.completed.count))"
+                        self.viewName.text = "Completed"
+                        self.taskCount.text = "\(self.completed.count)"
                         
                         if self.completed.count == 0 {
                             self.notasks.setFAColor(color: Getsdone.BlueColor)
@@ -756,7 +760,8 @@ class HomeController: UIViewController, UITableViewDelegate, UITableViewDataSour
                             self.deferred = all
                         }
                         
-                        self.viewName.text = "Deferred (\(self.deferred.count))"
+                        self.viewName.text = "Deferred"
+                        self.taskCount.text = "\(self.deferred.count)"
                         
                         if self.deferred.count == 0 {
                             self.notasks.setFAColor(color: Getsdone.BlueColor)
